@@ -1,0 +1,78 @@
+/* src/components/Header/Header.css */
+.header {
+    background-color: var(--header-bg);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .nav-menu {
+    flex: 1;
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+  }
+  
+  .nav-item a {
+    color: #000;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s;
+    color: rgb(38, 38, 38);
+font-family: Manrope;
+font-size: 14px;
+font-weight: 400;
+line-height: 16px;
+letter-spacing: 0.2px;
+text-align: center;
+  }
+  
+  .nav-item a:hover {
+    color: var(--primary-color);
+  }
+  
+  .logo {
+    flex: 1;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  .logo a {
+    color: #000;
+    letter-spacing: 1px;
+  }
+  
+  .header-controls {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  
+  .icon-button {
+    background: none;
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-button img {
+    width: 20px;
+    height: 20px;
+  }

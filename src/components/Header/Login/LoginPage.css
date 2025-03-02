@@ -1,0 +1,28 @@
+/* src/pages/LoginPage/LoginPage.css */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    flex: 1;
+    background-color: var(--background-dark);
+  }
+  
+  .forgot-password {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -5px;
+    margin-bottom: 20px;
+  }
+  
+  .forgot-password a {
+    color: var(--text-gray);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }

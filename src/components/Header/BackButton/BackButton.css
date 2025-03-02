@@ -1,0 +1,18 @@
+/* src/components/BackButton/BackButton.css */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-light);
+  font-size: 14px;
+  transition: opacity 0.3s;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
+.back-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}

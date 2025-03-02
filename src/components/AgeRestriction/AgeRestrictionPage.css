@@ -1,0 +1,50 @@
+.age-restriction-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a0c0c;
+    color: white;
+    padding: 20px;
+  }
+  
+  .restriction-container {
+    max-width: 600px;
+    text-align: center;
+    padding: 40px;
+    background-color: rgba(40, 20, 20, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .restriction-container h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #d41c1c;
+  }
+  
+  .restriction-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .actions {
+    margin-top: 30px;
+  }
+  
+  .home-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4a1c22;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .home-link:hover {
+    background-color: #6b272f;
+    transform: translateY(-2px);
+  }
