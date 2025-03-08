@@ -1,0 +1,312 @@
+.exclusive-offers-section {
+  background-color: #ffffff;
+  padding: 60px 0;
+  position: relative;
+  background-size: 20px 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+}
+
+.offers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 60px;
+  font-weight: 300;
+  color: #1D1D1D;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.details-link {
+  width: 282px;
+  height: 56px;
+  display: flex;
+  padding: 8px 16px 8px 16px;
+  justify-content: center;
+  align-items: center;
+  color: #23272C;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #23272C;
+  transition: all 0.3s ease;
+}
+
+.details-link:hover {
+  background-color: #a30000;
+  border-color: #a30000;
+  color: #fff;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Card wrapper to contain both card and buttons */
+.card-wrapper {
+  position: relative;
+}
+
+.offer-card {
+  /* 200 */
+background: rgb(239, 237, 238);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  height: 500px;
+}
+
+.offer-card:hover .wishlist-button {
+  opacity: 1;
+}
+
+.wine-category {
+
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background-color: #ffffff00;
+  color: #8D0314;
+  font-size: 12px;
+  padding: 4px 10px;
+  z-index: 2;
+border: 1px solid rgba(141, 3, 20, 0.4);
+}
+
+.wishlist-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  color: #3c0000;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.wishlist-button.active {
+  color: #a30000;
+  opacity: 1;
+}
+
+.wishlist-button:hover {
+  color: #a30000;
+}
+
+.wishlist-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.offer-image {
+  max-height: 350px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.offer-details {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.offer-info {
+  text-align: left;
+}
+
+.offer-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #3c0000;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.offer-type {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.offer-price {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  color: #a30000;
+  font-weight: 500;
+}
+
+/* Modified - buttons outside the card */
+.offer-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  position: absolute;
+  bottom: -50px; /* Position below card */
+  left: 0;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+}
+
+/* Show buttons on card hover */
+.card-wrapper:hover .offer-buttons {
+  opacity: 1;
+  bottom: -35px; /* Slide up to just below card */
+}
+
+.btn-cart {
+  background-color: #a30000;
+  color: #fff;
+  padding: 12px 15px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-details {
+  background-color: #fff;
+  color: #3c0000;
+  padding: 12px 15px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-cart:hover {
+  background-color: #800000;
+}
+
+.btn-details:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pagination-dot.active {
+  background-color: #a30000;
+}
+
+.slider-controls {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.slider-prev, .slider-next {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  margin: 0 -20px;
+  color: #3c0000;
+}
+
+.slider-prev svg, .slider-next svg {
+  width: 20px;
+  height: 20px;
+}
+
+.slider-prev:hover, .slider-next:hover {
+  background-color: #fff;
+}
+
+@media (max-width: 992px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .slider-controls {
+    display: none;
+  }
+  
+  .wishlist-button {
+    opacity: 1;
+  }
+  
+  .offer-buttons {
+    opacity: 1;
+    bottom: -10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .offers-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .offers-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .details-link {
+    width: 100%;
+  }
+  
+  .card-wrapper {
+    margin-bottom: 20px; /* Add space for buttons below */
+  }
+}

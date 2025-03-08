@@ -1,0 +1,127 @@
+/* ProfileMenu.css */
+.profile-menu-container {
+    position: relative;
+  }
+  
+  .quick-links-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 320px;
+    background-color: #fff9f9;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: hidden;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f1e1e1;
+  }
+  
+  .menu-header h2 {
+    margin: 0;
+    color: #5a2828;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .close-button svg {
+    width: 24px;
+    height: 24px;
+    fill: #5a2828;
+  }
+  
+  .menu-links {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-link {
+    padding: 16px 20px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f1e1e1;
+    transition: background-color 0.2s;
+  }
+  
+  .menu-link:hover {
+    background-color: #f8eded;
+  }
+  
+  .language-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1e1e1;
+  }
+  
+  .flag-icon {
+    width: 30px;
+    height: 20px;
+    border-radius: 3px;
+  }
+  
+  .menu-footer {
+    padding: 16px;
+  }
+  
+  .login-button {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #9f0000;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: background-color 0.2s;
+  }
+  
+  .login-button:hover {
+    background-color: #850000;
+  }
+  
+  .register-prompt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .register-link {
+    color: #9f0000;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .register-link:hover {
+    text-decoration: underline;
+  }

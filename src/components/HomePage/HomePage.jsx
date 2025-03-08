@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './HomePage.css';
 import logo from "../../img/Logo.svg";
 import exslusive from "../../img/wine.png";
 import avatar from "../../img/avatar.png";
 import merlot from "../../img/merlot.png";
+
 // import WineText from "../../img/WineText.png"; 
 // import HoodText from "../../img/HoodText.png";
 import aboutVideo from "../../img/aboutus.mp4"; 
 import Background from "../../img/bcg_HomePage.png";
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import BlogSection from './BlogSection/BlogSection';
+import WineCategories from './BuyCategory/WineCategories';
+import ExclusiveOffers from './ExclusiveOffers/ExclusiveOffers';
+// import AgeVerificationModal from '../AgeVefification/AgeVerificationPage';
 // import AgeVerificationModal from '../AgeVefification/AgeVerificationModal';
 
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const navigate = useNavigate();
+
   
-  // Перевірка віку при завантаженні сторінки
-  useEffect(() => {
-    const ageVerified = localStorage.getItem('ageVerified') === 'true';
-    
-    if (!ageVerified) {
-      // Зберігаємо поточний шлях, щоб повернутися після верифікації
-      localStorage.setItem('redirectAfterVerification', window.location.pathname);
-      // Перенаправляємо на сторінку верифікації
-      navigate('/age-verification');
-    }
-  }, [navigate]);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +45,9 @@ const HomePage = () => {
   const handleSlideChange = (index) => {
     setActiveSlide(index);
   };
+
+
+
   
   return (
     <div className="home-page">
@@ -81,36 +80,29 @@ const HomePage = () => {
                 <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 3c0 .55.45 1 1 1h1l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h11c.55 0 1-.45 1-1s-.45-1-1-1H7l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0 0 21 4H5.21l-.67-1.43a.993.993 0 0 0-.9-.57H2c-.55 0-1 .45-1 1zm16 15c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
               </svg>
             </Link>
-            <Link to="/account" className="icon-button account">
-              <svg className="icon" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
-              </svg>
-            </Link>
+            <ProfileMenu />
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="hero-section" style={{ backgroundImage: `url(${Background})` }}>
-      <div className="hero-content">
-        <div className="hero-title animate-fade-in">
-          <span className="wine-text">WINE</span>
-          <span className="hood-text">HOOD</span>
-         
-          <span className="hero-subtitle">НОВИЙ ПОГЛЯД НА ВИНО</span>
-          {/* <img className="hood-text" src={HoodText} alt="HOOD" /> */}
-        </div>
-
-        <div className="hero-description animate-fade-in delay-400">
-          <p>Винний простір для сучасної міської аудиторії.</p>
-          <p>Ми створюємо місце, де вино стає доступним, зрозумілим і натхненним.</p>
-        </div>
-
-        <div className="cta-container animate-fade-in delay-600">
-          <Link to="/catalog" className="cta-button">ЗНАЙТИ СВОЄ ВИНО</Link>
-        </div>
-      </div>
-    </section>
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="brand-name">
+      <div class="wine-text">WINE</div>
+      <div class="hood-text">HOOD</div>
+      <div class="hero-subtitle">НОВИЙ ПОГЛЯД НА ВИНО</div>
+    </div>
+    <div class="hero-description">
+      Винний простір для сучасної міської аудиторії.
+      Ми створюємо місце, де вино стає доступним,
+      зрозумілим і натхненним.
+    </div>
+    <div class="cta-container">
+      <a href="#" class="cta-button">ЗНАЙТИ СВОЄ ВИНО</a>
+    </div>
+  </div>
+</section>
 
       {/* Page Indicators/Pagination */}
       <div className="page-indicators">
@@ -123,63 +115,11 @@ const HomePage = () => {
         ))}
       </div>
 
+     <WineCategories />
 
-{/* Ексклюзивні пропозиції */}
-<section className="exclusive-offers-section">
-  <div className="container">
-    <div className="offers-header">
-      <h2 className="section-title">ЕКСКЛЮЗИВНІ ПРОПОЗИЦІЇ</h2>
-      <a href="/offers" className="details-link">ДЕТАЛЬНІШЕ</a>
-    </div>
-    
-    <div className="offers-grid">
-      <div className="offer-card">
-        <div className="offer-image">
-          <img src={exslusive} alt="Gewurztraminer Leon Beyer" />
-        </div>
-        <div className="offer-info">
-          <h3 className="offer-title">Gewurztraminer Leon Beyer 0.75л</h3>
-          <p className="offer-price">1 350 ₴</p>
-          <button className="add-to-cart-btn">
-            <svg viewBox="0 0 24 24" className="cart-icon">
-              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm3-11H7.07l-.85-2H2v2h3.45l4.13 9h7.88l3.55-7H8.1l-.9-2H20zm-1 3.5l-1.96 3.5H9.5L7.97 10.5H19z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      
-      <div className="offer-card">
-        <div className="offer-image">
-          <img src={exslusive} alt="Gewurztraminer Leon Beyer" />
-        </div>
-        <div className="offer-info">
-          <h3 className="offer-title">Gewurztraminer Leon Beyer 0.75л</h3>
-          <p className="offer-price">1 350 ₴</p>
-          <button className="add-to-cart-btn">
-            <svg viewBox="0 0 24 24" className="cart-icon">
-              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm3-11H7.07l-.85-2H2v2h3.45l4.13 9h7.88l3.55-7H8.1l-.9-2H20zm-1 3.5l-1.96 3.5H9.5L7.97 10.5H19z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      
-      <div className="offer-card">
-        <div className="offer-image">
-          <img src={exslusive} alt="Gewurztraminer Leon Beyer" />
-        </div>
-        <div className="offer-info">
-          <h3 className="offer-title">Gewurztraminer Leon Beyer 0.75л</h3>
-          <p className="offer-price">1 350 ₴</p>
-          <button className="add-to-cart-btn">
-            <svg viewBox="0 0 24 24" className="cart-icon">
-              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm3-11H7.07l-.85-2H2v2h3.45l4.13 9h7.88l3.55-7H8.1l-.9-2H20zm-1 3.5l-1.96 3.5H9.5L7.97 10.5H19z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
+
+
 
       {/* Категорії секція */}
       <section className="about-section">
@@ -250,6 +190,69 @@ const HomePage = () => {
     </div>
   </div>
 </section>
+
+{/* Ексклюзивні пропозиції
+<section className="exclusive-offers-section">
+  <div className="container">
+    <div className="offers-header">
+      <h2 className="section-title">ЕКСКЛЮЗИВНІ ПРОПОЗИЦІЇ</h2>
+      <a href="/offers" className="details-link">ДЕТАЛЬНІШЕ</a>
+    </div>
+    
+    <div className="offers-grid">
+      <div className="offer-card">
+        <div className="offer-image">
+          <img src={exslusive} alt="Gewurztraminer Leon Beyer" />
+        </div>
+        <div className="offer-info">
+          <h3 className="offer-title">Gewurztraminer Leon Beyer 0.75л</h3>
+          <p className="offer-price">1 350 ₴</p>
+          <button className="add-to-cart-btn">
+            <svg viewBox="0 0 24 24" className="cart-icon">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm3-11H7.07l-.85-2H2v2h3.45l4.13 9h7.88l3.55-7H8.1l-.9-2H20zm-1 3.5l-1.96 3.5H9.5L7.97 10.5H19z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div className="offer-card">
+        <div className="offer-image">
+          <img src={exslusive} alt="Gewurztraminer Leon Beyer" />
+        </div>
+        <div className="offer-info">
+          <h3 className="offer-title">Gewurztraminer Leon Beyer 0.75л</h3>
+          <p className="offer-price">1 350 ₴</p>
+          <button className="add-to-cart-btn">
+            <svg viewBox="0 0 24 24" className="cart-icon">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm3-11H7.07l-.85-2H2v2h3.45l4.13 9h7.88l3.55-7H8.1l-.9-2H20zm-1 3.5l-1.96 3.5H9.5L7.97 10.5H19z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div className="offer-card">
+        <div className="offer-image">
+          <img src={exslusive} alt="Gewurztraminer Leon Beyer" />
+        </div>
+        <div className="offer-info">
+          <h3 className="offer-title">Gewurztraminer Leon Beyer 0.75л</h3>
+          <p className="offer-price">1 350 ₴</p>
+          <button className="add-to-cart-btn">
+            <svg viewBox="0 0 24 24" className="cart-icon">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm3-11H7.07l-.85-2H2v2h3.45l4.13 9h7.88l3.55-7H8.1l-.9-2H20zm-1 3.5l-1.96 3.5H9.5L7.97 10.5H19z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> */}
+
+
+     {/* Блог */}
+     <BlogSection />
+     <ExclusiveOffers />
+
   
 
       {/* Відгуки про вина */}

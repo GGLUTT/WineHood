@@ -5,18 +5,18 @@ import './AgeRestrictionPage.css';
 const AgeRestrictionPage = () => {
   return (
     <div className="age-restriction-page">
-      <div className="restriction-container">
+      <div className="restriction-content">
         <h1>Доступ обмежено</h1>
         <p>
-          На жаль, цей сайт містить інформацію про алкогольні напої і доступний 
+          На жаль, цей сайт містить інформацію про алкогольні напої і доступний
           тільки для користувачів віком від 18 років.
         </p>
         <p>
           Будь ласка, поверніться, коли вам виповниться 18 років.
         </p>
-        <div className="actions">
-          <Link to="/" className="home-link">Повернутися на головну</Link>
-        </div>
+        <Link to="/" className="home-link">
+          Повернутися на головну
+        </Link>
       </div>
     </div>
   );
