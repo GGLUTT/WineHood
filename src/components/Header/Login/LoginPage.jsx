@@ -23,14 +23,12 @@ const LoginPage = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Перевірка email
     if (!formData.email.trim()) {
       newErrors.email = "Email є обов'язковим";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Будь ласка, введіть дійсну адресу електронної пошти";
     }
 
-    // Перевірка паролю
     if (!formData.password) {
       newErrors.password = "Пароль є обов'язковим";
     }
