@@ -1,0 +1,1026 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import "./WineCatalog.css";
+import "./Product.css";
+import "./SortProduct.css";
+import ArgentinaFlag from "../../img/ico/flags/argentina.svg";
+import AvstraliaFlag from "../../img/ico/flags/icon_australia.svg";
+import AvstriaFlag from "../../img/ico/flags/icon_avstria.svg";
+import BulgaryFlag from "../../img/ico/flags/icon_bolgary.svg";
+import BrazilFlag from "../../img/ico/flags/icon_brazil.svg";
+import GeorgiaFlag from "../../img/ico/flags/icon_georgia.svg";
+import IzrailFlag from "../../img/ico/flags/icon_izrail.svg";
+import SpainFlag from "../../img/ico/flags/icon_spain.svg";
+
+import penfolds from "../../img/wine_Category/penfolds.png";
+import Header from "../Header/Header";
+
+const WineCatalog = () => {
+  const [collapsedSections, setCollapsedSections] = useState({
+    color: false,
+    price: false,
+    alcohol: false,
+    taste: false,
+    country: false,
+    producer: false,
+    character: false,
+    volume: false,
+    food: false,
+  });
+  const [sortOption, setSortOption] = useState("За замовчуванням");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredWines, setFilteredWines] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [maxPriceValue, setMaxPriceValue] = useState(50000);
+  const totalPages = 103;
+  const itemsPerPage = 12;
+
+  const [filters, setFilters] = useState({
+    color: [],
+    alcohol: [],
+    taste: [],
+    country: [],
+    producer: [],
+    character: [],
+    volume: [],
+    food: [],
+    priceRange: { min: 300, max: 38650 },
+    showDiscounts: false,
+  });
+
+  const navigate = useNavigate();
+
+  const handleAddToCarts = (product, quantity) => {
+    // Логіка додавання товару до кошика
+    console.log(`Added to cart: ${product.name}, quantity: ${quantity}`);
+    // Тут може бути виклик API або функції для оновлення кошика
+  };
+
+  const handleViewDetails = (product) => {
+    // Переадресація на сторінку деталей товару
+    navigate(`/product/${product.id}`);
+    
+    // Якщо ви хочете логувати або відстежувати цю взаємодію
+    console.log(`Navigating to product: ${product.name}`);
+    
+    // Якщо ви використовуєте аналітику
+    // analytics.trackEvent('product_view', { productId: product.id });
+  };
+
+
+  const renderArrow = (section) => {
+    return (
+
+      
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={`h-4 w-4 transition-transform duration-200 ${
+          collapsedSections[section] ? "rotate-180" : ""
+        }`}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    );
+  };
+
+  const toggleSection = (section) => {
+    setCollapsedSections({
+      ...collapsedSections,
+      [section]: !collapsedSections[section],
+    });
+  };
+
+  const allWines = [
+    {
+      id: 1,
+      name: "Penfolds Bin 60A",
+      type: "Червоне вино",
+      color: "Червоне",
+      price: 19850,
+      onSale: false,
+      alcohol: "14%+",
+      taste: "Сухе",
+      country: "Австралія",
+      producer: "Penfolds",
+      character: "Глибоке",
+      volume: "0.75 л",
+      foodPairing: ["Дичина", "Баранина"],
+      image: penfolds,
+    },
+    {
+      id: 2,
+      name: "Penfolds Bin 60A",
+      type: "Червоне вино",
+      color: "Червоне",
+      price: 21500,
+      onSale: true,
+      alcohol: "14%+",
+      taste: "Сухе",
+      country: "Австралія",
+      producer: "Penfolds",
+      character: "Глибоке",
+      volume: "0.75 л",
+      foodPairing: ["Дичина", "Баранина"],
+      image: penfolds,
+    },
+    {
+      id: 3,
+      name: "Penfolds Bin 60A",
+      type: "Червоне вино",
+      color: "Червоне",
+      price: 18750,
+      onSale: false,
+      alcohol: "14%+",
+      taste: "Сухе",
+      country: "Австралія",
+      producer: "Penfolds",
+      character: "Глибоке",
+      volume: "0.75 л",
+      foodPairing: ["Дичина"],
+      image: penfolds,
+    },
+    {
+      id: 4,
+      name: "Cloudy Bay",
+      type: "Біле вино",
+      color: "Біле",
+      price: 2850,
+      onSale: false,
+      alcohol: "11-13%",
+      taste: "Сухе",
+      country: "Австралія",
+      producer: "Cloudy Bay",
+      character: "Квіткове",
+      volume: "0.75 л",
+      foodPairing: ["Біла риба (лосось, тунець тощо)"],
+      image: penfolds,
+    },
+    {
+      id: 5,
+      name: "Lou Rosé",
+      type: "Біле вино",
+      color: "Біле",
+      price: 1950,
+      onSale: true,
+      alcohol: "11-13%",
+      taste: "Напівсухе",
+      country: "Іспанія",
+      producer: "Lou",
+      character: "Легке",
+      volume: "0.75 л",
+      foodPairing: ["Аперитив"],
+      image: penfolds,
+    },
+    {
+      id: 6,
+      name: "Penfolds Bin 60A",
+      type: "Біле вино",
+      color: "Біле",
+      price: 3250,
+      onSale: false,
+      alcohol: "11-13%",
+      taste: "Сухе",
+      country: "Австралія",
+      producer: "Penfolds",
+      character: "Елегантне",
+      volume: "0.75 л",
+      foodPairing: ["Біла риба (лосось, тунець тощо)"],
+      image: penfolds,
+    },
+    {
+      id: 7,
+      name: "Villa Maria",
+      type: "Біле вино",
+      color: "Біле",
+      price: 1650,
+      onSale: false,
+      alcohol: "11-13%",
+      taste: "Сухе",
+      country: "Аргентина",
+      producer: "Villa Maria",
+      character: "Легке",
+      volume: "0.75 л",
+      foodPairing: ["Вегетаріанські"],
+      image: penfolds,
+    },
+    {
+      id: 8,
+      name: "Domaine Desvignes",
+      type: "Біле вино",
+      color: "Біле",
+      price: 2950,
+      onSale: true,
+      alcohol: "11-13%",
+      taste: "Сухе",
+      country: "Франція",
+      producer: "Domaine Desvignes",
+      character: "Квіткове",
+      volume: "0.75 л",
+      foodPairing: ["Аперитив"],
+      image: penfolds,
+    },
+    {
+      id: 9,
+      name: "Whispering Angel",
+      type: "Рожеве вино",
+      color: "Рожеве",
+      price: 2450,
+      onSale: false,
+      alcohol: "11-13%",
+      taste: "Сухе",
+      country: "Франція",
+      producer: "Whispering Angel",
+      character: "Легке",
+      volume: "0.75 л",
+      foodPairing: ["Аперитив"],
+      image: penfolds,
+    },
+  ];
+
+  const colorCategories = [
+    "Червоне",
+    "Біле",
+    "Рожеве",
+    "Помаранчеве",
+    "Ігристе",
+    "Десертне",
+  ];
+
+  const alcoholCategories = ["5-7%", "8-10%", "11-13%", "14%+"];
+  const tasteCategories = ["Сухе", "Напівсухе", "Напівсолодке", "Солодке"];
+  const countryCategories = [
+    { name: "Аргентина", flagSrc: ArgentinaFlag },
+    { name: "Австралія", flagSrc: AvstraliaFlag },
+    { name: "Австрія", flagSrc: AvstriaFlag },
+    { name: "Болгарія", flagSrc: BulgaryFlag },
+    { name: "Бразилія", flagSrc: BrazilFlag },
+    { name: "Грузія", flagSrc: GeorgiaFlag },
+    { name: "Ізраїль", flagSrc: IzrailFlag },
+    { name: "Іспанія", flagSrc: SpainFlag },
+    { name: "Італія", flagSrc: IzrailFlag }, //
+    { name: "Франція", flagSrc: IzrailFlag }, //
+  ];
+  const producerCategories = [
+    "Antinori",
+    "Almaviva",
+    "Achaval-Ferrer",
+    "Beringer",
+    "Baron Philippe de Rothschild",
+    "Bodega Catena Zapata",
+    "Bollinger",
+    "Château Margaux",
+    "Cloudy Bay",
+    "Domaine Desvignes",
+    "Ferrari",
+    "Lou",
+    "MASI",
+    "Minuty",
+    "Penfolds",
+    "Villa Maria",
+    "Whispering Angel",
+  ];
+  const characterCategories = [
+    "Гармонійне",
+    "Глибоке",
+    "Живе",
+    "Землисте",
+    "Екзотичне",
+    "Елегантне",
+    "Квіткове",
+    "Легке",
+    "Медове",
+  ];
+  const volumeCategories = ["0.375 л", "0.75 л", "1.5 л", "3 л"];
+  const foodCategories = [
+    "Аперитив",
+    "Біла риба (лосось, тунець тощо)",
+    "Баранина",
+    "Вегетаріанські",
+    "Випічка и мед",
+    "Гостра їжа",
+    "Гриби",
+    "Дичина",
+  ];
+
+  const [searchCountry, setSearchCountry] = useState("");
+  const [searchProducer, setSearchProducer] = useState("");
+
+  const formatPrice = (price) => {
+    return parseInt(price);
+  };
+
+  const handleFilterChange = (filterType, value) => {
+    setFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters };
+
+      if (filterType === "priceRange") {
+        updatedFilters.priceRange = { ...updatedFilters.priceRange, ...value };
+      } else if (filterType === "showDiscounts") {
+        updatedFilters.showDiscounts = value;
+      } else {
+        if (updatedFilters[filterType].includes(value)) {
+          updatedFilters[filterType] = updatedFilters[filterType].filter(
+            (item) => item !== value
+          );
+        } else {
+          updatedFilters[filterType] = [...updatedFilters[filterType], value];
+        }
+      }
+
+      return updatedFilters;
+    });
+  };
+
+  const handlePriceChange = (type, value) => {
+    const numValue = parseInt(value) || 0;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      priceRange: {
+        ...prevFilters.priceRange,
+        [type]: numValue,
+      },
+    }));
+  };
+
+  const resetAllFilters = () => {
+    setFilters({
+      color: [],
+      alcohol: [],
+      taste: [],
+      country: [],
+      producer: [],
+      character: [],
+      volume: [],
+      food: [],
+      priceRange: { min: 500, max: 38650 },
+      showDiscounts: false,
+    });
+    setSearchCountry("");
+    setSearchProducer("");
+  };
+
+  const applyFilters = () => {
+    let result = [...allWines];
+
+    if (filters.color.length > 0) {
+      result = result.filter((wine) => filters.color.includes(wine.color));
+    }
+
+    result = result.filter(
+      (wine) =>
+        wine.price >= filters.priceRange.min &&
+        wine.price <= filters.priceRange.max
+    );
+
+    if (filters.showDiscounts) {
+      result = result.filter((wine) => wine.onSale);
+    }
+
+    if (filters.alcohol.length > 0) {
+      result = result.filter((wine) => filters.alcohol.includes(wine.alcohol));
+    }
+
+    if (filters.taste.length > 0) {
+      result = result.filter((wine) => filters.taste.includes(wine.taste));
+    }
+
+    if (filters.country.length > 0) {
+      result = result.filter((wine) => filters.country.includes(wine.country));
+    }
+
+    if (filters.producer.length > 0) {
+      result = result.filter((wine) =>
+        filters.producer.includes(wine.producer)
+      );
+    }
+
+    if (filters.character.length > 0) {
+      result = result.filter((wine) =>
+        filters.character.includes(wine.character)
+      );
+    }
+
+    if (filters.volume.length > 0) {
+      result = result.filter((wine) => filters.volume.includes(wine.volume));
+    }
+
+    if (filters.food.length > 0) {
+      result = result.filter((wine) => {
+        return wine.foodPairing.some((food) => filters.food.includes(food));
+      });
+    }
+
+    result = sortWines(result, sortOption);
+
+    setFilteredWines(result);
+    setTotalItems(result.length);
+
+    setCurrentPage(1);
+  };
+
+  const sortWines = (wines, option) => {
+    const sortedWines = [...wines];
+
+    switch (option) {
+      case "За ціною (зростання)":
+        return sortedWines.sort((a, b) => a.price - b.price);
+      case "За ціною (спадання)":
+        return sortedWines.sort((a, b) => b.price - a.price);
+      case "За алфавітом (А-Я)":
+        return sortedWines.sort((a, b) => a.name.localeCompare(b.name));
+      case "За алфавітом (Я-А)":
+        return sortedWines.sort((a, b) => b.name.localeCompare(a.name));
+      default:
+        return sortedWines; // За замовчуванням
+    }
+  };
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [sortOption]);
+
+  const getCurrentPageWines = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return filteredWines.slice(startIndex, endIndex);
+  };
+
+  const getFilteredCountries = () => {
+    if (!searchCountry) return countryCategories;
+    return countryCategories.filter((country) =>
+      country.name.toLowerCase().includes(searchCountry.toLowerCase())
+    );
+  };
+
+  const getFilteredProducers = () => {
+    if (!searchProducer) return producerCategories;
+    return producerCategories.filter((producer) =>
+      producer.toLowerCase().includes(searchProducer.toLowerCase())
+    );
+  };
+
+  return (
+    <div className="bg-white min-h-screen">
+      <Header></Header> 
+      {/* Верхній банер */}
+      <div className="custom-bg relative h-64 overflow-hidden">
+        <div className="absolute inset-0 bg-opacity-50"></div>
+        <div className="container mx-auto px-4 py-16 relative z-10">
+          <div className="flex items-center text-sm mb-4">
+            <span>Головна</span>
+            <span className="mx-2">{">"}</span>
+            <span>Каталог</span>
+          </div>
+          <h1 className="text-4xl font-bold mb-4">ІСКРИСТА МАГІЯ</h1>
+          <h2 className="text-xl mb-6">ВІД КЛАСИКИ ДО СМІЛИВИХ НОВИНОК</h2>
+          <button className="bg-red-700">ДІЗНАТИСЬ БІЛЬШЕ</button>
+        </div>
+      </div>
+
+      {/* Основний контент з фоном в смужку */}
+      <div className="catalog-container">
+        <div className="container mx-auto px-4 py-8">
+          <h2 className="text-3xl font-bold mb-4">КАТАЛОГ</h2>
+          <p className="mb-8 text-gray-700">{totalItems} Товарів</p>
+
+          <div className="flex flex-wrap">
+            {/* Ліва колонка з фільтрами */}
+            <div className="w-full lg:w-1/4 lg:pr-8">
+              <h3 className="font-bold mb-4">Фільтри</h3>
+
+              {/* Категорія кольору */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("color")}
+                >
+                  <h4 className="filter-title">Колір вина</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("color")}
+                  </button>
+                </div>
+                {!collapsedSections.color &&
+                  colorCategories.map((category, index) => (
+                    <div key={index} className="filter-option">
+                      <input
+                        type="checkbox"
+                        id={`color-${index}`}
+                        className="filter-checkbox"
+                        checked={filters.color.includes(category)}
+                        onChange={() => handleFilterChange("color", category)}
+                      />
+                      <label htmlFor={`color-${index}`}>{category}</label>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Цінова категорія */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("price")}
+                >
+                  <h4 className="filter-title">Ціна</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("price")}
+                  </button>
+                </div>
+
+                {!collapsedSections.price && (
+                  <>
+                    <div className="price-filter-input-group mb-4">
+                      <div className="w-1/2 pr-2">
+                        <div className="price-input-label">ВІД</div>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={filters.priceRange.min}
+                            onChange={(e) =>
+                              handlePriceChange("min", e.target.value)
+                            }
+                            className="price-filter-input"
+                            min="0"
+                          />
+                          <span className="absolute right-2 top-1/2 transform -translate-y-1/2 currency">
+                            ₴
+                          </span>
+                        </div>
+                      </div>
+                      <div className="w-1/2 pl-2">
+                        <div className="price-input-label">ДО</div>
+                        <div className="relative">
+                          <input
+                            type="number"
+                            value={filters.priceRange.max}
+                            onChange={(e) =>
+                              handlePriceChange("max", e.target.value)
+                            }
+                            className="price-filter-input"
+                            min="0"
+                          />
+                          <span className="absolute right-2 top-1/2 transform -translate-y-1/2 currency">
+                            ₴
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="price-slider mb-4">
+                      <div
+                        className="price-slider-track"
+                        style={{
+                          left: `${
+                            (filters.priceRange.min / maxPriceValue) * 100
+                          }%`,
+                          width: `${
+                            ((filters.priceRange.max - filters.priceRange.min) /
+                              maxPriceValue) *
+                            100
+                          }%`,
+                        }}
+                      ></div>
+                      <div
+                        className="price-slider-handle left"
+                        style={{
+                          left: `${
+                            (filters.priceRange.min / maxPriceValue) * 100
+                          }%`,
+                        }}
+                      ></div>
+                      <div
+                        className="price-slider-handle right"
+                        style={{
+                          left: `${
+                            (filters.priceRange.max / maxPriceValue) * 100
+                          }%`,
+                        }}
+                      ></div>
+                    </div>
+
+                    <div className="filter-option">
+                      <input
+                        type="checkbox"
+                        id="discounts"
+                        className="filter-checkbox"
+                        checked={filters.showDiscounts}
+                        onChange={() =>
+                          handleFilterChange(
+                            "showDiscounts",
+                            !filters.showDiscounts
+                          )
+                        }
+                      />
+                      <label htmlFor="discounts">Показати тільки знижки</label>
+                    </div>
+                  </>
+                )}
+              </div>
+              {/* Категорія вмісту алкоголю */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("alcohol")}
+                >
+                  <h4 className="filter-title">Вміст алкоголю</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("alcohol")}
+                  </button>
+                </div>
+                {!collapsedSections.alcohol &&
+                  alcoholCategories.map((category, index) => (
+                    <div key={index} className="filter-option">
+                      <input
+                        type="checkbox"
+                        id={`alcohol-${index}`}
+                        className="filter-checkbox"
+                        checked={filters.alcohol.includes(category)}
+                        onChange={() => handleFilterChange("alcohol", category)}
+                      />
+                      <label htmlFor={`alcohol-${index}`}>{category}</label>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Категорія смаку */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("taste")}
+                >
+                  <h4 className="filter-title">Смак</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("taste")}
+                  </button>
+                </div>
+                {!collapsedSections.taste &&
+                  tasteCategories.map((category, index) => (
+                    <div key={index} className="filter-option">
+                      <input
+                        type="checkbox"
+                        id={`taste-${index}`}
+                        className="filter-checkbox"
+                        checked={filters.taste.includes(category)}
+                        onChange={() => handleFilterChange("taste", category)}
+                      />
+                      <label htmlFor={`taste-${index}`}>{category}</label>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Пошук країни */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("country")}
+                >
+                  <h4 className="filter-title">Країна</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("country")}
+                  </button>
+                </div>
+                {!collapsedSections.country && (
+                  <>
+                    <div className="filter-search">
+                      <input
+                        type="text"
+                        placeholder="Пошук країн"
+                        className="filter-search-input"
+                        value={searchCountry}
+                        onChange={(e) => setSearchCountry(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <button className="filter-search-button">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    {getFilteredCountries().map((category, index) => (
+                      <div key={index} className="filter-option">
+                        <input
+                          type="checkbox"
+                          id={`country-${index}`}
+                          className="filter-checkbox"
+                          checked={filters.country.includes(category.name)}
+                          onChange={() =>
+                            handleFilterChange("country", category.name)
+                          }
+                        />
+                        <label htmlFor={`country-${index}`}>
+                          <img
+                            src={category.flagSrc}
+                            alt={`Прапор ${category.name}`}
+                            className="inline-block mr-2 w-5 h-3"
+                          />
+                          {category.name}
+                        </label>
+                      </div>
+                    ))}
+                    <button className="filter-more">
+                      Переглянути більше +
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Пошук виробника */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("producer")}
+                >
+                  <h4 className="filter-title">Виробник</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("producer")}
+                  </button>
+                </div>
+                {!collapsedSections.producer && (
+                  <>
+                    <div className="filter-search">
+                      <input
+                        type="text"
+                        placeholder="Пошук виробника"
+                        className="filter-search-input"
+                        value={searchProducer}
+                        onChange={(e) => setSearchProducer(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <button className="filter-search-button">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    {getFilteredProducers().map((category, index) => (
+                      <div key={index} className="filter-option">
+                        <input
+                          type="checkbox"
+                          id={`producer-${index}`}
+                          className="filter-checkbox"
+                          checked={filters.producer.includes(category)}
+                          onChange={() =>
+                            handleFilterChange("producer", category)
+                          }
+                        />
+                        <label htmlFor={`producer-${index}`}>{category}</label>
+                      </div>
+                    ))}
+                    <button className="filter-more">
+                      Переглянути більше +
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Характер вина */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("character")}
+                >
+                  <h4 className="filter-title">Характер</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("character")}
+                  </button>
+                </div>
+                {!collapsedSections.character &&
+                  characterCategories.map((category, index) => (
+                    <div key={index} className="filter-option">
+                      <input
+                        type="checkbox"
+                        id={`character-${index}`}
+                        className="filter-checkbox"
+                        checked={filters.character.includes(category)}
+                        onChange={() =>
+                          handleFilterChange("character", category)
+                        }
+                      />
+                      <label htmlFor={`character-${index}`}>{category}</label>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Об'єм */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("volume")}
+                >
+                  <h4 className="filter-title">Об'єм</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("volume")}
+                  </button>
+                </div>
+                {!collapsedSections.volume &&
+                  volumeCategories.map((category, index) => (
+                    <div key={index} className="filter-option">
+                      <input
+                        type="checkbox"
+                        id={`volume-${index}`}
+                        className="filter-checkbox"
+                        checked={filters.volume.includes(category)}
+                        onChange={() => handleFilterChange("volume", category)}
+                      />
+                      <label htmlFor={`volume-${index}`}>{category}</label>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Поєднання з їжею */}
+              <div className="filter-section">
+                <div
+                  className="flex justify-between items-center mb-2 cursor-pointer"
+                  onClick={() => toggleSection("food")}
+                >
+                  <h4 className="filter-title">Поєднання з їжею</h4>
+                  <button className="category-collapse-button">
+                    {renderArrow("food")}
+                  </button>
+                </div>
+                {!collapsedSections.food &&
+                  foodCategories.map((category, index) => (
+                    <div key={index} className="filter-option">
+                      <input
+                        type="checkbox"
+                        id={`food-${index}`}
+                        className="filter-checkbox"
+                        checked={filters.food.includes(category)}
+                        onChange={() => handleFilterChange("food", category)}
+                      />
+                      <label htmlFor={`food-${index}`}>{category}</label>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Кнопки керування фільтрами */}
+              <div className="filter-actions mt-6">
+                <button
+                  className="filter-button filter-apply w-full mb-3"
+                  onClick={applyFilters}
+                >
+                  Застосувати
+                </button>
+                <button
+                  className="filter-button filter-reset w-full"
+                  onClick={resetAllFilters}
+                >
+                  Скинути фільтри
+                </button>
+              </div>
+            </div>
+
+            {/* Права колонка з товарами */}
+            <div className="w-full lg:w-3/4">
+              <div className="sort-container">
+                <div className="sort-wrapper">
+                  <label className="sort-label">Сортувати за:</label>
+                  <select
+                    value={sortOption}
+                    onChange={handleSortChange}
+                    className="sort-select"
+                  >
+                    <option value="За замовчуванням">За замовчуванням</option>
+                    <option value="За ціною (зростання)">
+                      За ціною (зростання)
+                    </option>
+                    <option value="За ціною (спадання)">
+                      За ціною (спадання)
+                    </option>
+                    <option value="За алфавітом (А-Я)">
+                      За алфавітом (А-Я)
+                    </option>
+                    <option value="За алфавітом (Я-А)">
+                      За алфавітом (Я-А)
+                    </option>
+                  </select>
+                </div>
+              </div>
+             {/* Сітка продуктів */}
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {getCurrentPageWines().map((wine) => (
+    <div key={wine.id} className="wine-card">
+      <div 
+        className="wine-card-content cursor-pointer" 
+        onClick={() => navigate(`/product/${wine.id}`)}
+      >
+        {wine.onSale && <div className="sale-badge">Знижка</div>}
+        <div className="wine-image">
+          <img src={wine.image} alt={wine.name} />
+        </div>
+        <div className="wine-details">
+          <h3 className="wine-name">{wine.name}</h3>
+          <p className="wine-type">{wine.type}</p>
+          <div className="wine-price">
+            <span className="font-bold">
+              {formatPrice(wine.price)} ₴
+            </span>
+          </div>
+        </div>
+      </div>
+      <button 
+        className="add-to-cart"
+        onClick={(e) => {
+          e.stopPropagation(); 
+          handleAddToCarts(wine, 1);
+        }}
+      >
+        До кошика
+      </button>
+    </div>
+  ))}
+</div>
+
+              {/* Пагінація */}
+              <div className="pagination flex justify-center mt-8">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className={`pagination-arrow ${
+                    currentPage === 1 ? "disabled" : ""
+                  }`}
+                >
+                  &lt;
+                </button>
+                {Array.from({ length: 5 }, (_, i) => {
+                  let pageToShow;
+                  if (currentPage <= 3) {
+                    pageToShow = i + 1;
+                  } else if (currentPage >= totalPages - 2) {
+                    pageToShow = totalPages - 4 + i;
+                  } else {
+                    pageToShow = currentPage - 2 + i;
+                  }
+
+                  if (pageToShow < 1 || pageToShow > totalPages) return null;
+
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => handlePageChange(pageToShow)}
+                      className={`pagination-button ${
+                        currentPage === pageToShow ? "active" : ""
+                      }`}
+                    >
+                      {pageToShow}
+                    </button>
+                  );
+                })}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className={`pagination-arrow ${
+                    currentPage === totalPages ? "disabled" : ""
+                  }`}
+                >
+                  &gt;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default WineCatalog;

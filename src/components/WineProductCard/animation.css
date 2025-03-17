@@ -1,0 +1,518 @@
+/* Базові keyframes анімації */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(185, 28, 28, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(185, 28, 28, 0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Кнопка додавання в кошик */
+.add-to-cart-new {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.add-to-cart-new:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(185, 28, 28, 0.3);
+}
+
+.add-to-cart-new::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.8s ease;
+}
+
+.add-to-cart-new:hover::before {
+  left: 100%;
+}
+
+/* Кнопка улюблених */
+.favorite-btn {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.favorite-btn:hover {
+  background-color: #fff5f5;
+  transform: scale(1.2);
+  border-color: #b91c1c;
+}
+
+.favorite-btn svg {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.favorite-btn:hover svg {
+  transform: scale(1.2);
+  animation: pulse 1.5s infinite;
+}
+
+/* Мініатюри галереї */
+.thumbnail {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 1;
+}
+
+.thumbnail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(185, 28, 28, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.thumbnail:hover {
+  transform: translateY(-8px) scale(1.1);
+  border-color: #b91c1c;
+  border-width: 2px;
+  box-shadow: 0 8px 15px rgba(185, 28, 28, 0.2);
+}
+
+.thumbnail:hover::before {
+  opacity: 1;
+}
+
+/* Головне зображення */
+.main-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.main-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 60%, rgba(185, 28, 28, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.main-image img {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-image:hover img {
+  transform: scale(1.08);
+}
+
+.main-image:hover::after {
+  opacity: 1;
+}
+
+/* Табове меню */
+.tab {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.tab::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #b91c1c;
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+}
+
+.tab:hover {
+  color: #b91c1c;
+  transform: translateY(-3px);
+}
+
+.tab:hover::before {
+  width: 80%;
+}
+
+/* Банер продукту */
+.product-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at bottom right, rgba(185, 28, 28, 0.3), transparent 70%);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.product-banner:hover::after {
+  opacity: 1;
+}
+
+.product-banner .brand {
+  opacity: 0;
+  animation: fadeInLeft 0.8s forwards;
+}
+
+.product-banner h1 {
+  opacity: 0;
+  animation: fadeInRight 0.8s forwards;
+  animation-delay: 0.2s;
+}
+
+/* Рейтинг та зірки */
+.rating {
+  position: relative;
+}
+
+.stars {
+  display: inline-block;
+  opacity: 0;
+  animation: fadeInUp 0.7s forwards;
+  animation-delay: 0.4s;
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.rating:hover .stars {
+  transform: scale(1.2);
+  color: #ff4d4d;
+}
+
+.reviews {
+  transition: color 0.3s ease;
+}
+
+.rating:hover .reviews {
+  color: #b91c1c;
+}
+
+/* Кнопки кількості */
+.quantity-btn {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.quantity-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(185, 28, 28, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #f8e0e0;
+  color: #b91c1c;
+  transform: scale(1.1);
+}
+
+.quantity-btn:hover::before {
+  transform: scaleX(1);
+}
+
+/* Картки вина */
+.wine-card {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 1;
+}
+
+.wine-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 80%, rgba(185, 28, 28, 0.05));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.wine-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+.wine-card:hover::before {
+  opacity: 1;
+}
+
+.wine-card img {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wine-card:hover img {
+  transform: translateY(-5px);
+}
+
+.wine-card .name {
+  transition: color 0.3s ease;
+}
+
+.wine-card:hover .name {
+  color: #8D0314;
+}
+
+/* Смаковий профіль */
+.taste-bar {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.taste-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shine 3s infinite linear paused;
+}
+
+.taste-bar:hover {
+  transform: scaleY(1.3);
+}
+
+.taste-bar:hover::after {
+  animation-play-state: running;
+}
+
+.taste-value {
+  transition: width 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.taste-profile:hover .taste-value {
+  background-color: rgba(185, 28, 28, 0.8);
+}
+
+/* Опис вина */
+.wine-description {
+  position: relative;
+}
+
+.wine-description h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.wine-description h2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #b91c1c;
+  transition: width 0.5s ease;
+}
+
+.wine-description:hover h2::after {
+  width: 100%;
+}
+
+.wine-description p {
+  transition: all 0.4s ease;
+}
+
+.wine-description:hover p {
+  transform: translateX(5px);
+  border-left: 3px solid #b91c1c;
+  padding-left: 10px;
+}
+
+/* Теги поєднання з їжею */
+.food-tag {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.food-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(185, 28, 28, 0.2),
+    transparent
+  );
+  transition: left 0.8s ease;
+}
+
+.food-tag:hover {
+  background-color: #b91c1c;
+  color: white;
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 15px rgba(185, 28, 28, 0.2);
+}
+
+.food-tag:hover::before {
+  left: 100%;
+}
+
+/* Стрілки навігації */
+.prev-arrow, .next-arrow {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.prev-arrow:hover, .next-arrow:hover {
+  background-color: #b91c1c;
+  color: white;
+  transform: scale(1.2);
+  box-shadow: 0 5px 15px rgba(185, 28, 28, 0.3);
+}
+
+/* Ціна */
+.price {
+  position: relative;
+  display: inline-block;
+  transition: all 0.4s ease;
+}
+
+.price::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #b91c1c;
+  transition: width 0.4s ease;
+}
+
+.price:hover {
+  transform: scale(1.1);
+  text-shadow: 0 5px 10px rgba(185, 28, 28, 0.2);
+}
+
+.price:hover::before {
+  width: 100%;
+}
+
+/* Загальні класи анімацій */
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.7s forwards;
+}
+
+.fade-in-left {
+  opacity: 0;
+  animation: fadeInLeft 0.7s forwards;
+}
+
+.fade-in-right {
+  opacity: 0;
+  animation: fadeInRight 0.7s forwards;
+}
+
+.fade-in-up-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.fade-in-up-delay-2 {
+  animation-delay: 0.4s;
+}
+
+.fade-in-up-delay-3 {
+  animation-delay: 0.6s;
+}

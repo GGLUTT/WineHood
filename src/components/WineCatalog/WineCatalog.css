@@ -1,0 +1,1265 @@
+/* Загальні стилі */
+.bg-white {
+  background-color: white;
+}
+
+.custom-bg {
+  background-image: url('../../../src/img/catalog_banner.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* Стилі для банера з анімацією */
+.bg-black {
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-black::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(139,0,0,0.7) 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
+  animation: gradientShift 10s infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% {
+    opacity: 0.7;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.7;
+    background-position: 100% 50%;
+  }
+}
+
+.text-white {
+  color: white;
+}
+
+.relative {
+  position: relative;
+}
+
+.h-64 {
+  height: 16rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.bg-opacity-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+  gap: 40%;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Анімована кнопка Дізнатись більше */
+.bg-red-700 {
+  background-color: #8B0000;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(139, 0, 0, 0.1);
+}
+
+.bg-red-700:hover {
+  background-color: #a10000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(139, 0, 0, 0.2);
+}
+
+.bg-red-700::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: width 0.3s ease;
+}
+
+.bg-red-700:hover::after {
+  width: 100%;
+}
+
+/* Заголовок Каталогу згідно дизайну */
+.text-3xl.font-bold {
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: #4A2511;
+  position: relative;
+  display: inline-block;
+}
+
+.text-3xl.font-bold::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #8B0000;
+  transition: width 0.4s ease;
+}
+
+.text-3xl.font-bold:hover::after {
+  width: 100%;
+}
+
+.text-gray-700 {
+  color: #4A2511;
+}
+
+/* Стилі для фільтрів з анімацією */
+.w-full {
+  width: 100%;
+}
+
+.lg\:w-1\/4 {
+  width: 25%;
+}
+
+.lg\:w-3\/4 {
+  width: 75%;
+}
+
+.lg\:pr-8 {
+  padding-right: 2rem;
+}
+
+.filter-section {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #F3D5D5;
+  padding-bottom: 1rem;
+  transition: padding 0.3s ease;
+}
+
+.filter-section:hover {
+  padding-left: 0.5rem;
+  border-bottom: 1px solid #8B0000;
+}
+
+.filter-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  color: #4A2511;
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.filter-section:hover .filter-title {
+  color: #8B0000;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #4A2511;
+  transition: transform 0.2s ease;
+}
+
+.filter-option:hover {
+  transform: translateX(5px);
+  color: #8B0000;
+}
+
+.filter-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #d4b5b5;
+  border-radius: 3px;
+  margin-right: 0.75rem;
+  background-color: #fbecec;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-checkbox:checked {
+  background-color: #8B0000;
+  border-color: #8B0000;
+}
+
+.filter-search {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.filter-search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #F3D5D5;
+  background-color: #FFF0F5;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.filter-search-input:focus {
+  border-color: #8B0000;
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+  outline: none;
+}
+
+.filter-search-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  color: #8B0000;
+  background: none;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.filter-search-button:hover {
+  transform: scale(1.2);
+}
+
+.filter-more {
+  color: #8B0000;
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.filter-more:hover {
+  color: #a10000;
+  text-decoration: none;
+}
+
+/* Змінено стиль кнопки "Застосувати" відповідно до дизайну */
+.filter-apply {
+  width: 100%;
+  background-color: #8B0000;
+  color: white;
+  padding: 0.75rem 0;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-apply:hover {
+  background-color: #a10000;
+}
+
+.filter-apply::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.filter-apply:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(30, 30);
+    opacity: 0;
+  }
+}
+
+.filter-reset {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #F3D5D5;
+  padding: 0.75rem 0;
+  color: #4A2511;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-reset:hover {
+  border-color: #8B0000;
+  color: #8B0000;
+}
+
+/* Стилі для продуктів з анімаціями відповідно до дизайну */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+/* Змінено фон продуктів на світло-рожевий з білими смугами відповідно до дизайну */
+.product-card {
+  background-color: #FFF0F5;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background-image: repeating-linear-gradient(90deg, #FFF0F5, #FFF0F5 8px, #FFF8FA 8px, #FFF8FA 16px);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  border-color: #F3D5D5;
+}
+
+.product-badge {
+  background-color: #FFC0CB;
+  color: #8B0000;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  transform: rotate(-5deg);
+  transition: all 0.3s ease;
+}
+
+.product-card:hover .product-badge {
+  transform: rotate(0deg) scale(1.05);
+  background-color: #8B0000;
+  color: white;
+}
+
+.product-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  height: 18rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image img {
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+/* Оновлено стилі назви вина відповідно до макету */
+.wine-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: rgb(38, 38, 38);
+  margin-bottom: 0.25rem;
+}
+
+/* Оновлено стилі типу вина відповідно до макету */
+.wine-type {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: rgb(38, 38, 38);
+  margin-bottom: 0.5rem;
+}
+
+/* Оновлено стилі ціни відповідно до макету */
+.font-bold {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 120%;
+  color: rgb(141, 3, 20);
+}
+
+
+
+/* Стилі для сортування з анімацією */
+.sort-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.sort-label {
+  margin-right: 0.75rem;
+  color: #4A2511;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Змінено стиль випадаючого списку відповідно до дизайну */
+.sort-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #F3D5D5;
+  background-color: #FFF0F5;
+  color: #4A2511;
+  border-radius: 0.25rem;
+  min-width: 12rem;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%234A2511" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.sort-select:focus {
+  border-color: #8B0000;
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+  outline: none;
+}
+
+/* Стилі для пагінації з анімацією */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  color: #4A2511;
+}
+
+/* Оновлено стилі кнопок пагінації відповідно до дизайну */
+.pagination-button {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #F3D5D5;
+  background-color: transparent;
+  color: #4A2511;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pagination-button:hover:not(:disabled) {
+  border-color: #8B0000;
+  color: #8B0000;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.pagination-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.pagination-input {
+  width: 3rem;
+  border: 1px solid #F3D5D5;
+  padding: 0.25rem;
+  text-align: center;
+  margin: 0 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.pagination-input:focus {
+  border-color: #8B0000;
+  outline: none;
+}
+
+.pagination-text {
+  margin-left: 0.5rem;
+}
+
+/* Стилі для різних типів вин з урахуванням дизайну */
+.wine-red {
+  color: #8B0000;
+  transition: all 0.3s ease;
+}
+
+.wine-white {
+  color: #A67B5B;
+  transition: all 0.3s ease;
+}
+
+.wine-rose {
+  color: #FF6B8B;
+  transition: all 0.3s ease;
+}
+
+.wine-sparkling {
+  color: #4682B4;
+  transition: all 0.3s ease;
+}
+
+/* Анімація для тексту типів вин */
+.product-card:hover .wine-red,
+.product-card:hover .wine-white,
+.product-card:hover .wine-rose,
+.product-card:hover .wine-sparkling {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Додаємо анімацію каталогу при завантаженні сторінки */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.catalog-container {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Анімація для фільтрів при відкритті/закритті категорій */
+.category-header {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-header:hover {
+  color: #8B0000;
+}
+
+.category-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.category-content.open {
+  max-height: 500px;
+}
+
+/* Стилі для "Торпедували" кнопки відповідно до дизайну */
+.torpedo-button {
+  background-color: #FFC0CB;
+  color: #8B0000;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+  z-index: 5;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}
+
+.torpedo-button:hover {
+  transform: scale(1.1);
+  background-color: #8B0000;
+  color: white;
+}
+
+/* Медіа-запити для адаптивності */
+@media (max-width: 1024px) {
+  .lg\:w-1\/4, .lg\:w-3\/4 {
+    width: 100%;
+  }
+  
+  .lg\:pr-8 {
+    padding-right: 0;
+  }
+  
+  .product-image {
+    height: 15rem;
+  }
+  
+  .sort-container {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  
+  .product-image {
+    height: 12rem;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Додаємо кнопку "Швидкий перегляд" */
+.quick-view-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background-color: rgba(139, 0, 0, 0.9);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.product-card:hover .quick-view-button {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Фон сторінки каталогу відповідно до дизайну */
+.catalog-page {
+  position: relative;
+  background-color: #FFF0F5;
+}
+
+.catalog-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #FFF0F5, #FFF0F5 8px, #FFF8FA 8px, #FFF8FA 16px);
+  z-index: -1;
+  opacity: 1;
+}
+
+/* Стилі для кнопок згортання категорій відповідно до дизайну */
+.category-collapse-button {
+  background: transparent;
+  border: none;
+  color: #4A2511;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.category-collapse-button:hover {
+  color: #8B0000;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.category-collapse-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.category-collapse-button.collapsed svg {
+  transform: rotate(180deg);
+}
+
+/* Стилі для фільтра ціни */
+.price-filter-input-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-input-label {
+  color: #4A2511;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  font-family: 'Manrope', sans-serif;
+}
+
+.price-filter-input {
+  background-color: #FFF0F5;
+  border: 1px solid #F3D5D5;
+  padding: 0.5rem;
+  width: 100%;
+  transition: border-color 0.3s ease;
+  color: #4A2511;
+  font-weight: 700;
+}
+
+.price-filter-input:focus {
+  border-color: #8B0000;
+  outline: none;
+}
+
+.currency {
+  font-weight: normal;
+  color: #4A2511;
+}
+
+/* Стилі для слайдера ціни */
+.price-slider {
+  width: 100%;
+  height: 2px;
+  background: #e9c9c9;
+  position: relative;
+  margin: 2rem 0;
+}
+
+.price-slider-track {
+  position: absolute;
+  height: 100%;
+  background: rgb(38, 38, 38);
+  z-index: 1;
+}
+
+.price-slider-handle {
+  width: 4px;
+  height: 14px;
+  border-radius: 4px;
+  background: rgb(38, 38, 38);;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.price-slider-handle.left {
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.price-slider-handle.right {
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.price-slider-handle:hover {
+  background: #5c1414;
+}
+
+/* Стилі для кнопки "Застосувати" */
+.apply-button {
+  width: 100%;
+  background-color: #8B0000;
+  color: white;
+  border: none;
+  padding: 0.75rem 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+}
+
+.apply-button:hover {
+  background-color: #a10000;
+}
+
+/* Стилі для кнопки скидання фільтрів */
+.reset-button {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #F3D5D5;
+  padding: 0.75rem 0;
+  color: #4A2511;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+}
+
+.reset-button:hover {
+  border-color: #8B0000;
+  color: #8B0000;
+}
+
+/* Стилі для категорій фільтрів відповідно до дизайну */
+.category {
+  color: #4A2511;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+.category:hover {
+  color: #8B0000;
+}
+
+/* Стилі для тексту "Торпедовано" відповідно до дизайну */
+.torpedoed-label {
+  display: inline-block;
+  background-color: #FFC0CB;
+  color: #8B0000;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Стилі для пошукових полів відповідно до дизайну */
+.producer-search, .country-search {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #F3D5D5;
+  background-color: #FFF0F5;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  font-family: 'Manrope', sans-serif;
+}
+
+.producer-search:focus, .country-search:focus {
+  border-color: #8B0000;
+  outline: none;
+}
+
+/* Стилі для нумерації сторінок відповідно до дизайну */
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.25rem;
+  border: 1px solid #F3D5D5;
+  color: #4A2511;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Manrope', sans-serif;
+}
+
+.pagination-page:hover {
+  border-color: #8B0000;
+  color: #8B0000;
+}
+
+.pagination-page.active {
+  background-color: #8B0000;
+  color: white;
+  border-color: #8B0000;
+  cursor: default;
+}
+
+.pagination-ellipsis {
+  margin: 0 0.25rem;
+  color: #4A2511;
+}
+
+/* Стилі для мобільного меню фільтрів */
+.mobile-filters-button {
+  display: none;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #8B0000;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+}
+
+.mobile-filters-button:hover {
+  background-color: #a10000;
+}
+
+/* Ефект для відкриття мобільних фільтрів */
+.filters.mobile-open {
+  display: block;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Медіа-запит для мобільних пристроїв */
+@media (max-width: 768px) {
+  .mobile-filters-button {
+    display: block;
+  }
+  
+  .filters {
+    display: none;
+  }
+  
+  .filters.mobile-open {
+    display: block;
+  }
+}
+
+/* Анімація для кошика */
+.cart-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #8B0000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.cart-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: white;
+  color: #8B0000;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Анімація збільшення для кількості товарів у кошику */
+.cart-count.updated {
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Стилі для повідомлення про додавання товару в кошик */
+.cart-notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: #8B0000;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 100;
+  font-family: 'Manrope', sans-serif;
+}
+
+.cart-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Футер сторінки з анімацією */
+.footer {
+  background-color: #4A2511;
+  color: white;
+  padding: 3rem 0;
+  margin-top: 4rem;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #8B0000;
+  transition: width 0.4s ease;
+}
+
+.footer-logo:hover::after {
+  width: 100%;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #FFC0CB;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+.footer-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #8B0000;
+  transform: translateY(-5px);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.875rem;
+}
+
+/* Адаптивність для футера */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}

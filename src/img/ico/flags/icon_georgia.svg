@@ -1,0 +1,20 @@
+<svg width="16.000000" height="16.000000" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip3_4878">
+			<rect id="icon/ge" rx="0.000000" width="15.000000" height="15.000000" transform="translate(0.500000 0.500000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="icon/ge" rx="0.000000" width="15.000000" height="15.000000" transform="translate(0.500000 0.500000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip3_4878)">
+		<mask id="mask3_4880" mask-type="alpha" maskUnits="userSpaceOnUse" x="0.000000" y="0.000000" width="16.000000" height="16.000000">
+			<path id="Vector" d="M16 8C16 12.41 12.41 16 8 16C3.58 16 0 12.41 0 8C0 3.58 3.58 0 8 0C12.41 0 16 3.58 16 8Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		</mask>
+		<g mask="url(#mask3_4880)">
+			<path id="Vector" d="M0 0L7 0L8 1L9 0L16 0L16 7L15 8L16 9L16 16L9 16L8 15L7 16L0 16L0 9L1 8L0 7L0 0Z" fill="#EEEEEE" fill-opacity="1.000000" fill-rule="nonzero"/>
+			<path id="Vector" d="M7 0L7 7L0 7L0 9L7 9L7 16L9 16L9 9L16 9L16 7L9 7L9 0L7 0ZM4 3L4 4L3 4L3 5L4 5L4 6L5 6L5 5L6 5L6 4L5 4L5 3L4 3ZM11 3L11 4L10 4L10 5L11 5L11 6L12 6L12 5L13 5L13 4L12 4L12 3L11 3ZM4 10L4 11L3 11L3 12L4 12L4 13L5 13L5 12L6 12L6 11L5 11L5 10L4 10ZM11 10L11 11L10 11L10 12L11 12L11 13L12 13L12 12L13 12L13 11L12 11L12 10L11 10Z" fill="#D80027" fill-opacity="1.000000" fill-rule="nonzero"/>
+		</g>
+	</g>
+</svg>

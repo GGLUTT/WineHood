@@ -1,0 +1,550 @@
+/* ProductDetail.css */
+/* @import url('./animation.css'); */
+
+/* Основні стилі сторінки */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff5f5;
+}
+
+/* Заголовний банер */
+.product-banner {
+  background: linear-gradient(to right, #1d1d1d, #2d2d2d);
+  color: white;
+  padding: 2rem 0;
+}
+
+.product-banner .brand {
+/* H3 */
+color: rgb(141, 3, 20);
+font-family: Oswald;
+font-size: 40px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;;
+}
+
+.product-banner h1 {
+  /* H2 */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 60px;
+font-weight: 300;
+line-height: 110%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
+}
+
+/* Галерея зображень */
+.product-gallery {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #e2e2e2;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail.active {
+  border-color: #b91c1c;
+}
+
+.main-image {
+  flex-grow: 1;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Рейтинг */
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stars {
+  color: #b91c1c;
+  margin-right: 0.5rem;
+}
+
+.reviews {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Специфікації товару */
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.spec-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.spec-item:nth-child(odd) {
+  border-right: 1px solid #e2e2e2;
+}
+
+.spec-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.spec-label {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.country-flag {
+  width: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+/* Ціна та кошик */
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #b91c1c;
+  margin-bottom: 1rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.25rem;
+  margin-right: 1rem;
+}
+
+.quantity-btn {
+  background-color: #fff5f5;
+  color: #b91c1c;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+
+.quantity-value {
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-left: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+}
+
+.add-to-cart-new {
+  background-color: #b91c1c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.favorite-btn {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.25rem;
+  background: none;
+  cursor: pointer;
+}
+
+.favorite-btn svg {
+  color: #b91c1c;
+}
+
+/* Табове меню */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #666;
+  background-color: transparent; /* Встановлюємо фон прозорим */
+  border: none; /* Прибираємо рамки */
+  transition: all 0.3s ease; /* Додаємо плавний перехід */
+}
+
+.tab.active {
+  color: #b91c1c; /* Змінюємо колір активного табу */
+  border-bottom: 2px solid #b91c1c; /* Додаємо лінію під активним табом */
+}
+
+.tab:hover {
+  color: #b91c1c; /* Колір при наведенні */
+}
+
+
+
+
+/* Опис вина */
+.wine-description h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.wine-description p {
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Гастрономічні поєднання */
+.food-pairing h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.food-tag {
+  background-color: #fff5f5;
+  color: #b91c1c;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+/* Рекомендовані товари */
+.recommended h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.recommended-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.recommended-item {
+  border: 1px solid #e2e2e2;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Смаковий профіль */
+.taste-profile {
+  margin-bottom: 2rem;
+}
+
+.taste-profile h3 {
+  font-family: Oswald;
+
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.taste-slider {
+  margin-bottom: 1rem;
+}
+
+.taste-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.taste-label {
+  /* Main text */
+color: rgb(38, 38, 38);
+font-family: Manrope;
+font-size: 18px;
+font-weight: 400;
+line-height: 150%;
+letter-spacing: 0%;
+text-align: left;
+  width: 100px;
+  font-size: 0.9rem;
+}
+
+.taste-bar {
+  flex-grow: 1;
+  height: 8px;
+  background: rgba(141, 3, 20, 0.2);
+  position: relative;
+}
+
+.taste-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #b91c1c;
+  width: 50%; /* змінюйте для різних значень */
+}
+
+.taste-opposite {
+  /* Main text */
+color: rgb(38, 38, 38);
+font-family: Manrope;
+font-size: 18px;
+font-weight: 400;
+line-height: 150%;
+letter-spacing: 0%;
+text-align: left;
+  width: 100px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+/* Смакове поєднання */
+.pairing-section {
+  background: linear-gradient(to right, #1d1d1d, #2d2d2d);
+  color: white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.pairing-section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.pairing-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.pairing-items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pairing-item {
+  text-align: center;
+}
+
+.pairing-image {
+  width: 270px;
+  height: 234px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.pairing-name {
+  color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+}
+
+/* Вам може сподобатись */
+.you-may-like {
+  margin: 3rem 0;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.recommendation-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.recommendation-grid {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+.recommendation-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.wine-card {
+  flex: 0 0 auto;
+  width: calc(33.33% - 1rem);
+  min-width: 300px;
+  text-align: left;
+  scroll-snap-align: start;
+}
+
+.wine-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.wine-card .name {
+  margin-bottom: 0.25rem;
+  color: rgb(38, 38, 38);
+font-family: Oswald;
+font-size: 28px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+}
+
+.wine-card .type {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.wine-card .price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #8D0314;
+  font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+
+}
+
+.recommendation-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.dot.active {
+  background-color: #000;
+}
+
+/* Navigation arrows */
+.you-may-like .prev-arrow,
+.you-may-like .next-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.you-may-like .prev-arrow {
+  left: 0;
+}
+
+.you-may-like .next-arrow {
+  right: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wine-card {
+    width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .wine-card {
+    width: 100%;
+  }
+}
+
+.text-description{
+  /* H3 */
+color: rgb(35, 39, 44);
+font-family: Oswald;
+font-size: 40px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
+}
+
+.text-taste{
+  /* H3 */
+color: rgb(35, 39, 44);
+font-family: Oswald;
+font-size: 40px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
+}
+.text-oglad{
+  /* H5 */
+color: rgb(0, 0, 0);
+font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+}
+p.text{
+  /* Main text */
+color: rgb(38, 38, 38);
+font-family: Manrope;
+font-size: 18px;
+font-weight: 400;
+line-height: 150%;
+letter-spacing: 0%;
+text-align: left;
+}
+

@@ -1,0 +1,22 @@
+<svg width="16.000000" height="16.000000" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip3_4866">
+			<rect id="icon/br" rx="0.000000" width="15.000000" height="15.000000" transform="translate(0.500000 0.500000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="icon/br" rx="0.000000" width="15.000000" height="15.000000" transform="translate(0.500000 0.500000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip3_4866)">
+		<mask id="mask3_4868" mask-type="alpha" maskUnits="userSpaceOnUse" x="0.000000" y="0.000000" width="16.000000" height="16.000000">
+			<path id="Vector" d="M16 8C16 12.41 12.41 16 8 16C3.58 16 0 12.41 0 8C0 3.58 3.58 0 8 0C12.41 0 16 3.58 16 8Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		</mask>
+		<g mask="url(#mask3_4868)">
+			<path id="Vector" d="M0 0L16 0L16 16L0 16L0 0Z" fill="#6DA544" fill-opacity="1.000000" fill-rule="nonzero"/>
+			<path id="Vector" d="M8 3.13L14.6 8L8 12.87L1.39 8L8 3.13Z" fill="#FFDA44" fill-opacity="1.000000" fill-rule="nonzero"/>
+			<path id="Vector" d="M5.44 6.9C5.28 7.26 5.21 7.65 5.21 8.04L10.28 9.59C10.5 9.28 10.65 8.91 10.73 8.53C9.46 6.49 6.99 6.02 5.44 6.91L5.44 6.9Z" fill="#EEEEEE" fill-opacity="1.000000" fill-rule="nonzero"/>
+			<path id="Vector" d="M7.99 5.21C7.53 5.21 7.08 5.33 6.67 5.55C6.12 5.84 5.69 6.32 5.44 6.9C6.39 6.7 7.37 6.75 8.29 7.03C9.22 7.32 10.05 7.83 10.72 8.53C10.85 7.9 10.75 7.25 10.44 6.67C10.2 6.23 9.85 5.86 9.42 5.6C8.98 5.35 8.49 5.21 7.99 5.21ZM6.62 7.82C6.14 7.82 5.67 7.89 5.21 8.03C5.22 8.48 5.33 8.92 5.54 9.32C5.71 9.64 5.95 9.92 6.23 10.15C6.51 10.38 6.84 10.55 7.19 10.66C7.54 10.76 7.91 10.8 8.27 10.76C8.64 10.73 8.99 10.62 9.31 10.44C9.69 10.24 10.02 9.95 10.27 9.59C9.83 9.05 9.28 8.6 8.64 8.3C8.01 7.99 7.32 7.83 6.62 7.82Z" fill="#0052B4" fill-opacity="1.000000" fill-rule="nonzero"/>
+		</g>
+	</g>
+</svg>
