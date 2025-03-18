@@ -19,6 +19,8 @@ const Checkout = () => {
     paymentMethod: 'cash'
   });
   const [comment, setComment] = useState('');
+
+
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -48,9 +50,23 @@ const Checkout = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Замовлення відправлено:', { customerInfo: formData, items: cartItems, total: getTotalAmount(), comment });
-    alert('Замовлення успішно оформлено!');
+    
+    // Створюємо об'єкт з даними замовлення
+    const orderData = {
+      orderNumber: 'N' + Math.floor(10000 + Math.random() * 90000),
+      customerInfo: formData,
+      items: cartItems,
+      totalAmount: getTotalAmount(),
+      comment: comment,
+      deliveryCost: formData.deliveryMethod === 'courier' ? '99₴' : 'За тарифами перевізника'
+    };
+    
+    console.log('Замовлення відправлено:', orderData);
+    
+    navigate('/order-success', { state: { orderData } });
   };
+
+  
   
   return (
     <div className="checkout-container">

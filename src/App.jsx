@@ -12,6 +12,7 @@ import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import WineCatalog from './components/WineCatalog/WineCatalog';
 import ProductDetail from './components/WineProductCard/ProductDetail.jsx';
 import Checkout from './components/CheckOut/CheckOut.jsx';
+import OrderSuccess from './components/OrderSuccess/OrderSuccess.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <AgeVerificationModal />
         <Routes>
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/welcome-test" element={<WelcomeScreen />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<WineCatalog />} />
