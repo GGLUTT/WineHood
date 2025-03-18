@@ -15,12 +15,11 @@ const Checkout = () => {
     lastName: '',
     phone: '+380',
     email: '',
-    deliveryMethod: 'pickup', // самовивіз за замовчуванням
-    paymentMethod: 'cash' // готівка за замовчуванням
+    deliveryMethod: 'pickup',
+    paymentMethod: 'cash'
   });
   const [comment, setComment] = useState('');
   
-  // Обробка змін вводу
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -49,25 +48,18 @@ const Checkout = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Тут би відправили замовлення на бекенд
     console.log('Замовлення відправлено:', { customerInfo: formData, items: cartItems, total: getTotalAmount(), comment });
-    // Перенаправлення на сторінку успіху або показ підтвердження
     alert('Замовлення успішно оформлено!');
-    // navigate('/order-confirmation');
   };
   
   return (
-    
     <div className="checkout-container">
-      <Header></Header>
+      <Header />
 
       <h1 className="checkout-title">ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
       
       <form onSubmit={handleSubmit}>
-
-        {/* Розділ інформації про клієнта */}
         <section className="contact-info">
-          
           <h2>Контактна інформація</h2>
           
           <div className="customer-type">
@@ -78,6 +70,7 @@ const Checkout = () => {
                 checked={customerType === 'new'} 
                 onChange={() => setCustomerType('new')} 
               />
+              <span className="radio-custom"></span>
               Я новий покупець
             </label>
             
@@ -88,6 +81,7 @@ const Checkout = () => {
                 checked={customerType === 'returning'} 
                 onChange={() => setCustomerType('returning')} 
               />
+              <span className="radio-custom"></span>
               Я постійний клієнт
             </label>
           </div>
@@ -154,10 +148,8 @@ const Checkout = () => {
           )}
         </section>
         
-        {/* Показувати решту форми лише коли не в режимі входу постійного клієнта */}
         {customerType !== 'returning' && (
           <>
-            {/* Розділ способу доставки */}
             <section className="delivery-method">
               <h2>Спосіб доставки</h2>
               
@@ -212,7 +204,6 @@ const Checkout = () => {
               </div>
             </section>
             
-            {/* Розділ способу оплати */}
             <section className="payment-method">
               <h2>Спосіб оплати</h2>
               
@@ -252,7 +243,6 @@ const Checkout = () => {
               </div>
             </section>
             
-            {/* Розділ коментаря */}
             <section className="comment-section">
               <h2>Коментар</h2>
               <textarea 
@@ -262,7 +252,6 @@ const Checkout = () => {
               ></textarea>
             </section>
             
-            {/* Підсумок замовлення */}
             <section className="order-summary">
               <div className="order-items">
                 <h3>Ваше замовлення</h3>
@@ -290,7 +279,7 @@ const Checkout = () => {
             </section>
             
             <div className="navigation-buttons">
-              <button type="button" className="back-button" onClick={() => navigate(-1)}>НАЗАД</button>
+              <button type="button" className="send-button" onClick={() => navigate(-1)}>ВІДПРАВИТИ</button>
             </div>
           </>
         )}

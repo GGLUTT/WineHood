@@ -11,6 +11,7 @@ import BrazilFlag from "../../img/ico/flags/icon_brazil.svg";
 import GeorgiaFlag from "../../img/ico/flags/icon_georgia.svg";
 import IzrailFlag from "../../img/ico/flags/icon_izrail.svg";
 import SpainFlag from "../../img/ico/flags/icon_spain.svg";
+import { useCart } from '../Context/CartContext.jsx';
 
 import penfolds from "../../img/wine_Category/penfolds.png";
 import Header from "../Header/Header";
@@ -34,6 +35,7 @@ const WineCatalog = () => {
   const [maxPriceValue, setMaxPriceValue] = useState(50000);
   const totalPages = 103;
   const itemsPerPage = 12;
+  const { addToCart } = useCart();
 
   const [filters, setFilters] = useState({
     color: [],
@@ -51,9 +53,14 @@ const WineCatalog = () => {
   const navigate = useNavigate();
 
   const handleAddToCarts = (product, quantity) => {
-    // Логіка додавання товару до кошика
-    console.log(`Added to cart: ${product.name}, quantity: ${quantity}`);
-    // Тут може бути виклик API або функції для оновлення кошика
+    addToCart({
+      id: product.id,
+      name: product.name,
+      type: product.type,
+      price: product.price,
+      image: product.image,
+      quantity: quantity
+    });
   };
 
   const handleViewDetails = (product) => {

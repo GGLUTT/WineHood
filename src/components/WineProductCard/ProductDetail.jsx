@@ -70,7 +70,7 @@ const { addToCart } = useCart();
     setQuantity(quantity + 1);
   };
 
-  const handleAddToCart = () => {
+    const handleAddToCart = () => {
     // Створюємо продукт для додавання в кошик
     const productToAdd = {
       id: productData.id,

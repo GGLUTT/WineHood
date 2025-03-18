@@ -2,9 +2,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 20px;
-  background-color: #fff;
-  
   color: #333;
+  animation: slideInFromBottom 0.5s ease-out;
 }
 
 .checkout-title {
@@ -12,17 +11,41 @@
   margin-bottom: 40px;
   font-weight: 600;
   color: #333;
+  position: relative;
+  display: inline-block;
+  animation: fadeInTitle 0.7s ease;
+}
+
+.checkout-title:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: #d35050;
+  transition: width 0.4s ease;
+}
+
+.checkout-title:hover:after {
+  width: 100%;
 }
 
 section {
   margin-bottom: 40px;
+  padding: 15px;
+  border-radius: 2px;
 }
 
 section h2 {
-  font-size: 24px;
   margin-bottom: 20px;
-  font-weight: 500;
-  color: #333;
+  font-family: Oswald;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: left;
+  position: relative;
 }
 
 /* Контактна інформація */
@@ -39,14 +62,16 @@ section h2 {
   align-items: center;
   cursor: pointer;
   font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.customer-option:hover {
+  color: #d35050;
 }
 
 .customer-option.active {
   font-weight: 600;
-}
-
-.customer-option input[type="radio"] {
-  margin-right: 10px;
+  color: #d35050;
 }
 
 .form-row {
@@ -57,22 +82,41 @@ section h2 {
 
 .form-group {
   flex: 1;
+  position: relative;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  font-size: 14px;
-  color: #666;
+  color: rgb(115, 115, 115);
+  font-family: Manrope;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0%;
+  text-align: left;
 }
 
 .form-group input {
   width: 100%;
   padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: transparent;
+  box-sizing: border-box;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 0;
+  color: rgb(76, 76, 75);
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: left;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #d35050;
+  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
+  outline: none;
 }
 
 /* Спосіб доставки */
@@ -88,25 +132,40 @@ section h2 {
   display: flex;
   align-items: center;
   padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid transparent;
+  border-radius: 0;
   cursor: pointer;
   position: relative;
   background-color: transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.delivery-option input[type="radio"],
-.payment-option input[type="radio"] {
-  margin-right: 15px;
+.delivery-option:hover,
+.payment-option:hover {
+  background-color: rgba(211, 80, 80, 0.05);
+  border-color: rgba(211, 80, 80, 0.2);
 }
 
 .option-text {
+  color: rgb(76, 76, 75);
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: left;
   flex: 1;
+  margin-left: 10px;
 }
 
 .option-price {
-  margin-left: auto;
-  font-weight: 500;
+  color: rgb(115, 115, 115);
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: left;
 }
 
 /* Стилізація радіо-кнопок */
@@ -114,10 +173,19 @@ section h2 {
   display: inline-block;
   width: 20px;
   height: 20px;
-  margin-right: 10px;
-  border: 2px solid #ddd;
+  border: 2px solid #ccc;
   border-radius: 50%;
   position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.delivery-option:hover .radio-custom,
+.payment-option:hover .radio-custom {
+  border-color: #d35050;
+}
+
+input[type="radio"]:checked + .radio-custom {
+  border-color: #d35050;
 }
 
 input[type="radio"]:checked + .radio-custom:before {
@@ -127,8 +195,20 @@ input[type="radio"]:checked + .radio-custom:before {
   left: 3px;
   width: 10px;
   height: 10px;
-  background-color: #cc7b87;
+  background-color: #d35050;
   border-radius: 50%;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Розділ коментаря */
@@ -136,12 +216,19 @@ input[type="radio"]:checked + .radio-custom:before {
   width: 100%;
   height: 120px;
   padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #f0d0d0;
+  border-radius: 0;
   resize: vertical;
   font-family: inherit;
   font-size: 16px;
-  background-color: transparent;
+  background-color: rgba(255, 240, 240, 0.5);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-section textarea:focus {
+  border-color: #d35050;
+  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
+  outline: none;
 }
 
 /* Підсумок замовлення */
@@ -165,6 +252,7 @@ input[type="radio"]:checked + .radio-custom:before {
   width: 80px;
   height: 80px;
   margin-right: 20px;
+  overflow: hidden;
 }
 
 .item-image img {
@@ -191,7 +279,7 @@ input[type="radio"]:checked + .radio-custom:before {
 .item-price {
   font-weight: 600;
   font-size: 18px;
-  color: #cc7b87;
+  color: #d35050;
 }
 
 .order-total {
@@ -200,7 +288,7 @@ input[type="radio"]:checked + .radio-custom:before {
   align-items: center;
   margin: 30px 0;
   padding: 15px 0;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #eee;
   font-size: 20px;
 }
 
@@ -210,47 +298,67 @@ input[type="radio"]:checked + .radio-custom:before {
 
 .total-amount {
   font-weight: 700;
-  color: #cc7b87;
+  color: #d35050;
   font-size: 24px;
+  background-color: rgba(255, 240, 240, 0.7);
+  padding: 5px 15px;
 }
 
 .submit-order {
   width: 100%;
   padding: 15px;
-  background-color: #cc7b87;
+  background-color: #d35050;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
 }
 
 .submit-order:hover {
-  background-color: #b56977;
+  background-color: #c04040;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(211, 80, 80, 0.4);
+}
+
+.submit-order:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(211, 80, 80, 0.5);
 }
 
 .navigation-buttons {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  gap: 20px;
 }
 
-.back-button {
+.send-button, .back-button {
   padding: 15px 35px;
   background-color: transparent;
   color: #666;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #eee;
+  border-radius: 0;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  text-transform: uppercase;
 }
 
-.back-button:hover {
-  background-color: #f5f5f5;
+.send-button:hover, .back-button:hover {
+  background-color: rgba(255, 240, 240, 0.8);
+  color: #d35050;
+  border-color: #d35050;
+}
+
+.send-button:active, .back-button:active {
+  transform: translateY(1px);
 }
 
 /* Адаптивні стилі */
@@ -285,16 +393,22 @@ input[type="radio"]:checked + .radio-custom:before {
   .item-price {
     margin-top: 10px;
   }
+  
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .send-button, .back-button {
+    width: 100%;
+  }
 }
 
+/* Стилізація для фокусу */
 input:focus, textarea:focus {
   outline: none;
-  border-color: #cc7b87;
-  box-shadow: 0 0 0 2px rgba(204, 123, 135, 0.2);
-}
-
-input[type="radio"]:checked + .radio-custom:before {
-  background-color: #cc7b87;
+  border-color: #d35050;
+  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
 }
 
 input[type="radio"] {
@@ -302,4 +416,106 @@ input[type="radio"] {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+/* Покращена видимість полів */
+input, textarea {
+  background-color: transparent !important;
+}
+
+/* Контейнер із підсумком замовлення */
+.order-summary {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Стилізація секції оплати */
+.payment-option {
+  margin-bottom: 5px;
+}
+
+/* Анімації для появи */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стилізація для активних елементів */
+.delivery-option.active, .payment-option.active {
+  background-color: rgba(211, 80, 80, 0.1);
+  border-left: 3px solid #d35050;
+}
+
+/* Базові стилі для чекбоксів */
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 20px;
+}
+
+input[type="checkbox"] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked + label:before {
+  background: #d35050;
+  border-color: #d35050;
+}
+
+input[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Прокрутка для текстового поля */
+.comment-section textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comment-section textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.comment-section textarea::-webkit-scrollbar-thumb {
+  background: #d35050;
+  border-radius: 3px;
+}
+
+.comment-section textarea::-webkit-scrollbar-thumb:hover {
+  background: #c04040;
 }

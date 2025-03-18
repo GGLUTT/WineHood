@@ -10,7 +10,7 @@ import NotFound from './components/NotFound/NotFound';
 import AgeVerificationModal from './components/AgeVefification/AgeVerificationModal';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import WineCatalog from './components/WineCatalog/WineCatalog';
-import ProductDetail from './components/WineProductCard/ProductDetail';
+import ProductDetail from './components/WineProductCard/ProductDetail.jsx';
 import Checkout from './components/CheckOut/CheckOut.jsx';
 
 function App() {
