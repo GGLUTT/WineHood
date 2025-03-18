@@ -9,7 +9,6 @@ body {
   background-color: #ffffff;
 }
 
-/* Заголовний банер */
 .product-banner {
   background: linear-gradient(to right, #1d1d1d, #2d2d2d);
   color: white;
@@ -17,7 +16,6 @@ body {
 }
 
 .product-banner .brand {
-/* H3 */
 color: rgb(141, 3, 20);
 font-family: Oswald;
 font-size: 40px;
@@ -29,7 +27,6 @@ text-transform: uppercase;;
 }
 
 .product-banner h1 {
-  /* H2 */
 color: rgb(255, 255, 255);
 font-family: Oswald;
 font-size: 60px;
