@@ -41,7 +41,7 @@ const Footer = () => {
           <div className="footer-form">
             <div className="input-group">
               <input type="email" placeholder="Електронна адреса" className="email-input" />
-              <button type="submit" className="submit-btn_footer">
+              <button type="submit" className="submit-btns_footer">
                 <svg viewBox="0 0 24 24" className="arrow-icon">
                   <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
