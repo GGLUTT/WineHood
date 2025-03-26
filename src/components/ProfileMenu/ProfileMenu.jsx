@@ -1,14 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './ProfileMenu.css';
 import flag from "../../img/ico/flag.svg";
 
-const ProfileMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const ProfileMenu = ({ isOpen, setIsOpen, customButton }) => {
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    setIsAuthenticated(!!token && !!user);
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setIsAuthenticated(false);
+    navigate('/');
+    setIsOpen(false);
   };
 
   // Закриття меню при кліку поза ним
@@ -23,16 +38,19 @@ const ProfileMenu = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [setIsOpen]);
 
   return (
     <div className="profile-menu-container" ref={menuRef}>
-      <button className="icon-button account" onClick={toggleMenu}>
-        <svg className="icon" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
-        </svg>
-      </button>
-      
+      {/* Використовуємо власну кнопку, якщо вона передана, інакше - стандартну */}
+      {customButton || (
+        <button className="icon-button account" onClick={toggleMenu}>
+          <svg className="icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" />
+          </svg>
+        </button>
+      )}
+
       {isOpen && (
         <div className="quick-links-menu">
           <div className="menu-header">
@@ -43,25 +61,42 @@ const ProfileMenu = () => {
               </svg>
             </button>
           </div>
-          
+
           <div className="menu-links">
-            <Link to="/account" className="menu-link">Особистий кабінет</Link>
-            <Link to="/returns" className="menu-link">Повернення</Link>
-            <Link to="/help" className="menu-link">Допомога</Link>
-            <Link to="/text" className="menu-link">Текст</Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/account" className="menu-link">Особистий кабінет</Link>
+                <Link to="/returns" className="menu-link">Повернення</Link>
+                <Link to="/help" className="menu-link">Допомога</Link>
+                <Link to="/text" className="menu-link">Текст</Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="menu-link">Вхід</Link>
+                <Link to="/register" className="menu-link">Реєстрація</Link>
+              </>
+            )}
           </div>
-          
+
           <div className="language-selector">
             <span>Українська</span>
             <img src={flag} alt="Прапор України" className="flag-icon" />
           </div>
-          
+
           <div className="menu-footer">
-            <Link to="/login" className="login-button">ВХІД</Link>
-            <div className="register-prompt">
-              <span>Ще не маєте акаунта?</span>
-              <Link to="/register" className="register-link">ЗАРЕЄСТРУВАТИСЬ</Link>
-            </div>
+            {isAuthenticated ? (
+              <>
+                <button onClick={handleLogout} className="login-button">ВИХІД</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="login-button">ВХІД</Link>
+                <div className="register-prompt">
+                  <span>Ще не маєте акаунта?</span>
+                  <Link to="/register" className="register-link">ЗАРЕЄСТРУВАТИСЬ</Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
@@ -70,3 +105,8 @@ const ProfileMenu = () => {
 };
 
 export default ProfileMenu;
+
+
+
+
+

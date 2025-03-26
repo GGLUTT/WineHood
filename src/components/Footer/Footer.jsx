@@ -33,12 +33,13 @@ const Footer = () => {
           <div className="footer-column">
             <h3>Профіль</h3>
             <ul>
-              <li><a href="/uviyty" className="footer-link">Увійти</a></li>
-              <li><a href="/reestraciya" className="footer-link">Зареєструватися</a></li>
+              <li><a href="/login" className="footer-link">Увійти</a></li>
+              <li><a href="/register" className="footer-link">Зареєструватися</a></li>
             </ul>
           </div>
           
           <div className="footer-form">
+            <h1 className="new_header">Приєднайся до закритого клубу підписників, щоб отримати <p className='p_sale_footer'>10% знижки</p> на покупку</h1>
             <div className="input-group">
               <input type="email" placeholder="Електронна адреса" className="email-input" />
               <button type="submit" className="submit-btns_footer">

@@ -11,18 +11,18 @@ const NotFound = () => {
         <div className="wine-spill">
           <img src={spiltWine} alt="Розлите вино" className="spilt-wine-img" />
         </div>
-        <h1 className="not-found-title">Упс! Помилка</h1>
+        {/* <h1 className="not-found-title">Упс! Помилка</h1> */}
         {/* <p className="not-found-message">
           Схоже, сторінка, яку ви шукаєте, зникла або ніколи не існувала.
         </p> */}
-        <div className="not-found-actions">
+        {/* <div className="not-found-actions">
           <Link to="/" className="home-button">
             На головну сторінку
           </Link>
           <Link to="/catalog" className="catalog-button">
             Перейти до каталогу
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,79 +1,147 @@
+/* Reset and full-screen layout */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Main container - full screen */
 .order-success-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
   font-family: 'Arial', sans-serif;
-  color: #333;
-}
-
-.success-content {
-  display: flex;
-  gap: 40px;
-  margin: 40px 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 30px;
-  border-radius: 8px;
   color: #fff;
+  background-color: #181818;
+  box-sizing: border-box;
 }
 
-.success-left-content {
-  flex: 1;
+/* Main content area with proper padding */
+.order-success-main {
+  padding: 40px 60px;
+  position: relative;
 }
 
-.success-right-content {
-  flex: 1;
+/* Success header section */
+.success-header {
+  margin-bottom: 40px;
 }
 
+/* Header title */
 .success-title {
-  font-size: 36px;
-  margin-bottom: 15px;
-  color: #fff;
-  font-weight: bold;
-}
-
-.order-number {
-  font-size: 18px;
-  margin-bottom: 30px;
-  color: #c10e0e;
-}
-
-.order-details-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.details-block {
+  color: rgb(255, 255, 255);
+  font-family: Oswald, sans-serif;
+  font-size: 60px;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
   margin-bottom: 20px;
 }
 
-.details-block h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+.order-number {
+  font-family: Oswald, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.order-number span {
   color: #c10e0e;
+}
+
+/* Wine glasses image */
+.wine-glasses-image {
+  position: absolute;
+  top: -134px;
+  right: 60px;
+  width: 383.95px;
+  height: 575.21px;
+  z-index: 1;
+}
+
+/* Content layout */
+.success-content {
+  display: flex;
+  margin: 40px 0;
+  color: #fff;
+  position: relative;
+  gap: 40px;
+}
+
+.success-left-content {
+  flex: 2;
+  max-width: 40%;
+}
+
+.success-right-content {
+  margin-left: -21%;
+  flex: 3;
+  max-width: 60%;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+/* Personal information section */
+.order-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.details-block {
+  margin-bottom: 30px;
+}
+
+.details-block h3 {
+  margin-bottom: 15px;
+  color: rgb(245, 245, 245);
+font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
 }
 
 .details-block p {
   margin: 5px 0;
   font-size: 16px;
+  color: #fff;
 }
 
 .address {
   line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Order items */
+.order-items-list {
+  margin-bottom: 30px;
 }
 
 .success-order-item {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .success-item-image {
   width: 120px;
-  height: 120px;
+  height: 180px;
   overflow: hidden;
-  border-radius: 5px;
 }
 
 .success-item-image img {
@@ -89,94 +157,207 @@
 .success-item-details h4 {
   font-size: 18px;
   margin-bottom: 5px;
+  font-weight: normal;
 }
 
+.success-item-details p {
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+/* Price and quantity */
 .price-quantity {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 10px;
+  color: rgb(239, 237, 238);
+font-family: Manrope;
+font-size: 18px;
+font-weight: 400;
+line-height: 150%;
+letter-spacing: 0%;
+text-align: left;
+  display: flex;
+  grid-template-columns: auto auto auto auto;
+  gap: 20px;
   margin-top: 15px;
+  align-items: center;
 }
 
-.price-label, .quantity-label {
-  color: rgba(255, 255, 255, 0.7);
+.price-label, 
+.quantity-label {
+  color: #bbb;
 }
 
+.price-value, 
+.quantity-value {
+  color: #fff;
+}
+
+/* Order total */
 .success-order-total {
   margin-top: 20px;
   padding: 15px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.delivery-cost, .final-total {
+.delivery-cost, 
+.final-total {
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: left;
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   margin: 10px 0;
 }
 
 .final-total {
-  font-size: 20px;
-  font-weight: bold;
+  font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
   margin-top: 15px;
 }
 
 .total-price {
   color: #c10e0e;
+  font-weight: bold;
 }
 
+/* Action buttons */
 .success-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-top: 60px;
 }
 
-.continue-shopping-btn, .home-page-btn {
-  padding: 15px 30px;
+.continue-shopping-btn, 
+.home-page-btn {
+  padding: 15px 0;
   text-decoration: none;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
+  color: rgb(239, 237, 238);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;
   transition: all 0.3s ease;
+  width: 282px;
+  
 }
 
 .continue-shopping-btn {
   background-color: #c10e0e;
   color: #fff;
+  border: none;
 }
 
 .home-page-btn {
   background-color: transparent;
-  color: #333;
-  border: 1px solid #333;
+  color: #fff;
+  border: 1px solid #fff;
 }
 
+/* Hover effects */
 .continue-shopping-btn:hover {
   background-color: #a10c0c;
 }
 
 .home-page-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .wine-glasses-image {
+    width: 300px;
+    height: auto;
+    top: -80px;
+  }
+  
+  .success-title {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 992px) {
+  .order-success-main {
+    padding: 30px;
+  }
+  
+  .wine-glasses-image {
+    width: 200px;
+    height: auto;
+    top: -50px;
+  }
+  
+  .success-title {
+    font-size: 36px;
+  }
+  
+  .order-number {
+    font-size: 22px;
+  }
 }
 
 @media (max-width: 768px) {
+  .order-success-main {
+    padding: 20px;
+  }
+  
   .success-content {
     flex-direction: column;
+  }
+  
+  .success-left-content,
+  .success-right-content {
+    max-width: 100%;
+  }
+  
+  .success-title {
+    font-size: 32px;
+    margin-top: 40px;
+  }
+  
+  .order-number {
+    font-size: 18px;
+  }
+  
+  .wine-glasses-image {
+    width: 150px;
+    height: auto;
+    top: -30px;
+    right: 20px;
+  }
+  
+  .success-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .continue-shopping-btn, 
+  .home-page-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wine-glasses-image {
+    width: 100px;
+    height: auto;
   }
   
   .success-title {
     font-size: 28px;
   }
   
-  .success-buttons {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .continue-shopping-btn, .home-page-btn {
-    width: 100%;
-    text-align: center;
+  .price-quantity {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
   }
 }

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./ProductDetail.css";
 import ArgentinaFlag from "../../img/ico/flags/argentina.svg";
-import Header from "../Header/Header";
 import yalovich from "../../img/card/yalovich.png";
 import baranina from "../../img/card/baranina.png";
 import bird from "../../img/card/bird.png";
@@ -18,9 +17,6 @@ import new_bottle1 from "../../img/card/new_botlle1.png";
 import new_bottle2 from "../../img/card/new_botlle2.png";
 import PaymentDelivery from "./Payment/PaymentDelivery.jsx";
 import { useCart } from "../Context/CartContext.jsx";
-
-
-// Import the PaymentDelivery component
 
 const productData = {
   id: "HFY30171",
@@ -228,9 +224,6 @@ const { addToCart } = useCart();
 
   return (
     <div className="bg-white min-h-screen">
-      <Header />
-
-      {/* Хлібні крихти */}
       <div className="container mx-auto px-4 py-4">
         <div className="breadcrumbs">
           <Link to="/" className="breadcrumb-link">
@@ -370,7 +363,7 @@ const { addToCart } = useCart();
                   <button className="quantity-btn" onClick={decreaseQuantity}>
                     −
                   </button>
-                  <div className="quantity-value">{quantity}</div>
+                  <div className="quantity-values">{quantity}</div>
                   <button className="quantity-btn" onClick={increaseQuantity}>
                     +
                   </button>

@@ -1,97 +1,166 @@
 /* src/components/Header/Header.css */
 .header {
-    background-color: var(--header-bg);
-    padding: 20px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  .nav-menu {
-    flex: 1;
-  }
-  
-  .nav-list {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-  }
-  
-  .nav-item a {
-    color: #000;
-    font-weight: 500;
-    font-size: 16px;
-    transition: color 0.3s;
-    color: rgb(38, 38, 38);
-font-family: Manrope;
-font-size: 14px;
-font-weight: 400;
-line-height: 16px;
-letter-spacing: 0.2px;
-text-align: center;
-  }
-  
-  .nav-item a:hover {
-    color: var(--primary-color);
-  }
-  
-  .logo {
-    flex: 1;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-  }
-  
-  .logo a {
-    color: #000;
-    letter-spacing: 1px;
-  }
-  
-  .header-controls {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-  }
-  
-  .icon-button {
-    background: none;
-    border: none;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .icon-button img {
-    width: 35px;
-    height: 35px;
-  }
+  box-sizing: border-box;
+/* 300 */
+border-bottom: 1px solid rgb(182, 182, 182);
+/* 100 */
+background: rgb(245, 245, 245);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .cart-button {
-    position: relative;
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.nav-menu {
+  flex: 1;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item a {
+  color: rgb(38, 38, 38);
+  font-family: Manrope, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-item a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--primary-color, #990000);
+  transition: width 0.3s ease;
+}
+
+.nav-item a:hover {
+  color: var(--primary-color, #990000);
+}
+
+.nav-item a:hover::after {
+  width: 100%;
+}
+
+.logo-img {
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+.header-controls {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  border-radius: 50%;
+}
+
+.icon-button:hover {
+  transform: translateY(-2px);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.icon-button:active {
+  transform: translateY(0);
+}
+
+.icon-button img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.2s ease;
+}
+
+.icon-button:hover img {
+  filter: brightness(0.8);
+}
+
+.cart-button {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color, #990000);
+  color: white;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(30%, -30%);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cart-button:hover .cart-badge {
+  transform: translate(30%, -30%) scale(1.1);
+}
+
+/* Shopping cart animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .cart-badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: #990000;
-    color: white;
-    font-size: 12px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,14 +1,16 @@
 /* src/components/BackButton/BackButton.css */
-.back-button {
+.back-buttons {
   display: inline-flex;
   align-items: center;
+  background-color: transparent;
   color: var(--text-light);
   font-size: 14px;
   transition: opacity 0.3s;
 }
 
-.back-button:hover {
-  opacity: 0.8;
+.back-buttons:hover {
+  opacity: 0.2;
+
 }
 
 .back-icon {

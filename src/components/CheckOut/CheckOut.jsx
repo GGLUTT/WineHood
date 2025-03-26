@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../Context/CartContext.jsx';
-import ReturningCustomer from '../ReturningCustomer/ReturningCustomer.jsx'; 
 import './CheckOut.css';
 import Header from '../Header/Header.jsx';
 
@@ -15,12 +14,30 @@ const Checkout = () => {
     lastName: '',
     phone: '+380',
     email: '',
+    password: '',
     deliveryMethod: 'pickup',
     paymentMethod: 'cash'
   });
+  const [showPassword, setShowPassword] = useState(false);
   const [comment, setComment] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
+  // Перевіряємо, чи користувач вже авторизований
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    if (token && user) {
+      setIsLoggedIn(true);
+      setFormData(prevData => ({
+        ...prevData,
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        phone: user.phone || '+380',
+        email: user.email || ''
+      }));
+    }
+  }, []);
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,15 +54,15 @@ const Checkout = () => {
     });
   };
   
-  const handleLoginSuccess = (userData) => {
-    setFormData({
-      ...formData,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      phone: userData.phone,
-      email: userData.email
-    });
-    setCustomerType('new');
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Тут буде логіка авторизації
+    console.log('Login attempt with:', formData.email, formData.password);
+  };
+
+  const handleGoogleLogin = () => {
+    // Тут буде логіка входу через Google
+    console.log('Google login attempt');
   };
   
   const handleSubmit = (e) => {
@@ -58,15 +75,77 @@ const Checkout = () => {
       items: cartItems,
       totalAmount: getTotalAmount(),
       comment: comment,
-      deliveryCost: formData.deliveryMethod === 'courier' ? '99₴' : 'За тарифами перевізника'
+      deliveryCost: formData.deliveryMethod === 'courier' ? '99₴' : 'За тарифами перевізника',
+      date: new Date().toLocaleDateString('uk-UA')
     };
     
-    console.log('Замовлення відправлено:', orderData);
+    // Якщо користувач авторизований, зберігаємо замовлення в його акаунті
+    if (isLoggedIn) {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const orders = user.orders || [];
+      orders.unshift(orderData);
+      localStorage.setItem('user', JSON.stringify({
+        ...user,
+        orders
+      }));
+    }
     
+    console.log('Замовлення відправлено:', orderData);
     navigate('/order-success', { state: { orderData } });
   };
-
   
+  const renderLoginForm = () => (
+    <div className="login-form">
+      <div className="form-group">
+        <label>Адреса електронної пошти (email)</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Введіть вашу електронну пошту"
+          required
+        />
+      </div>
+      
+      <div className="form-group password-group">
+        <label>Пароль</label>
+        <div className="password-input">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="Введіть ваш пароль"
+            required
+          />
+          <button
+            type="button"
+            className="toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "👁" : "👁"}
+          </button>
+        </div>
+        <a href="/forgot-password" className="forgot-password">
+          Забули пароль?
+        </a>
+      </div>
+      
+      <button type="button" className="login-button" onClick={handleLogin}>
+        УВІЙТИ
+      </button>
+      
+      <div className="dividers">
+        <span>або</span>
+      </div>
+      
+      <button type="button" className="google-login" onClick={handleGoogleLogin}>
+        <img src="/google-icon.svg" alt="Google" />
+        УВІЙТИ ЧЕРЕЗ GOOGLE
+      </button>
+    </div>
+  );
   
   return (
     <div className="checkout-container">
@@ -78,35 +157,34 @@ const Checkout = () => {
         <section className="contact-info">
           <h2>Контактна інформація</h2>
           
-          <div className="customer-type">
-            <label className={`customer-option ${customerType === 'new' ? 'active' : ''}`}>
-              <input 
-                type="radio" 
-                name="customerType" 
-                checked={customerType === 'new'} 
-                onChange={() => setCustomerType('new')} 
-              />
-              <span className="radio-custom"></span>
-              Я новий покупець
-            </label>
-            
-            <label className={`customer-option ${customerType === 'returning' ? 'active' : ''}`}>
-              <input 
-                type="radio" 
-                name="customerType" 
-                checked={customerType === 'returning'} 
-                onChange={() => setCustomerType('returning')} 
-              />
-              <span className="radio-custom"></span>
-              Я постійний клієнт
-            </label>
-          </div>
+          {!isLoggedIn && (
+            <div className="customer-type">
+              <label className={`customer-option ${customerType === 'new' ? 'active' : ''}`}>
+                <input 
+                  type="radio" 
+                  name="customerType" 
+                  checked={customerType === 'new'} 
+                  onChange={() => setCustomerType('new')} 
+                />
+                <span className="radio-custom"></span>
+                Я новий покупець
+              </label>
+              
+              <label className={`customer-option ${customerType === 'returning' ? 'active' : ''}`}>
+                <input 
+                  type="radio" 
+                  name="customerType" 
+                  checked={customerType === 'returning'} 
+                  onChange={() => setCustomerType('returning')} 
+                />
+                <span className="radio-custom"></span>
+                Я постійний клієнт
+              </label>
+            </div>
+          )}
           
-          {customerType === 'returning' ? (
-            <ReturningCustomer 
-              onLogin={handleLoginSuccess} 
-              onCancel={() => setCustomerType('new')} 
-            />
+          {customerType === 'returning' && !isLoggedIn ? (
+            renderLoginForm()
           ) : (
             <>
               <div className="form-row">
@@ -164,7 +242,7 @@ const Checkout = () => {
           )}
         </section>
         
-        {customerType !== 'returning' && (
+        {(customerType === 'new' || isLoggedIn) && (
           <>
             <section className="delivery-method">
               <h2>Спосіб доставки</h2>
@@ -261,11 +339,14 @@ const Checkout = () => {
             
             <section className="comment-section">
               <h2>Коментар</h2>
-              <textarea 
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Додайте коментар до замовлення"
-              ></textarea>
+              <div className="comment-container">
+                <textarea 
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="Додайте коментар до замовлення"
+                ></textarea>
+                <button type="button" className="send-comment-button">ВІДПРАВИТИ</button>
+              </div>
             </section>
             
             <section className="order-summary">
@@ -279,7 +360,7 @@ const Checkout = () => {
                     <div className="item-info">
                       <h4>{item.name}</h4>
                       <p>Червоне сухе вино</p>
-                      <p>1 шт.</p>
+                      <p>{item.quantity} шт.</p>
                     </div>
                     <div className="item-price">{item.price} ₴</div>
                   </div>
@@ -293,10 +374,6 @@ const Checkout = () => {
               
               <button type="submit" className="submit-order">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
             </section>
-            
-            <div className="navigation-buttons">
-              <button type="button" className="send-button" onClick={() => navigate(-1)}>ВІДПРАВИТИ</button>
-            </div>
           </>
         )}
       </form>

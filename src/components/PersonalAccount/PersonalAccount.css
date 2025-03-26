@@ -1,0 +1,813 @@
+/* PersonalAccount.css */
+.ua-personal-account {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+.ua-account-header {
+background: rgb(35, 39, 44);
+  color: white;
+  padding: 20px 40px;
+  margin-bottom: 0;
+}
+.ua-account-header h1 {
+  font-size: 60px;
+  color: white;
+  margin-bottom: 30px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-family: Oswald;
+}
+.ua-user-info {
+  display: flex;
+  align-items: center;
+}
+.ua-avatar {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.ua-avatar:hover {
+  opacity: 0.8;
+}
+
+.ua-avatar:hover::after {
+  content: '📷';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+
+
+.ua-user-details {
+  /* H5 */
+color: rgb(245, 245, 245);
+font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.ua-user-details h2 {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+}
+.ua-user-details p {
+  font-family: Manrope;
+  margin: 5px 0 0;
+  color: #cccccc;
+  font-size: 14px;
+}
+.ua-instagram-icon {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ua-account-content {
+  display: flex;
+  background-color: #ffffff;
+  min-height: calc(100vh - 125px);
+}
+.ua-account-nav {
+
+  flex: 0 0 170px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.ua-nav-button {
+  color: rgb(76, 76, 75);
+  font-family: Oswald;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ua-nav-button.ua-active {
+  background-color: #f9f0f0;
+  font-weight: 600;
+  color: #9f0000;
+  position: relative;
+}
+
+.ua-nav-button.ua-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background-color: #9f0000;
+}
+
+.ua-nav-button:hover:not(.ua-active) {
+  background-color: #f9d9d9;
+}
+
+.ua-logout {
+  margin-top: auto;
+  color: #9f0000;
+}
+
+.ua-tab-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Profile tab styles */
+.ua-category {
+  margin-bottom: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  /* Secondary */
+background: rgb(35, 39, 44);
+}
+
+.ua-category-header {
+  color: rgb(35, 39, 44);
+  font-family: Oswald;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 15px 20px;
+  cursor: pointer;
+  color: #1e1e1e;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.ua-category-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ua-chevron {
+  font-size: 18px;
+  color: #777;
+}
+
+.ua-category-content {
+  background-color: white;
+  color: #1e1e1e;
+  padding: 20px;
+}
+
+/* Form styles */
+.ua-form-group {
+  color: #1e1e1e;
+  margin-bottom: 20px;
+}
+
+.ua-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.ua-form-group input[type="text"],
+.ua-form-group input[type="email"],
+.ua-form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.ua-radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.ua-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ua-radio input {
+  margin-right: 8px;
+}
+
+.ua-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ua-inline-actions {
+  margin-top: 10px;
+}
+
+.ua-button {
+  padding: 10px 40px;
+  border: none;
+  /* border-radius: 4px; */
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.ua-button-mini {
+  padding: 8px 15px;
+  font-size: 12px;
+}
+
+.ua-button-primary {
+  
+  /* Button */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;
+  background-color: #9f0000;
+  color: white;
+}
+
+.ua-button-primary:hover {
+  background-color: #8a0000;
+}
+
+.ua-button-secondary {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.ua-button-secondary:hover {
+  background-color: #e5e5e5;
+}
+
+.ua-edit-btn {
+  margin-top: 15px;
+}
+
+.ua-edit-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.ua-edit-button {
+  background: none;
+  border: none;
+  color: #9f0000;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ua-info-display {
+  margin-bottom: 20px;
+}
+
+.ua-info-row {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.ua-info-label {
+  flex: 0 0 150px;
+  color: #777;
+  font-size: 14px;
+}
+
+.ua-info-value {
+  font-size: 14px;
+}
+
+/* Delivery addresses styles */
+.ua-form-section {
+  margin-bottom: 25px;
+}
+
+.ua-form-section h5 {
+  font-size: 15px;
+  margin: 0 0 15px 0;
+  font-weight: 500;
+}
+
+.ua-form-section h5 span {
+  font-size: 12px;
+  color: #777;
+  font-weight: normal;
+}
+
+.ua-nova-poshta-section,
+.ua-delivery-address-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ua-address-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.ua-address-field {
+  flex: 1;
+}
+
+.ua-address-field.small {
+  flex: 0.5;
+}
+
+.ua-delete-button {
+  background: none;
+  border: none;
+  color: #9f0000;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ua-delete-button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.ua-delete-icon {
+  font-size: 18px;
+}
+
+.ua-delivery-block {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.ua-add-button {
+  background: none;
+  border: 1px dashed #9f0000;
+  color: #9f0000;
+  padding: 15px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ua-select-placeholder {
+  color: #999;
+}
+
+/* Orders tab styles */
+.ua-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ua-order-item {
+  background-color: white;
+  border-radius: 5px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ua-order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.ua-order-number {
+  font-weight: 500;
+}
+
+.ua-order-date {
+  color: #777;
+  font-size: 14px;
+}
+
+.ua-order-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.ua-order-status {
+
+  color: #9f0000;
+  font-weight: 500;
+}
+
+.ua-order-details-btn {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ua-order-details-btn:hover {
+  background-color: #f9f9f9;
+}
+
+.ua-order-items {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.ua-order-item-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.ua-order-item-detail:last-child {
+  border-bottom: none;
+}
+
+.ua-order-item-detail span {
+  flex: 1;
+  text-align: left;
+  margin-right: 15px;
+}
+
+.ua-order-item-detail span:last-child {
+  text-align: right;
+  margin-right: 0;
+}
+
+.ua-order-item-image {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ua-order-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ua-order-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ua-order-item-name {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.ua-order-item-specs {
+  display: flex;
+  gap: 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+.ua-order-item-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.ua-order-delivery {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.ua-delivery-info,
+.ua-payment-info,
+.ua-tracking-info {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ua-delivery-info strong,
+.ua-payment-info strong,
+.ua-tracking-info strong {
+  color: #333;
+  margin-right: 8px;
+}
+
+.ua-order-details-btn {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ua-order-details-btn:hover {
+  background-color: #555;
+}
+
+/* Wishlist tab styles */
+.ua-wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.ua-wishlist-item {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.ua-wishlist-image {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.ua-placeholder-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f1f1;
+}
+
+.ua-wishlist-details {
+  padding: 15px;
+}
+
+.ua-wishlist-name {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.ua-wishlist-price {
+  color: #9f0000;
+  font-weight: 500;
+}
+
+.ua-add-to-cart {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #9f0000;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.ua-add-to-cart:hover {
+  background-color: #8a0000;
+}
+
+.ua-remove-wishlist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ua-empty-state {
+  text-align: center;
+  padding: 50px 0;
+  color: #777;
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ua-account-content {
+    flex-direction: column;
+  }
+  
+  .ua-account-nav {
+    flex: 0 0 auto;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .ua-nav-button {
+    padding: 12px 15px;
+  }
+  
+  .ua-nav-button.ua-active::before {
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    top: auto;
+  }
+  
+  .ua-logout {
+    margin-top: 0;
+    margin-left: auto;
+  }
+  
+  .ua-address-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .ua-address-field.small {
+    flex: 1;
+  }
+  
+  .ua-delete-button {
+    align-self: flex-end;
+  }
+  
+  .ua-wishlist-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+/* Popup Styles */
+.ua-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ua-popup {
+  background: #1E1E1E;
+  border-radius: 8px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  color: white;
+}
+
+.ua-popup h3 {
+  font-size: 24px;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.ua-popup p {
+  color: #CCCCCC;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.ua-popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ua-popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ua-popup .ua-form-group {
+  margin-bottom: 16px;
+}
+
+.ua-popup .ua-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #CCCCCC;
+  font-size: 14px;
+}
+
+.ua-popup .ua-form-group input {
+  width: 100%;
+  padding: 12px;
+  background: #2C2C2C;
+  border: 1px solid #3D3D3D;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+}
+
+.ua-popup .ua-form-group input::placeholder {
+  color: #666666;
+}
+
+.ua-popup .ua-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.ua-popup .ua-button-primary {
+  background: #B42D2D;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ua-popup .ua-button-primary:hover {
+  background: #C33;
+}
+
+/* Animation for popup */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ua-popup-overlay {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ua-popup {
+  animation: slideIn 0.3s ease-out;
+}

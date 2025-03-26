@@ -161,7 +161,7 @@ const RegisterPage = () => {
 
   return (
     <div className="register-page">
-      <Header />
+      {/* <Header /> */}
 
       <div className="main-content">
         <div className="back-button-container">

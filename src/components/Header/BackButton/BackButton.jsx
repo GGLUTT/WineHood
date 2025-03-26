@@ -6,7 +6,7 @@ import arrowLeftIcon from '../../../img/ico/arrow.svg';
 
 const BackButton = ({ text, to }) => {
   return (
-    <Link to={to} className="back-button">
+    <Link to={to} className="back-buttons">
       <img src={arrowLeftIcon} alt="Back" className="back-icon" />
       <span>{text}</span>
     </Link>

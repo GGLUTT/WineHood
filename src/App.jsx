@@ -13,12 +13,17 @@ import WineCatalog from './components/WineCatalog/WineCatalog';
 import ProductDetail from './components/WineProductCard/ProductDetail.jsx';
 import Checkout from './components/CheckOut/CheckOut.jsx';
 import OrderSuccess from './components/OrderSuccess/OrderSuccess.jsx';
+import PersonalAccount from './components/PersonalAccount/PersonalAccount.jsx';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+import Header from './components/Header/Header';
 
 function App() {
   return (
     <CartProvider>
       <Router>
         <AgeVerificationModal />
+        <Header />
+        <Breadcrumbs />
         <Routes>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-success" element={<OrderSuccess />} />
@@ -29,6 +34,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/account" element={<PersonalAccount />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

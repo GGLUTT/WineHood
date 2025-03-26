@@ -12,9 +12,7 @@ import GeorgiaFlag from "../../img/ico/flags/icon_georgia.svg";
 import IzrailFlag from "../../img/ico/flags/icon_izrail.svg";
 import SpainFlag from "../../img/ico/flags/icon_spain.svg";
 import { useCart } from '../Context/CartContext.jsx';
-
 import penfolds from "../../img/wine_Category/penfolds.png";
-import Header from "../Header/Header";
 
 const WineCatalog = () => {
   const [collapsedSections, setCollapsedSections] = useState({
@@ -464,6 +462,11 @@ const WineCatalog = () => {
     applyFilters();
   }, [sortOption]);
 
+  // Додаємо новий useEffect для автоматичного застосування фільтрів
+  useEffect(() => {
+    applyFilters();
+  }, [filters]);
+
   const getCurrentPageWines = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -486,19 +489,14 @@ const WineCatalog = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <Header></Header> 
       {/* Верхній банер */}
       <div className="custom-bg relative h-64 overflow-hidden">
         <div className="absolute inset-0 bg-opacity-50"></div>
         <div className="container mx-auto px-4 py-16 relative z-10">
-          <div className="flex items-center text-sm mb-4">
-            <span>Головна</span>
-            <span className="mx-2">{">"}</span>
-            <span>Каталог</span>
-          </div>
-          <h1 className="text-4xl font-bold mb-4">ІСКРИСТА МАГІЯ</h1>
-          <h2 className="text-xl mb-6">ВІД КЛАСИКИ ДО СМІЛИВИХ НОВИНОК</h2>
-          <button className="bg-red-700">ДІЗНАТИСЬ БІЛЬШЕ</button>
+         
+          <h1 className="head-title-catalog">ІСКРИСТА МАГІЯ</h1>
+          <h2 className="head-subtitle-catalog">ВІД КЛАСИКИ ДО СМІЛИВИХ НОВИНОК</h2>
+          <button className="button-catalog-more">ДІЗНАТИСЬ БІЛЬШЕ</button>
         </div>
       </div>
 

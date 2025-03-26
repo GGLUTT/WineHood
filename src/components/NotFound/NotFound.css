@@ -9,7 +9,7 @@
     /* background-image: linear-gradient(to right, #fff7f7 20px, transparent 1px),  */
                       /* linear-gradient(to bottom, #fff7f7 20px, transparent 1px); */
     background-size: 70px 70px;
-    background-color: #ffe6e6;
+    background-color: #ffffff;
     padding: 20px;
   }
   
@@ -22,8 +22,9 @@
   }
   
   .error-code {
-    font-size: 160px;
-    font-weight: 900;
+    font-family: Oswald;
+    font-size: 360px;
+    font-weight: 500;
     color: #2e1a1a;
     line-height: 1;
     margin-bottom: 10px;
@@ -43,9 +44,15 @@
   }
   
   .spilt-wine-img {
-    width: 100%;
+    width: 636px;
+height: 636px;
+z-index: -1;
     height: auto;
     transform: rotate(15deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   
   .not-found-title {

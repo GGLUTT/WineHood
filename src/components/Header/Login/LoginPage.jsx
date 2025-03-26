@@ -1,6 +1,6 @@
 // src/pages/LoginPage/LoginPage.jsx
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Header from '../Header';
 import BackButton from '../BackButton/BackButton';
 import './LoginPage.css';
@@ -10,6 +10,7 @@ import googleIcon from '../../../img/ico/google.svg';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,6 +20,19 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState('');
+
+  // Перевіряємо, чи користувач вже авторизований
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    
+    if (token && user) {
+      // Якщо користувач вже авторизований, перенаправляємо на дашборд
+      // або на сторінку, з якої він був перенаправлений на логін
+      const destination = location.state?.from || '/account';
+      navigate(destination, { replace: true });
+    }
+  }, [navigate, location]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -58,7 +72,27 @@ const LoginPage = () => {
       setIsSubmitting(true);
       setLoginError('');
       
-      // Використання fetch для запиту на сервер
+      // В режимі розробки імітуємо успішний вхід
+      if (process.env.NODE_ENV === 'development') {
+        // Імітуємо затримку мережевого запиту
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Створюємо тестового користувача
+        const mockUser = {
+          id: '12345',
+          email: userData.email,
+          firstName: 'None',
+          lastName: 'None',
+          phone: '+380 66 745 22 35'
+        };
+        
+        localStorage.setItem('token', 'fake-token-for-testing');
+        localStorage.setItem('user', JSON.stringify(mockUser));
+        
+        return mockUser;
+      }
+
+      // В продакшн режимі використовуємо реальний API
       const response = await fetch('https://api.your-domain.com/auth/login', {
         method: 'POST',
         headers: {
@@ -68,7 +102,6 @@ const LoginPage = () => {
       });
       
       if (!response.ok) {
-        // Обробка помилок від сервера
         if (response.status === 401) {
           throw new Error('Невірний email або пароль');
         } else {
@@ -79,16 +112,9 @@ const LoginPage = () => {
       
       const data = await response.json();
       
-      // Зберігаємо токен у localStorage
+      // Зберігаємо токен та дані користувача
       localStorage.setItem('token', data.token);
-      
-      // Якщо є інформація про користувача, можна її також зберегти
-      if (data.user) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-      }
-      
-      // Перенаправлення на сторінку після успішного входу
-      navigate('/dashboard');
+      localStorage.setItem('user', JSON.stringify(data.user));
       
       return data;
     } catch (error) {
@@ -100,47 +126,45 @@ const LoginPage = () => {
   };
 
   const handleGoogleAuth = () => {
+    // Зберігаємо інформацію про redirectUrl для OAuth провайдера
+    const redirectUrl = location.state?.from || '/dashboard';
+    localStorage.setItem('authRedirectUrl', redirectUrl);
+    
     // Перенаправлення на сторінку аутентифікації Google
-    window.location.href = 'https://api.your-domain.com/auth/google';
+    window.location.href = `https://api.your-domain.com/auth/google?redirect=${encodeURIComponent(redirectUrl)}`;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Валідація форми перед відправкою
     const isValid = validateForm();
     
     if (isValid) {
       try {
-        // Дані для входу
-        const userData = {
+        await loginUser({
           email: formData.email,
           password: formData.password
-        };
+        });
         
-        // Імітуємо успішний вхід і переадресацію в режимі розробки
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Дані для входу:', userData);
-          setIsSubmitting(true);
-          setTimeout(() => {
-            setIsSubmitting(false);
-            localStorage.setItem('token', 'fake-token-for-testing');
-            navigate('/dashboard');
-          }, 1000);
-        } else {
-          // В продакшн режимі використовуємо реальний API
-          await loginUser(userData);
-        }
+        // Перенаправлення після успішного входу
+        const destination = location.state?.from || '/account';
+        navigate(destination, { replace: true });
       } catch (error) {
         console.error('Помилка входу:', error);
-        // Помилка вже встановлена в функції loginUser
       }
     }
   };
 
+  // Функція для виходу з аккаунту, можна використовувати у компоненті кабінету
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <div className="login-page">
-      <Header />
+      {/* <Header /> */}
       
       <div className="main-content">
         <div className="back-button-container">

@@ -13,6 +13,51 @@
   min-height: 100vh;
 }
 
+.head-title-catalog{
+/* H2 */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 60px;
+font-weight: 300;
+line-height: 110%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
+}
+
+.head-subtitle-catalog{
+ /* H3 */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 40px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
+}
+
+.button-catalog-more {
+  background-color: #8D0314;
+  color: white;
+  font-family: Oswald;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 15px 70px;
+  margin: 24px 0px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-catalog-more:hover {
+  background-color: #6b0210;
+}
+
 .container {
   width: 100%;
   max-width: 1280px;
@@ -266,12 +311,46 @@
   color: #8B0000;
 }
 
+.filter-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d4b5b5;
+  border-radius: 3px;
+  margin-right: 0.75rem;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  transition: all 0.3s ease;
+}
+
+.filter-checkbox:checked {
+  background-color: #8B0000;
+  border-color: #8B0000;
+}
+
+.filter-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  /* border: solid white; */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
 .filter-option {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #4A2511;
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .filter-option:hover {
@@ -279,21 +358,10 @@
   color: #8B0000;
 }
 
-.filter-checkbox {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #d4b5b5;
-  border-radius: 3px;
-  margin-right: 0.75rem;
-  background-color: #fbecec;
+.filter-option label {
   cursor: pointer;
-  position: relative;
-}
-
-.filter-checkbox:checked {
-  background-color: #8B0000;
-  border-color: #8B0000;
+  user-select: none;
+  font-size: 14px;
 }
 
 .filter-search {
@@ -536,7 +604,7 @@
 }
 
 /* Змінено стиль випадаючого списку відповідно до дизайну */
-.sort-select {
+/* .sort-select {
   padding: 0.5rem 1rem;
   border: 1px solid #F3D5D5;
   background-color: #FFF0F5;
@@ -548,7 +616,7 @@
   background-image: url('data:image/svg+xml;utf8,<svg fill="%234A2511" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
-}
+} */
 
 .sort-select:focus {
   border-color: #8B0000;

@@ -7,13 +7,20 @@
 }
 
 .checkout-title {
-  font-size: 32px;
   margin-bottom: 40px;
-  font-weight: 600;
   color: #333;
   position: relative;
   display: inline-block;
   animation: fadeInTitle 0.7s ease;
+  /* H2 */
+color: rgb(35, 39, 44);
+font-family: Oswald;
+font-size: 60px;
+font-weight: 300;
+line-height: 110%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
 }
 
 .checkout-title:after {
@@ -137,13 +144,20 @@ section h2 {
   cursor: pointer;
   position: relative;
   background-color: transparent;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.delivery-option:hover,
-.payment-option:hover {
+.delivery-option:hover {
   background-color: rgba(211, 80, 80, 0.05);
   border-color: rgba(211, 80, 80, 0.2);
+}
+
+/* Видаляємо всі ховер-ефекти для payment-option */
+.payment-option input[type="radio"]:checked + .radio-custom {
+  border-color: #8B0029;
+}
+
+.payment-option input[type="radio"]:checked + .radio-custom:before {
+  background-color: #8B0029;
 }
 
 .option-text {
@@ -212,23 +226,83 @@ input[type="radio"]:checked + .radio-custom:before {
 }
 
 /* Розділ коментаря */
+.comment-section {
+  margin-bottom: 40px;
+}
+
+.comment-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
 .comment-section textarea {
   width: 100%;
   height: 120px;
   padding: 15px;
-  border: 1px solid #f0d0d0;
+  border: 1px solid #E0E0E0;
   border-radius: 0;
   resize: vertical;
   font-family: inherit;
   font-size: 16px;
-  background-color: rgba(255, 240, 240, 0.5);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color: #2D2D2D;
+  background-color: transparent;
+}
+
+.comment-section textarea::placeholder {
+  color: #BDBDBD;
 }
 
 .comment-section textarea:focus {
-  border-color: #d35050;
-  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
+  border-color: #8B0029;
   outline: none;
+}
+
+.send-comment-button {
+  padding: 10px 30px;
+  background-color: transparent;
+  box-sizing: border-box;
+/* Secondary */
+border: 1px solid rgb(35, 39, 44);
+  color: #8B0029;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  width: fit-content;
+  /* Button */
+color: rgb(35, 39, 44);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;
+}
+
+.send-comment-button:hover {
+  background-color: #363636;
+  color: white;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+  .comment-container {
+    align-items: stretch;
+  }
+  
+  .send-comment-button {
+    width: 100%;
+  }
+  
+  .delivery-option,
+  .payment-option {
+    width: 100%;
+  }
 }
 
 /* Підсумок замовлення */
@@ -511,4 +585,126 @@ input[type="checkbox"]:checked + label:after {
 
 .comment-section textarea::-webkit-scrollbar-thumb:hover {
   background: #c04040;
+}
+
+.login-form {
+  max-width: 400px;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2D2D2D;
+  font-size: 14px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #2D2D2D;
+}
+
+.login-form input::placeholder {
+  color: #BDBDBD;
+}
+
+.password-group {
+  position: relative;
+}
+
+.password-input {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 20px;
+  color: #757575;
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  color: #2D2D2D;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #8B0029;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.dividers {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.dividers::before,
+.dividers::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: #E0E0E0;
+}
+
+.dividers::before {
+  left: 0;
+}
+
+.dividers::after {
+  right: 0;
+}
+
+.dividers span {
+  background-color: white;
+  padding: 0 10px;
+  color: #757575;
+  font-size: 14px;
+}
+
+.google-login {
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #2D2D2D;
+  cursor: pointer;
+}
+
+.google-login img {
+  width: 20px;
+  height: 20px;
 }

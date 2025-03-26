@@ -14,8 +14,6 @@ import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import BlogSection from './BlogSection/BlogSection';
 import WineCategories from './BuyCategory/WineCategories';
 import ExclusiveOffers from './ExclusiveOffers/ExclusiveOffers';
-// import AgeVerificationModal from '../AgeVefification/AgeVerificationPage';
-// import AgeVerificationModal from '../AgeVefification/AgeVerificationModal';
 
 
 const HomePage = () => {
@@ -51,58 +49,24 @@ const HomePage = () => {
   
   return (
     <div className="home-page">
-      {/* Header/Navigation */}
-      <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="header-container">
-          <nav className="main-nav">
-            <ul className="nav-links">
-              <li><Link to="/catalog" className="nav-link">Каталог</Link></li>
-              <li><Link to="/akcii" className="nav-link">Акції</Link></li>
-              <li><Link to="/blog" className="nav-link">Блог</Link></li>
-              <li><Link to="/about" className="nav-link">Про нас</Link></li>
-            </ul>
-          </nav>
-          
-          <div className="logo">
-          <Link to="/">
-              <img className="logo-img" src={logo} alt="Logo" />
-          </Link>
+      {/* Hero Section */}
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="brand-name">
+            <div class="wine-text">WINE</div>
+            <div class="hood-text">HOOD</div>
+            <div class="hero-subtitle">НОВИЙ ПОГЛЯД НА ВИНО</div>
           </div>
-          
-          <div className="header-icons">
-            <button className="icon-button search">
-              <svg className="icon" viewBox="0 0 24 24">
-                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34 6.5 6.5 0 1 0-2.47 7.33l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0a4.5 4.5 0 1 1 3.18-7.68A4.5 4.5 0 0 1 9.5 14z" />
-              </svg>
-            </button>
-            <Link to="/cart" className="icon-button cart">
-              <svg className="icon" viewBox="0 0 24 24">
-                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 3c0 .55.45 1 1 1h1l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h11c.55 0 1-.45 1-1s-.45-1-1-1H7l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0 0 21 4H5.21l-.67-1.43a.993.993 0 0 0-.9-.57H2c-.55 0-1 .45-1 1zm16 15c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
-              </svg>
-            </Link>
-            <ProfileMenu />
+          <div class="hero-description">
+            Винний простір для сучасної міської аудиторії.
+            Ми створюємо місце, де вино стає доступним,
+            зрозумілим і натхненним.
+          </div>
+          <div class="cta-container">
+            <a href="#" class="cta-button">ЗНАЙТИ СВОЄ ВИНО</a>
           </div>
         </div>
-      </header>
-
-      {/* Hero Section */}
-<section class="hero-section">
-  <div class="hero-content">
-    <div class="brand-name">
-      <div class="wine-text">WINE</div>
-      <div class="hood-text">HOOD</div>
-      <div class="hero-subtitle">НОВИЙ ПОГЛЯД НА ВИНО</div>
-    </div>
-    <div class="hero-description">
-      Винний простір для сучасної міської аудиторії.
-      Ми створюємо місце, де вино стає доступним,
-      зрозумілим і натхненним.
-    </div>
-    <div class="cta-container">
-      <a href="#" class="cta-button">ЗНАЙТИ СВОЄ ВИНО</a>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Page Indicators/Pagination */}
       <div className="page-indicators">

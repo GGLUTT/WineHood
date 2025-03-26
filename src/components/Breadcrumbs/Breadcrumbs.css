@@ -1,0 +1,33 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: transparent;
+  font-size: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.breadcrumb-item {
+  color: #000;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  opacity: 0.7;
+}
+
+.breadcrumb-item:hover {
+  opacity: 1;
+}
+
+.breadcrumb-item.active {
+  color: #000;
+  opacity: 1;
+  font-weight: normal;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #000;
+  opacity: 0.7;
+} 

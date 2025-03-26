@@ -167,7 +167,7 @@
     transform: translateY(-5px);
   }
   
-  /* Header Styles */
+  /* Header Styles
   .header {
     position: fixed;
     top: 0;
@@ -178,7 +178,6 @@
     backdrop-filter: blur(8px);
     transition: all 0.4s ease;
     box-sizing: border-box;
-  /* 400 */
    border-bottom: 1px solid rgb(76, 76, 75);
    background: rgb(245, 245, 245);
   }
@@ -288,7 +287,7 @@ align-items: center;
   .icon-button:hover .icon {
     color: #a30000;
     transform: scale(1.1);
-  }
+  } */
   
 /* Hero Section */
 .hero-section {
