@@ -5,7 +5,7 @@ import Header from '../Header';
 import BackButton from '../BackButton/BackButton';
 import './LoginPage.css';
 import eyeIcon from '../../../img/ico/eyes.svg';
-import eyeOffIcon from '../../../img/ico/eyes.svg';
+import eyeOffIcon from '../../../img/ico/eye-off.svg';
 import googleIcon from '../../../img/ico/google.svg';
 
 const LoginPage = () => {
@@ -127,7 +127,7 @@ const LoginPage = () => {
 
   const handleGoogleAuth = () => {
     // Зберігаємо інформацію про redirectUrl для OAuth провайдера
-    const redirectUrl = location.state?.from || '/dashboard';
+    const redirectUrl = location.state?.from || '/account';
     localStorage.setItem('authRedirectUrl', redirectUrl);
     
     // Перенаправлення на сторінку аутентифікації Google
@@ -211,7 +211,10 @@ const LoginPage = () => {
                     className="password-toggle-btn"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    <img src={showPassword ? eyeIcon : eyeOffIcon} alt="Toggle password" />
+                    <img 
+                      src={showPassword ? eyeIcon : eyeOffIcon} 
+                      alt={showPassword ? "Hide password" : "Show password"} 
+                    />
                   </button>
                 </div>
                 {errors.password && <p className="error-text">{errors.password}</p>}

@@ -14,7 +14,7 @@
   }
   
   .not-found-content {
-    max-width: 600px;
+    max-width: 850px;
     text-align: center;
     padding: 40px;
     position: relative;
@@ -23,9 +23,9 @@
   
   .error-code {
     font-family: Oswald;
-    font-size: 360px;
+    font-size: 300px;
     font-weight: 500;
-    color: #2e1a1a;
+    color: #262626;
     line-height: 1;
     margin-bottom: 10px;
     position: relative;
@@ -44,32 +44,40 @@
   }
   
   .spilt-wine-img {
-    width: 636px;
-height: 636px;
+  width: 496px;
+height: 496px;
 z-index: -1;
     height: auto;
-    transform: rotate(15deg);
+    transform: rotate(35deg);
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+       transform: translate(-47%, -60%);
   }
   
   .not-found-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #9f0000;
-    margin-bottom: 16px;
-    margin-top: 40px;
-    position: relative;
-    z-index: 2;
+    margin-top: -50px;
+    color: rgb(0, 0, 0);
+    font-family: Oswald;
+    font-size: 60px;
+    font-weight: 300;
+    line-height: 110%;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
   }
   
   .not-found-message {
-    font-size: 18px;
-    color: #4a2828;
-    margin-bottom: 30px;
-    line-height: 1.5;
+   /* Main text */
+color: rgb(0, 0, 0);
+font-family: Manrope;
+font-size: 18px;
+font-weight: 400;
+line-height: 150%;
+letter-spacing: 0%;
+text-align: center;
+    margin-top: 15%;
+
   }
   
   .not-found-actions {
@@ -82,18 +90,24 @@ z-index: -1;
   .home-button,
   .catalog-button {
     display: inline-block;
-    padding: 14px 24px;
-    font-size: 16px;
-    font-weight: 600;
+    padding: 18px 16px 8px 16px;
     text-decoration: none;
-    border-radius: 5px;
     transition: all 0.3s ease;
   }
   
   .home-button {
-    background-color: #9f0000;
-    color: white;
-    border: none;
+    width: 282px;
+height: 56px;
+    background: rgb(141, 3, 20);
+    /* Button */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;
   }
   
   .home-button:hover {
@@ -101,9 +115,20 @@ z-index: -1;
   }
   
   .catalog-button {
+    width: 282px;
+    height: 56px;
     background-color: transparent;
-    color: #9f0000;
-    border: 2px solid #9f0000;
+/* Button */
+color: rgb(35, 39, 44);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;    
+    color: rgb(35, 39, 44);
+    border: 1px solid rgb(35, 39, 44);
   }
   
   .catalog-button:hover {

@@ -15,7 +15,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="forgot-password-page">
-      <Header />
+      {/* <Header /> */}
       
       <div className="main-content">
         <div className="back-button-container">

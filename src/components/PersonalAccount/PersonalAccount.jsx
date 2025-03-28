@@ -1021,7 +1021,7 @@ const PersonalAccount = () => {
 
   return (
     <div className="ua-personal-account">
-      <Header></Header>
+      {/* <Header></Header> */}
 
       <header className="ua-account-header">
         <h1>ОСОБИСТИЙ КАБІНЕТ</h1>

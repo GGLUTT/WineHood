@@ -5,16 +5,16 @@ import Header from "../Header";
 import BackButton from "../BackButton/BackButton";
 import "./RegisterPage.css";
 import eyeIcon from "../../../img/ico/eyes.svg";
-import eyeOffIcon from "../../../img/ico/eyes.svg";
+import eyeOffIcon from "../../../img/ico/eye-off.svg";
 import googleIcon from "../../../img/ico/google.svg";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    repeatPassword: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -26,11 +26,11 @@ const RegisterPage = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Перевірка імені
-    if (!formData.name.trim()) {
-      newErrors.name = "Ім'я користувача є обов'язковим";
-    } else if (formData.name.length < 2) {
-      newErrors.name = "Ім'я має містити не менше 2 символів";
+    // Перевірка імені користувача
+    if (!formData.username.trim()) {
+      newErrors.username = "Ім'я користувача є обов'язковим";
+    } else if (formData.username.length < 2) {
+      newErrors.username = "Ім'я має містити не менше 2 символів";
     }
 
     // Перевірка email
@@ -48,8 +48,8 @@ const RegisterPage = () => {
     }
 
     // Перевірка підтвердження паролю
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Паролі не співпадають";
+    if (formData.password !== formData.repeatPassword) {
+      newErrors.repeatPassword = "Паролі не співпадають";
     }
 
     setErrors(newErrors);
@@ -107,7 +107,7 @@ const RegisterPage = () => {
       localStorage.setItem("token", data.token);
 
       // Перенаправлення на сторінку після успішної реєстрації
-      navigate("/dashboard");
+      navigate("/account");
 
       return data;
     } catch (error) {
@@ -131,30 +131,28 @@ const RegisterPage = () => {
 
     if (isValid) {
       try {
-        // Підготовка даних для відправки (без confirmPassword)
+        // Підготовка даних для відправки
         const userData = {
-          name: formData.name,
+          username: formData.username,
           email: formData.email,
           password: formData.password,
+          repeatPassword: formData.repeatPassword,
         };
 
         // Імітуємо успішну реєстрацію і переадресацію (для тестування)
-        // Під час інтеграції з реальним API закоментуйте ці рядки і розкоментуйте виклик registerUser
         if (process.env.NODE_ENV === "development") {
           console.log("Дані для реєстрації:", userData);
           setIsSubmitting(true);
           setTimeout(() => {
             setIsSubmitting(false);
             localStorage.setItem("token", "fake-token-for-testing");
-            navigate("/dashboard");
+            navigate("/account");
           }, 1000);
         } else {
-          // В продакшн режимі використовуємо реальний API
           await registerUser(userData);
         }
       } catch (error) {
         console.error("Помилка реєстрації:", error);
-        // Помилка вже встановлена в функції registerUser
       }
     }
   };
@@ -181,13 +179,13 @@ const RegisterPage = () => {
                 <label className="form-label">Ім'я користувача</label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
-                  placeholder="Роман Мирний"
-                  className={`form-input ${errors.name ? "input-error" : ""}`}
+                  placeholder="Введіть ім'я користувача"
+                  className={`form-input ${errors.username ? "input-error" : ""}`}
                 />
-                {errors.name && <p className="error-text">{errors.name}</p>}
+                {errors.username && <p className="error-text">{errors.username}</p>}
               </div>
 
               <div className="form-group">
@@ -214,9 +212,7 @@ const RegisterPage = () => {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="********"
-                    className={`form-input ${
-                      errors.password ? "input-error" : ""
-                    }`}
+                    className={`form-input ${errors.password ? "input-error" : ""}`}
                   />
                   <button
                     type="button"
@@ -225,7 +221,7 @@ const RegisterPage = () => {
                   >
                     <img
                       src={showPassword ? eyeIcon : eyeOffIcon}
-                      alt="Toggle password"
+                      alt={showPassword ? "Hide password" : "Show password"}
                     />
                   </button>
                 </div>
@@ -243,13 +239,11 @@ const RegisterPage = () => {
                 <div className="password-input-wrapper">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
+                    name="repeatPassword"
+                    value={formData.repeatPassword}
                     onChange={handleChange}
                     placeholder="********"
-                    className={`form-input ${
-                      errors.confirmPassword ? "input-error" : ""
-                    }`}
+                    className={`form-input ${errors.repeatPassword ? "input-error" : ""}`}
                   />
                   <button
                     type="button"
@@ -258,12 +252,12 @@ const RegisterPage = () => {
                   >
                     <img
                       src={showConfirmPassword ? eyeIcon : eyeOffIcon}
-                      alt="Toggle password"
+                      alt={showConfirmPassword ? "Hide password" : "Show password"}
                     />
                   </button>
                 </div>
-                {errors.confirmPassword && (
-                  <p className="error-text">{errors.confirmPassword}</p>
+                {errors.repeatPassword && (
+                  <p className="error-text">{errors.repeatPassword}</p>
                 )}
               </div>
               <button
@@ -285,7 +279,7 @@ const RegisterPage = () => {
               disabled={isSubmitting}
             >
               <img src={googleIcon} alt="Google" className="google-icon" />
-              ЗАРЕЄСТРУВАТИСЯ
+              ЗАРЕЄСТРУВАТИСЬ
             </button>
 
             <div className="auth-redirect">

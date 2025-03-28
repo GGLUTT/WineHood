@@ -121,12 +121,17 @@ background: rgb(245, 245, 245);
 
 .cart-button {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 .cart-badge {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -5px;
+  right: -5px;
   background-color: var(--primary-color, #990000);
   color: white;
   font-size: 12px;

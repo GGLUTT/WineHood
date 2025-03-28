@@ -7,22 +7,22 @@ const NotFound = () => {
   return (
     <div className="not-found-container">
       <div className="not-found-content">
+      <h1 className="not-found-title">Здається, ми щось пролили...</h1>
         <div className="error-code">404</div>
         <div className="wine-spill">
           <img src={spiltWine} alt="Розлите вино" className="spilt-wine-img" />
         </div>
-        {/* <h1 className="not-found-title">Упс! Помилка</h1> */}
-        {/* <p className="not-found-message">
-          Схоже, сторінка, яку ви шукаєте, зникла або ніколи не існувала.
-        </p> */}
-        {/* <div className="not-found-actions">
-          <Link to="/" className="home-button">
-            На головну сторінку
+        <p className="not-found-message">
+        Ох, це ваша сторінка! На жаль, її тут немає, але ми можемо запропонувати щось не менш смачне
+        </p>
+        <div className="not-found-actions">
+          <Link to="/catalog" className="home-button">
+            Каталог вин
           </Link>
-          <Link to="/catalog" className="catalog-button">
-            Перейти до каталогу
+          <Link to="/" className="catalog-button">
+            Головна
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );

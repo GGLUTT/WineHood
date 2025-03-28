@@ -7,6 +7,8 @@
   background-image: url('../../../src/img/catalog_banner.png');
   background-size: cover;
   background-position: center;
+  height: 400px;
+  width: 100%;
 }
 
 .min-h-screen {
@@ -23,6 +25,7 @@ line-height: 110%;
 letter-spacing: 0%;
 text-align: left;
 text-transform: uppercase;
+margin: 0;
 }
 
 .head-subtitle-catalog{
@@ -35,6 +38,7 @@ line-height: 120%;
 letter-spacing: 0%;
 text-align: left;
 text-transform: uppercase;
+margin: 0;
 }
 
 .button-catalog-more {
@@ -52,6 +56,7 @@ text-transform: uppercase;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .button-catalog-more:hover {
@@ -101,7 +106,6 @@ text-transform: uppercase;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(139,0,0,0.7) 0%, rgba(0,0,0,0.8) 100%);
   z-index: 1;
   animation: gradientShift 10s infinite alternate;
 }
@@ -298,11 +302,14 @@ text-transform: uppercase;
 }
 
 .filter-title {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 500;
-  color: #4A2511;
-  text-transform: uppercase;
-  font-size: 1rem;
+/* H5 */
+color: rgb(35, 39, 44);
+font-family: Oswald;
+font-size: 22px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
   margin-bottom: 0.75rem;
   transition: color 0.3s ease;
 }
@@ -311,25 +318,47 @@ text-transform: uppercase;
   color: #8B0000;
 }
 
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #262626;
+  padding: 2px 0;
+}
+
+.filter-option:hover .filter-checkbox {
+  border-color: #8D0314;
+}
+
 .filter-checkbox {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #d4b5b5;
-  border-radius: 3px;
-  margin-right: 0.75rem;
-  background-color: #fff;
-  cursor: pointer;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  margin-right: 8px;
   position: relative;
-  vertical-align: middle;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  background: white;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
 }
 
 .filter-checkbox:checked {
-  background-color: #8B0000;
-  border-color: #8B0000;
+  background-color: #8D0314;
+  border-color: #8D0314;
 }
 
 .filter-checkbox:checked::after {
@@ -339,29 +368,27 @@ text-transform: uppercase;
   top: 2px;
   width: 5px;
   height: 10px;
-  /* border: solid white; */
+  border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 
-.filter-option {
+.filter-checkbox:hover {
+  border-color: #8D0314;
+}
+
+.filter-option span {
+  flex-grow: 1;
   display: flex;
   align-items: center;
-  margin-bottom: 0.75rem;
-  color: #4A2511;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
-
-.filter-option:hover {
-  transform: translateX(5px);
-  color: #8B0000;
-}
-
-.filter-option label {
-  cursor: pointer;
   user-select: none;
-  font-size: 14px;
+}
+
+.filter-option span img {
+  margin-right: 8px;
+  width: 20px;
+  height: 12px;
+  object-fit: cover;
 }
 
 .filter-search {
@@ -587,106 +614,156 @@ text-transform: uppercase;
   color: rgb(141, 3, 20);
 }
 
-
-
 /* Стилі для сортування з анімацією */
 .sort-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-bottom: 2rem;
   align-items: center;
 }
 
-.sort-label {
-  margin-right: 0.75rem;
-  color: #4A2511;
-  font-family: 'Manrope', sans-serif;
+.sort-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-/* Змінено стиль випадаючого списку відповідно до дизайну */
-/* .sort-select {
-  padding: 0.5rem 1rem;
-  border: 1px solid #F3D5D5;
-  background-color: #FFF0F5;
-  color: #4A2511;
-  border-radius: 0.25rem;
-  min-width: 12rem;
-  transition: all 0.3s ease;
+.sort-label {
+  color: #262626;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  margin-right: 8px;
+}
+
+.sort-select {
   appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%234A2511" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-} */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 12px;
+  background: #FFF0F5;
+  color: #262626;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  cursor: pointer;
+  min-width: 240px;
+  border: none;
+  position: relative;
+}
+
+.sort-select option {
+  background: #FFF0F5;
+  color: #262626;
+  padding: 12px;
+  border: none;
+}
 
 .sort-select:focus {
-  border-color: #8B0000;
-  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
   outline: none;
 }
 
-/* Стилі для пагінації з анімацією */
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 3rem;
-  color: #4A2511;
-}
-
-/* Оновлено стилі кнопок пагінації відповідно до дизайну */
-.pagination-button {
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #F3D5D5;
-  background-color: transparent;
-  color: #4A2511;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.pagination-button:hover:not(:disabled) {
-  border-color: #8B0000;
-  color: #8B0000;
-}
-
-.pagination-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.pagination-button::before {
+.sort-wrapper::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
+  right: 12px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #262626;
+  border-bottom: 2px solid #262626;
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+/* Стилі для пагінації */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
+  padding: 16px 0;
+  background: transparent;
 }
 
-.pagination-button:hover:not(:disabled)::before {
-  left: 100%;
+.pagination-arrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #262626;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0 20px;
 }
 
-.pagination-input {
-  width: 3rem;
-  border: 1px solid #F3D5D5;
-  padding: 0.25rem;
+.pagination-arrow:hover:not(:disabled) {
+  color: #8D0314;
+}
+
+/* .pagination-arrow:disabled {
+  color: #E0E0E0;
+  cursor: not-allowed;
+} */
+
+.pagination-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.pagination-select-wrapper {
+  position: relative;
+  width: 48px;
+}
+
+.pagination-select {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #E0E0E0;
+  background: transparent;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #262626;
   text-align: center;
-  margin: 0 0.5rem;
-  transition: all 0.3s ease;
+  appearance: none;
+  cursor: pointer;
+  padding-right: 20px;
 }
 
-.pagination-input:focus {
-  border-color: #8B0000;
+.pagination-select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #262626;
+  pointer-events: none;
+}
+
+.pagination-select:focus {
   outline: none;
+  border-color: #8D0314;
 }
 
-.pagination-text {
-  margin-left: 0.5rem;
+.pagination span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #262626;
 }
 
 /* Стилі для різних типів вин з урахуванням дизайну */
@@ -733,6 +810,44 @@ text-transform: uppercase;
 
 .catalog-container {
   animation: fadeInUp 0.8s ease-out;
+}
+
+.tittle-catalog {
+  /* H2 */
+  color: rgb(29, 29, 29);
+  font-family: Oswald;
+  font-size: 60px;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: 0%;
+  text-align: left;
+  text-transform: uppercase;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.product-count {
+  /* H5 */
+  color: rgb(141, 3, 20);
+  font-family: Oswald;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.text-filter-title {
+  /* H4 */
+  color: rgb(35, 39, 44);
+  font-family: Oswald;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-bottom: 24px;
 }
 
 /* Анімація для фільтрів при відкритті/закритті категорій */
@@ -1130,7 +1245,7 @@ text-transform: uppercase;
   }
 }
 
-/* Анімація для кошика */
+/* Анімація для кошика
 .cart-button {
   position: fixed;
   bottom: 2rem;
@@ -1151,7 +1266,7 @@ text-transform: uppercase;
 .cart-button:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .cart-count {
   position: absolute;
@@ -1330,4 +1445,91 @@ text-transform: uppercase;
   .footer-container {
     grid-template-columns: 1fr;
   }
+}
+
+/* Специфічні стилі для Breadcrumbs на сторінці каталогу */
+.wine-catalog .breadcrumbs {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: transparent;
+  padding: 10px 0;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.wine-catalog .breadcrumb-item {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.wine-catalog .breadcrumb-item:hover {
+  opacity: 1;
+}
+
+.wine-catalog .breadcrumb-item.active {
+  color: #fff;
+  opacity: 1;
+}
+
+.wine-catalog .breadcrumb-separator {
+  color: #fff;
+  margin: 0 8px;
+  opacity: 0.8;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  backdrop-filter: blur(1px);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.banner-overlay .container {
+  margin-top: 80px;
+}
+
+.banner-overlay:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* Оновлюємо стилі для контейнера банера */
+.wine-catalog {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-bg.relative {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.banner-content {
+  /* display: flex; */
+  align-items: center;
+  gap: 30px;
+  color: white;
+  margin-top: 100px;
 }

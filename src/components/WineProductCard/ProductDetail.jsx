@@ -224,29 +224,7 @@ const { addToCart } = useCart();
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="container mx-auto px-4 py-4">
-        <div className="breadcrumbs">
-          <Link to="/" className="breadcrumb-link">
-            Головна
-          </Link>
-          <span className="breadcrumb-separator">{" > "}</span>
-          <Link to="/catalog" className="breadcrumb-link">
-            Каталог
-          </Link>
-          <span className="breadcrumb-separator">{" > "}</span>
-          <Link to="/catalog/red" className="breadcrumb-link">
-            Червоні вина
-          </Link>
-          <span className="breadcrumb-separator">{" > "}</span>
-          <Link to="/catalog/santa-julia" className="breadcrumb-link">
-            Santa Julia
-          </Link>
-          <span className="breadcrumb-separator">{" > "}</span>
-          <span className="breadcrumb-current">
-            Santa Julia Reserva Malbec Valle de Uco
-          </span>
-        </div>
-      </div>
+    
 
       {/* Банер заголовка продукту */}
       <div className="product-banner">

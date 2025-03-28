@@ -68,35 +68,32 @@ const PaymentDelivery = () => {
       
       <div className="payment-sections">
         <h2 className="section-title">ОПЛАТА</h2>
+        <div className="payment-option">
+          <span className="payment-option-icon">
+            <img src={card} alt="Visa/MasterCard" />
+          </span>
+          <h3 className="option-title">Visa/MasterCard (онлайн)</h3>
+        </div>
         
-        <div className="payment-options">
-          <div className="payment-option">
-            <span className="payment-option-icon">
-              <img src={card} alt="Visa/MasterCard" />
-            </span>
-            <h3 className="option-title">Visa/MasterCard (онлайн)</h3>
-          </div>
-          
-          <div className="payment-option">
-            <span className="payment-option-icon">
-              <img src={card2} alt="Безготівковий розрахунок" />
-            </span>
-            <h3 className="option-title">Безготівковий розрахунок, рахунок-фактура</h3>
-          </div>
-          
-          <div className="payment-option">
-            <span className="payment-option-icon">
-              <img src={card} alt="Готівкою при отриманні" />
-            </span>
-            <h3 className="option-title">Готівкою при отриманні</h3>
-          </div>
-          
-          <div className="payment-option">
-            <span className="payment-option-icon">
-              <img src={license} alt="Подарункові сертифікати" />
-            </span>
-            <h3 className="option-title">Подарунковими сертифікатами WINEHOOD</h3>
-          </div>
+        <div className="payment-option">
+          <span className="payment-option-icon">
+            <img src={card2} alt="Безготівковий розрахунок" />
+          </span>
+          <h3 className="option-title">Безготівковий розрахунок, рахунок-фактура</h3>
+        </div>
+        
+        <div className="payment-option">
+          <span className="payment-option-icon">
+            <img src={card} alt="Готівкою при отриманні" />
+          </span>
+          <h3 className="option-title">Готівкою при отриманні</h3>
+        </div>
+        
+        <div className="payment-option">
+          <span className="payment-option-icon">
+            <img src={license} alt="Подарункові сертифікати" />
+          </span>
+          <h3 className="option-title">Подарунковими сертифікатами WINEHOOD</h3>
         </div>
       </div>
 

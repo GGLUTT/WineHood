@@ -100,19 +100,16 @@ text-transform: uppercase;
 .specs-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid #e2e2e2;
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
 }
 
 .spec-item {
   padding: 0.75rem;
-  border-bottom: 1px solid #e2e2e2;
 }
 
-.spec-item:nth-child(odd) {
-  border-right: 1px solid #e2e2e2;
-}
+/* .spec-item:nth-child(odd) {
+} */
 
 .spec-item:nth-last-child(-n+2) {
   border-bottom: none;
@@ -131,13 +128,20 @@ text-transform: uppercase;
 
 /* Ціна та кошик */
 .price {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #b91c1c;
+color: rgb(141, 3, 20);
+font-family: Oswald;
+font-size: 40px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
   margin-bottom: 1rem;
+
 }
 
 .quantity-controls {
+  padding: 12px;
   display: flex;
   align-items: center;
   border: 1px solid #e2e2e2;
@@ -164,12 +168,21 @@ text-transform: uppercase;
   background-color: #b91c1c;
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 20px 25px 20px 25px;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.875rem;
   cursor: pointer;
   flex-grow: 1;
+/* Button */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;
 }
 
 .favorite-btn {
@@ -337,10 +350,17 @@ text-align: left;
 }
 
 .pairing-section h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
+
+ /* H3 */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 40px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: left;
+text-transform: uppercase;
   margin-bottom: 1.5rem;
-  text-transform: uppercase;
 }
 
 .pairing-text {
