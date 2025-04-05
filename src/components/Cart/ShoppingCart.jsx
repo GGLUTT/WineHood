@@ -6,11 +6,22 @@ import recomend from '../../img/card/new_botlle.png'
 
 const ShoppingCart = () => {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart, updateQuantity, getTotalAmount, toggleCart } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, getTotalAmount, toggleCart, getTotalItems } = useCart();
   
   const handleCheckout = () => {
     navigate('/checkout');
     toggleCart(); // Close the cart when proceeding to checkout
+  };
+  
+  // Function to get correct item text with plural forms in Ukrainian
+  const getItemText = (count) => {
+    if (count % 10 === 1 && count % 100 !== 11) {
+      return "товар";
+    } else if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) {
+      return "товари";
+    } else {
+      return "товарів";
+    }
   };
   
   return (
@@ -76,7 +87,7 @@ const ShoppingCart = () => {
           
           <div className="cart-summary">
             <div className="subtotal-label">
-              Проміжний підсумок <span className="item-count">(1 товар)</span>
+              Проміжний підсумок <span className="item-count">({getTotalItems()} {getItemText(getTotalItems())})</span>
             </div>
             <div className="subtotal-amount">{getTotalAmount()} ₴</div>
           </div>

@@ -149,7 +149,7 @@ const Checkout = () => {
   
   return (
     <div className="checkout-container">
-      <Header />
+      {/* <Header /> */}
 
       <h1 className="checkout-title">ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</h1>
       

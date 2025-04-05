@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PersonalAccount.css";
 import "./PersonalAccountAnimations.css";
@@ -110,6 +110,95 @@ const PersonalAccount = () => {
   const [newPhone, setNewPhone] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [isCodeSent, setIsCodeSent] = useState(false);
+
+  // Memoized handlers for popup inputs
+  const handleEmailChange = useCallback((e) => {
+    e.preventDefault();
+    setNewEmail(e.target.value);
+  }, []);
+
+  const handlePhoneChange = useCallback((e) => {
+    e.preventDefault();
+    setNewPhone(e.target.value);
+  }, []);
+
+  const handleVerificationChange = useCallback((e) => {
+    e.preventDefault();
+    setVerificationCode(e.target.value);
+  }, []);
+
+  const handleSendEmailCode = useCallback(() => {
+    // Here would be the API call to send verification code
+    setIsCodeSent(true);
+  }, []);
+
+  const handleSubmitEmail = useCallback(() => {
+    // Here would be the API call to verify code and update email
+    if (verificationCode) {
+      setUserData(prev => ({
+        ...prev,
+        email: newEmail
+      }));
+      setShowEmailPopup(false);
+      setIsCodeSent(false);
+      setVerificationCode("");
+      setNewEmail("");
+    }
+  }, [newEmail, verificationCode]);
+
+  const handleSendPhoneCode = useCallback(() => {
+    // Here would be the API call to send verification code
+    setIsCodeSent(true);
+  }, []);
+
+  const handleSubmitPhone = useCallback(() => {
+    // Here would be the API call to verify code and update phone
+    if (verificationCode) {
+      setUserData(prev => ({
+        ...prev,
+        phone: newPhone
+      }));
+      setShowPhonePopup(false);
+      setIsCodeSent(false);
+      setVerificationCode("");
+      setNewPhone("");
+    }
+  }, [newPhone, verificationCode]);
+
+  const closeEmailPopup = useCallback(() => {
+    setShowEmailPopup(false);
+    setIsCodeSent(false);
+    setVerificationCode("");
+    setNewEmail("");
+  }, []);
+
+  const closePhonePopup = useCallback(() => {
+    setShowPhonePopup(false);
+    setIsCodeSent(false);
+    setVerificationCode("");
+    setNewPhone("");
+  }, []);
+
+  // Add these toggle functions to properly handle popup opening
+  const toggleEmailPopup = useCallback(() => {
+    if (!showEmailPopup) {
+      // Reset state before opening
+      setNewEmail("");
+      setVerificationCode("");
+      setIsCodeSent(false);
+    }
+    setShowEmailPopup(prev => !prev);
+  }, [showEmailPopup]);
+
+  const togglePhonePopup = useCallback(() => {
+    if (!showPhonePopup) {
+      // Reset state before opening
+      setNewPhone("");
+      setVerificationCode("");
+      setIsCodeSent(false);
+    }
+    setShowPhonePopup(prev => !prev);
+  }, [showPhonePopup]);
 
   useEffect(() => {
     const loadUserData = () => {
@@ -490,123 +579,98 @@ const PersonalAccount = () => {
     </div>
   );
 
-  const ChangeEmailPopup = () => {
-    const handleSendCode = () => {
-      // Here would be the API call to send verification code
-      setIsCodeSent(true);
-    };
-
-    const handleSubmit = () => {
-      // Here would be the API call to verify code and update email
-      if (verificationCode) {
-        setUserData(prev => ({
-          ...prev,
-          email: newEmail
-        }));
-        setShowEmailPopup(false);
-        setIsCodeSent(false);
-        setVerificationCode("");
-        setNewEmail("");
-      }
-    };
-
+  // Memoized popup components
+  const emailPopup = useMemo(() => {
+    if (!showEmailPopup) return null;
+    
     return (
       <div className="ua-popup-overlay">
         <div className="ua-popup">
-          <button className="ua-popup-close" onClick={() => setShowEmailPopup(false)}>✕</button>
-          <h3>ЗМІНИТИ ПОШТУ</h3>
-          <p>Ваша пошта є логіном до профілю. Для зміни пошти потрібно написати нову та підтвердити її за допомогою коду, який прийде в повідомленні</p>
-          <div className="ua-popup-form">
-            <div className="ua-form-group">
-              <label>Нова електронна пошта</label>
-              <input
-                type="email"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="Введіть нову адресу"
-              />
+          <button className="ua-popup-close" onClick={closeEmailPopup}>✕</button>
+          <div className="ua-popup-content">
+            <div>
+              <h3>ЗМІНИТИ ПОШТУ</h3>
+              <p>Ваша пошта є логіном до профілю. Для зміни пошти потрібно написати нову та підтвердити її за допомогою коду, який прийде в повідомленні</p>
             </div>
-            {isCodeSent && (
+            <div className="ua-popup-form">
               <div className="ua-form-group">
-                <label>Код підтвердження</label>
+                <label>Нова електронна пошта</label>
                 <input
-                  type="text"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                  placeholder="Введіть код"
+                  type="email"
+                  value={newEmail}
+                  onChange={handleEmailChange}
+                  placeholder="Введіть нову адресу"
                 />
               </div>
-            )}
-            <button 
-              className="ua-button ua-button-primary"
-              onClick={isCodeSent ? handleSubmit : handleSendCode}
-            >
-              {isCodeSent ? "ПІДТВЕРДИТИ" : "НАДІСЛАТИ ОДНОРАЗОВИЙ КОД"}
-            </button>
+              {isCodeSent && (
+                <div className="ua-form-group">
+                  <label>Код підтвердження</label>
+                  <input
+                    type="text"
+                    value={verificationCode}
+                    onChange={handleVerificationChange}
+                    placeholder="Введіть код"
+                  />
+                </div>
+              )}
+              <button 
+                className="ua-button ua-button-primary"
+                onClick={isCodeSent ? handleSubmitEmail : handleSendEmailCode}
+              >
+                {isCodeSent ? "ПІДТВЕРДИТИ" : "НАДІСЛАТИ ОДНОРАЗОВИЙ КОД"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
-  };
+  }, [showEmailPopup, newEmail, verificationCode, isCodeSent, handleEmailChange, handleVerificationChange, handleSubmitEmail, handleSendEmailCode, closeEmailPopup]);
 
-  const ChangePhonePopup = () => {
-    const handleSendCode = () => {
-      // Here would be the API call to send verification code
-      setIsCodeSent(true);
-    };
-
-    const handleSubmit = () => {
-      // Here would be the API call to verify code and update phone
-      if (verificationCode) {
-        setUserData(prev => ({
-          ...prev,
-          phone: newPhone
-        }));
-        setShowPhonePopup(false);
-        setIsCodeSent(false);
-        setVerificationCode("");
-        setNewPhone("");
-      }
-    };
-
+  const phonePopup = useMemo(() => {
+    if (!showPhonePopup) return null;
+    
     return (
       <div className="ua-popup-overlay">
         <div className="ua-popup">
-          <button className="ua-popup-close" onClick={() => setShowPhonePopup(false)}>✕</button>
-          <h3>ЗМІНИТИ ТЕЛЕФОН</h3>
-          <p>Для зміни номера телефону потрібно написати новий та підтвердити його за допомогою коду, який прийде в повідомленні</p>
-          <div className="ua-popup-form">
-            <div className="ua-form-group">
-              <label>Новий номер телефону</label>
-              <input
-                type="tel"
-                value={newPhone}
-                onChange={(e) => setNewPhone(e.target.value)}
-                placeholder="+380"
-              />
+          <button className="ua-popup-close" onClick={closePhonePopup}>✕</button>
+          <div className="ua-popup-content">
+            <div>
+              <h3>ЗМІНИТИ ТЕЛЕФОН</h3>
+              <p>Для зміни номера телефону потрібно написати новий та підтвердити його за допомогою коду, який прийде в повідомленні</p>
             </div>
-            {isCodeSent && (
+            <div className="ua-popup-form">
               <div className="ua-form-group">
-                <label>Код підтвердження</label>
+                <label>Новий номер телефону</label>
                 <input
-                  type="text"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                  placeholder="Введіть код"
+                  type="tel"
+                  value={newPhone}
+                  onChange={handlePhoneChange}
+                  placeholder="+380"
                 />
               </div>
-            )}
-            <button 
-              className="ua-button ua-button-primary"
-              onClick={isCodeSent ? handleSubmit : handleSendCode}
-            >
-              {isCodeSent ? "ПІДТВЕРДИТИ" : "НАДІСЛАТИ ОДНОРАЗОВИЙ КОД"}
-            </button>
+              {isCodeSent && (
+                <div className="ua-form-group">
+                  <label>Код підтвердження</label>
+                  <input
+                    type="text"
+                    value={verificationCode}
+                    onChange={handleVerificationChange}
+                    placeholder="Введіть код"
+                  />
+                </div>
+              )}
+              <button 
+                className="ua-button ua-button-primary"
+                onClick={isCodeSent ? handleSubmitPhone : handleSendPhoneCode}
+              >
+                {isCodeSent ? "ПІДТВЕРДИТИ" : "НАДІСЛАТИ ОДНОРАЗОВИЙ КОД"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
-  };
+  }, [showPhonePopup, newPhone, verificationCode, isCodeSent, handlePhoneChange, handleVerificationChange, handleSubmitPhone, handleSendPhoneCode, closePhonePopup]);
 
   // Render personal info form
   const renderPersonalInfoContent = () => (
@@ -758,7 +822,7 @@ const PersonalAccount = () => {
           <span>{userData.phone || "Не вказано"}</span>
           <button
             className="ua-edit-button"
-            onClick={() => setShowPhonePopup(true)}
+            onClick={togglePhonePopup}
           >
             ЗМІНИТИ
           </button>
@@ -770,14 +834,12 @@ const PersonalAccount = () => {
           <span>{userData.email}</span>
           <button
             className="ua-edit-button"
-            onClick={() => setShowEmailPopup(true)}
+            onClick={toggleEmailPopup}
           >
             ЗМІНИТИ
           </button>
         </div>
       </div>
-      {showEmailPopup && <ChangeEmailPopup />}
-      {showPhonePopup && <ChangePhonePopup />}
     </div>
   );
 
@@ -1112,6 +1174,10 @@ const PersonalAccount = () => {
 
         <main className="ua-tab-content">{renderTabContent()}</main>
       </div>
+      
+      {emailPopup}
+      {phonePopup}
+      
       <Footer />
     </div>
   );

@@ -51,7 +51,24 @@ const WineCatalog = () => {
 
   const navigate = useNavigate();
 
-  const handleAddToCarts = (product, quantity) => {
+  // Flag to prevent double execution
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const handleAddToCarts = (product, quantity, event) => {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+    // Prevent multiple executions in rapid succession
+    if (isAddingToCart) {
+      console.log('Already adding to cart, operation ignored');
+      return;
+    }
+
+    setIsAddingToCart(true);
+    console.log(`Adding to cart: ${product.name}, quantity: ${quantity}`);
+    
     addToCart({
       id: product.id,
       name: product.name,
@@ -60,6 +77,9 @@ const WineCatalog = () => {
       image: product.image,
       quantity: quantity
     });
+    
+    // Reset flag after a short delay
+    setTimeout(() => setIsAddingToCart(false), 500);
   };
 
   const handleViewDetails = (product) => {
@@ -561,12 +581,14 @@ const WineCatalog = () => {
         {/* Основний контент з фоном в смужку */}
         <div className="catalog-container">
           <div className="container mx-auto px-4 py-8">
-            <h2 className="tittle-catalog">КАТАЛОГ</h2>
-            <p className="product-count">{totalItems} Товарів</p>
+            <div className="catalog-header">
+              <h2 className="tittle-catalog">КАТАЛОГ</h2>
+              <p className="product-count">{totalItems} Товарів</p>
+            </div>
 
-            <div className="flex flex-wrap">
+            <div className="catalog-content">
               {/* Ліва колонка з фільтрами */}
-              <div className="w-full lg:w-1/4 lg:pr-8">
+              <div className="filter-column">
                 <h3 className="text-filter-title">Фільтри</h3>
 
                 <FilterSection
@@ -644,12 +666,6 @@ const WineCatalog = () => {
                 {/* Кнопки керування фільтрами */}
                 <div className="filter-actions mt-6">
                   <button
-                    className="filter-button filter-apply w-full mb-3"
-                    onClick={applyFilters}
-                  >
-                    Застосувати
-                  </button>
-                  <button
                     className="filter-button filter-reset w-full"
                     onClick={resetAllFilters}
                   >
@@ -659,7 +675,7 @@ const WineCatalog = () => {
               </div>
 
               {/* Права колонка з товарами */}
-              <div className="w-full lg:w-3/4">
+              <div className="w-full lg:w-3/4 products-column">
                 <div className="sort-container">
                   <div className="sort-wrapper">
                     <label className="sort-label">Сортувати:</label>
@@ -676,78 +692,91 @@ const WineCatalog = () => {
                   </div>
                 </div>
                {/* Сітка продуктів */}
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-{getCurrentPageWines().map((wine) => (
-  <div key={wine.id} className="wine-card">
-    <div 
-      className="wine-card-content cursor-pointer" 
-      onClick={() => navigate(`/product/${wine.id}`)}
-    >
-      {wine.onSale && <div className="sale-badge">Знижка</div>}
-      <div className="wine-image">
-        <img src={wine.image} alt={wine.name} />
-      </div>
-      <div className="wine-details">
-        <h3 className="wine-name">{wine.name}</h3>
-        <p className="wine-type">{wine.type}</p>
-        <div className="wine-price">
-          <span className="font-bold">
-            {formatPrice(wine.price)} ₴
-          </span>
-        </div>
-      </div>
-    </div>
-    <button 
-      className="add-to-cart"
-      onClick={(e) => {
-        e.stopPropagation(); 
-        handleAddToCarts(wine, 1);
-      }}
-    >
-      До кошика
-    </button>
-  </div>
-))}
-</div>
+               <div className="products-grid-container">
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredWines.length > 0 ? (
+                    getCurrentPageWines().map((wine) => (
+                      <div key={wine.id} className="wine-card">
+                        <div 
+                          className="wine-card-content cursor-pointer" 
+                          onClick={() => navigate(`/product/${wine.id}`)}
+                        >
+                          {wine.onSale && <div className="sale-badge">Знижка</div>}
+                          <div className="wine-image">
+                            <img src={wine.image} alt={wine.name} />
+                          </div>
+                          <div className="wine-details">
+                            <h3 className="wine-name">{wine.name}</h3>
+                            <p className="wine-type">{wine.type}</p>
+                            <div className="wine-price">
+                              <span className="font-bold">
+                                {formatPrice(wine.price)} ₴
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <button 
+                          className="add-to-cart"
+                          onClick={function cartButtonHandler(e) {
+                            e.stopPropagation(); 
+                            e.preventDefault();
+                            // Use direct function to prevent potential double execution
+                            handleAddToCarts(wine, 1, e);
+                          }}
+                        >
+                          До кошика
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="no-products-message">
+                      <p>За вашим запитом товарів не знайдено.</p>
+                      <p>Спробуйте змінити параметри фільтра.</p>
+                    </div>
+                  )}
+                </div>
+               </div>
 
                 {/* Пагінація */}
-                <div className="pagination">
-                  <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="pagination-arrow"
-                  >
-                    ПОПЕРЕДНЯ
-                  </button>
-                  <div className="pagination-center">
-                    <span>Сторінка:</span>
-                    <div className="pagination-select-wrapper">
-                      <select
-                        value={currentPage}
-                        onChange={(e) => {
-                          const value = parseInt(e.target.value);
-                          if (value >= 1 && value <= totalPages) {
-                            handlePageChange(value);
-                          }
-                        }}
-                        className="pagination-select"
-                      >
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                          <option key={page} value={page}>{page}</option>
-                        ))}
-                      </select>
-                      <div className="pagination-select-arrow"></div>
+                {filteredWines.length > 0 && (
+                  <div className="pagination">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="pagination-arrow"
+                    >
+                      ПОПЕРЕДНЯ
+                    </button>
+                    <div className="pagination-center">
+                      <span>Сторінка:</span>
+                      <div className="pagination-select-wrapper">
+                        <select
+                          value={currentPage}
+                          onChange={(e) => {
+                            const value = parseInt(e.target.value);
+                            if (value >= 1 && value <= totalPages) {
+                              handlePageChange(value);
+                            }
+                          }}
+                          className="pagination-select"
+                        >
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                            <option key={page} value={page}>{page}</option>
+                          ))}
+                        </select>
+                        <div className="pagination-select-arrow"></div>
+                      </div>
+                      <span>з {totalPages}</span>
                     </div>
-                    <span>з {totalPages}</span>
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="pagination-arrow"
+                    >
+                      НАСТУПНА
+                    </button>
                   </div>
-                  <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="pagination-arrow"
-                  >
-                    НАСТУПНА
-                  </button>
-                </div>
+                )}
               </div>
             </div>
           </div>

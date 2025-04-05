@@ -13,7 +13,7 @@ const OrderSuccess = () => {
   
   return (
     <div className="order-success-container">
-      <Header />
+      {/* <Header /> */}
       
       <div className="order-success-main">
         {/* Wine glasses image */}

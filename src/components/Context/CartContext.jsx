@@ -5,19 +5,38 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [lastAddedItem, setLastAddedItem] = useState(null);
 
   const addToCart = (product, quantity = 1) => {
+    console.log('Adding to cart:', product.name, 'Quantity:', quantity);
+    
+    // Enhanced duplicate detection
+    const now = Date.now();
+    if (lastAddedItem && 
+        lastAddedItem.id === product.id && 
+        now - lastAddedItem.timestamp < 1000) { // Increased debounce time to 1 second
+      console.log('Duplicate add prevented by CartContext');
+      return; // Prevent duplicate adds
+    }
+    
+    setLastAddedItem({ id: product.id, timestamp: now });
+    
     setCartItems(prevItems => {
-      // Перевірка, чи товар вже є в кошику
+      // Check if product already exists
       const existingItemIndex = prevItems.findIndex(item => item.id === product.id);
       
       if (existingItemIndex !== -1) {
-        // Якщо товар вже є, збільшуємо кількість
+        // If product exists, update quantity
         const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantity += quantity;
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: updatedItems[existingItemIndex].quantity + quantity
+        };
+        console.log('Updated existing item, new quantity:', updatedItems[existingItemIndex].quantity);
         return updatedItems;
       } else {
-        // Якщо товару немає, додаємо новий
+        // If product is new, add it
+        console.log('Adding new item to cart');
         return [...prevItems, { ...product, quantity }];
       }
     });

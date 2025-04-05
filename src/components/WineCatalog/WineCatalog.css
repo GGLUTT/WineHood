@@ -296,11 +296,6 @@ margin: 0;
   transition: padding 0.3s ease;
 }
 
-.filter-section:hover {
-  padding-left: 0.5rem;
-  border-bottom: 1px solid #8B0000;
-}
-
 .filter-title {
 /* H5 */
 color: rgb(35, 39, 44);
@@ -311,11 +306,6 @@ line-height: 120%;
 letter-spacing: 0%;
 text-align: left;
   margin-bottom: 0.75rem;
-  transition: color 0.3s ease;
-}
-
-.filter-section:hover .filter-title {
-  color: #8B0000;
 }
 
 .filter-options {
@@ -340,28 +330,55 @@ text-align: left;
   border-color: #8D0314;
 }
 
+/* Повністю оновлені стилі для чекбоксів з !important */
+.filter-option input[type="checkbox"],
 .filter-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  margin-right: 8px;
-  position: relative;
-  cursor: pointer;
-  background: white;
-  flex-shrink: 0;
-  transition: all 0.2s ease-in-out;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 4px !important;
+  margin-right: 12px !important;
+  /* position: relative !important; */
+  cursor: pointer !important;
+  background-color: white !important;
+  flex-shrink: 0 !important;
 }
 
+.filter-option input[type="checkbox"]:checked,
 .filter-checkbox:checked {
+  background-color: #8D0314 !important;
+  border-color: #8D0314 !important;
+}
+
+.filter-option input[type="checkbox"]:checked::after,
+.filter-checkbox:checked::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 8px !important;
+  top: 6px !important;
+  width: 6px !important;
+  height: 10px !important;
+  border: solid white !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+  display: block !important;
+}
+
+.filter-option input[type="checkbox"]:hover,
+.filter-checkbox:hover {
+  border-color: #8D0314 !important;
+}
+
+/* Прибираємо дублюючі стилі для активного стану */
+.filter-option.active .filter-checkbox {
   background-color: #8D0314;
   border-color: #8D0314;
 }
 
-.filter-checkbox:checked::after {
+.filter-option.active .filter-checkbox::after {
   content: '';
   position: absolute;
   left: 6px;
@@ -371,10 +388,12 @@ text-align: left;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+  display: block;
 }
 
-.filter-checkbox:hover {
-  border-color: #8D0314;
+.filter-option.active {
+  font-weight: 600;
+  color: #8D0314;
 }
 
 .filter-option span {
@@ -787,6 +806,91 @@ text-align: left;
   transition: all 0.3s ease;
 }
 
+/* Забезпечення стабільного розміщення фільтрів */
+.catalog-content {
+  display: flex;
+  position: relative;
+  min-height: 500px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.filter-column {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  flex: 0 0 25%;
+  width: 25%;
+  max-width: 25%;
+  padding-right: 2rem;
+}
+
+.w-full.lg\:w-3\/4 {
+  flex: 0 0 75%;
+  width: 75%;
+  max-width: 75%;
+}
+
+.products-column {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 75%;
+  width: 75%;
+}
+
+.products-grid-container {
+  width: 100%;
+  min-height: 400px;
+}
+
+/* Стилі для повідомлення про відсутність товарів */
+.no-products-message {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #FFF0F5;
+  border-radius: 0;
+  margin: 0;
+  width: 830px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.no-products-message p {
+  font-family: 'Oswald', sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #8D0314;
+}
+
+.no-products-message p:last-child {
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  color: #4A2511;
+}
+
+@media (max-width: 1024px) {
+  .catalog-content {
+    flex-wrap: wrap;
+  }
+  
+  .filter-column {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    position: static;
+    padding-right: 0;
+  }
+  
+  .products-column,
+  .w-full.lg\:w-3\/4 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 /* Анімація для тексту типів вин */
 .product-card:hover .wine-red,
 .product-card:hover .wine-white,
@@ -812,6 +916,11 @@ text-align: left;
   animation: fadeInUp 0.8s ease-out;
 }
 
+.catalog-header {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
 .tittle-catalog {
   /* H2 */
   color: rgb(29, 29, 29);
@@ -824,6 +933,8 @@ text-align: left;
   text-transform: uppercase;
   margin-top: 16px;
   margin-bottom: 16px;
+  display: block;
+  width: 100%;
 }
 
 .product-count {
@@ -836,6 +947,8 @@ text-align: left;
   letter-spacing: 0%;
   text-align: left;
   margin-bottom: 32px;
+  display: block;
+  width: 100%;
 }
 
 .text-filter-title {
@@ -1532,4 +1645,14 @@ text-align: left;
   gap: 30px;
   color: white;
   margin-top: 100px;
+}
+
+.products-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.products-grid-container {
+  width: 100%;
+  min-height: 400px;
 }

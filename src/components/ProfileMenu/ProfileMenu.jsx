@@ -68,12 +68,12 @@ const ProfileMenu = ({ isOpen, setIsOpen, customButton }) => {
                 <Link to="/account" className="menu-link">Особистий кабінет</Link>
                 <Link to="/returns" className="menu-link">Повернення</Link>
                 <Link to="/help" className="menu-link">Допомога</Link>
-                <Link to="/text" className="menu-link">Текст</Link>
+                {/* <Link to="/text" className="menu-link">Текст</Link> */}
               </>
             ) : (
               <>
-                <Link to="/login" className="menu-link">Вхід</Link>
-                <Link to="/register" className="menu-link">Реєстрація</Link>
+                <Link to="/help" className="menu-link">Допомога</Link>
+                <Link to="/returns" className="menu-link">Повернення</Link>
               </>
             )}
           </div>

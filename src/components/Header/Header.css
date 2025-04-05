@@ -88,6 +88,8 @@ background: rgb(245, 245, 245);
 }
 
 .icon-button {
+  width: 48px;
+height: 48px;
   background: none;
   border: none;
   padding: 8px;
@@ -110,8 +112,8 @@ background: rgb(245, 245, 245);
 }
 
 .icon-button img {
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   transition: filter 0.2s ease;
 }
 
