@@ -14,6 +14,7 @@ import IzrailFlag from "../../img/ico/flags/icon_izrail.svg";
 import SpainFlag from "../../img/ico/flags/icon_spain.svg";
 import { useCart } from '../Context/CartContext.jsx';
 import penfolds from "../../img/wine_Category/penfolds.png";
+import Footer from "../Footer/Footer.jsx";
 
 const WineCatalog = () => {
   const [collapsedSections, setCollapsedSections] = useState({
@@ -53,6 +54,9 @@ const WineCatalog = () => {
 
   // Flag to prevent double execution
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  const [isDragging, setIsDragging] = useState(null);
+  const sliderRef = React.useRef(null);
 
   const handleAddToCarts = (product, quantity, event) => {
     if (event) {
@@ -520,7 +524,7 @@ const WineCatalog = () => {
   }) => (
     <div className="filter-section">
       <div
-        className="flex justify-between items-center mb-2 cursor-pointer"
+        className="flex justify-between items-center mb-2 cursor-pointer filter-header"
         onClick={() => toggleSection(section)}
       >
         <h4 className="filter-title">{title}</h4>
@@ -563,225 +567,348 @@ const WineCatalog = () => {
     </div>
   );
 
+  const handleSliderMouseDown = (e, handle) => {
+    e.preventDefault();
+    setIsDragging(handle);
+  };
+
+  const handleSliderMouseUp = () => {
+    setIsDragging(null);
+  };
+
+  const handleSliderMouseMove = (e) => {
+    if (!isDragging || !sliderRef.current) return;
+    
+    const slider = sliderRef.current;
+    const rect = slider.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const percentage = Math.min(Math.max(offsetX / rect.width, 0), 1);
+    
+    const min = 300;
+    const max = maxPriceValue;
+    const value = Math.round(min + percentage * (max - min));
+    
+    if (isDragging === 'left') {
+      if (value < filters.priceRange.max) {
+        handlePriceChange('min', value);
+      }
+    } else if (isDragging === 'right') {
+      if (value > filters.priceRange.min) {
+        handlePriceChange('max', value);
+      }
+    }
+  };
+
+  // Add event listeners for drag outside the element
+  React.useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mousemove', handleSliderMouseMove);
+      window.addEventListener('mouseup', handleSliderMouseUp);
+    }
+    
+    return () => {
+      window.removeEventListener('mousemove', handleSliderMouseMove);
+      window.removeEventListener('mouseup', handleSliderMouseUp);
+    };
+  }, [isDragging, filters.priceRange]);
+
   return (
-    <div className="wine-catalog">
-      <div className="custom-bg relative overflow-hidden">
-        <Breadcrumbs />
-        <div className="banner-overlay">
-          <div className="container mx-auto px-4 h-full flex items-center">
-            <div className="banner-content">
-              <h1 className="head-title-catalog">ІСКРИСТА МАГІЯ</h1>
-              <h2 className="head-subtitle-catalog">ВІД КЛАСИКИ ДО СМІЛИВИХ НОВИНОК</h2>
-              <button className="button-catalog-more">ДІЗНАТИСЬ БІЛЬШЕ</button>
+    <div className="wine-catalog-wrapper">
+      <div className="wine-catalog-content">
+        <div className="custom-bg relative overflow-hidden">
+          <Breadcrumbs />
+          <div className="banner-overlay">
+            <div className="container mx-auto px-4 h-full flex items-center">
+              <div className="banner-content">
+                <h1 className="head-title-catalog">ІСКРИСТА МАГІЯ</h1>
+                <h2 className="head-subtitle-catalog">ВІД КЛАСИКИ ДО СМІЛИВИХ НОВИНОК</h2>
+                <button className="button-catalog-more">ДІЗНАТИСЬ БІЛЬШЕ</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="bg-white min-h-screen">
-        {/* Основний контент з фоном в смужку */}
-        <div className="catalog-container">
-          <div className="container mx-auto px-4 py-8">
-            <div className="catalog-header">
-              <h2 className="tittle-catalog">КАТАЛОГ</h2>
-              <p className="product-count">{totalItems} Товарів</p>
-            </div>
-
-            <div className="catalog-content">
-              {/* Ліва колонка з фільтрами */}
-              <div className="filter-column">
-                <h3 className="text-filter-title">Фільтри</h3>
-
-                <FilterSection
-                  title="Колір вина"
-                  section="color"
-                  categories={colorCategories}
-                  filterType="color"
-                />
-
-                <FilterSection
-                  title="Вміст алкоголю"
-                  section="alcohol"
-                  categories={alcoholCategories}
-                  filterType="alcohol"
-                />
-
-                <FilterSection
-                  title="Смак"
-                  section="taste"
-                  categories={tasteCategories}
-                  filterType="taste"
-                />
-
-                <FilterSection
-                  title="Країна"
-                  section="country"
-                  categories={getFilteredCountries()}
-                  filterType="country"
-                  hasSearch={true}
-                  searchValue={searchCountry}
-                  onSearchChange={(e) => setSearchCountry(e.target.value)}
-                  renderItem={(category) => (
-                    <>
-                      <img
-                        src={category.flagSrc}
-                        alt={`Прапор ${category.name}`}
-                        className="inline-block mr-2 w-5 h-3"
-                      />
-                      {category.name}
-                    </>
-                  )}
-                />
-
-                <FilterSection
-                  title="Виробник"
-                  section="producer"
-                  categories={getFilteredProducers()}
-                  filterType="producer"
-                  hasSearch={true}
-                  searchValue={searchProducer}
-                  onSearchChange={(e) => setSearchProducer(e.target.value)}
-                />
-
-                <FilterSection
-                  title="Характер"
-                  section="character"
-                  categories={characterCategories}
-                  filterType="character"
-                />
-
-                <FilterSection
-                  title="Об'єм"
-                  section="volume"
-                  categories={volumeCategories}
-                  filterType="volume"
-                />
-
-                <FilterSection
-                  title="Поєднання з їжею"
-                  section="food"
-                  categories={foodCategories}
-                  filterType="food"
-                />
-
-                {/* Кнопки керування фільтрами */}
-                <div className="filter-actions mt-6">
-                  <button
-                    className="filter-button filter-reset w-full"
-                    onClick={resetAllFilters}
-                  >
-                    Скинути фільтри
-                  </button>
-                </div>
+        <div className="bg-white">
+          <div className="catalog-container">
+            <div className="container mx-auto px-4 py-8">
+              <div className="catalog-header">
+                <h2 className="tittle-catalog">КАТАЛОГ</h2>
+                <p className="product-count">{totalItems} Товарів</p>
               </div>
 
-              {/* Права колонка з товарами */}
-              <div className="w-full lg:w-3/4 products-column">
-                <div className="sort-container">
-                  <div className="sort-wrapper">
-                    <label className="sort-label">Сортувати:</label>
-                    <select
-                      value={sortOption}
-                      onChange={handleSortChange}
-                      className="sort-select"
+              <div className="catalog-content">
+                {/* Ліва колонка з фільтрами */}
+                <div className="filter-column">
+                  <h3 className="text-filter-title">Фільтри</h3>
+
+                  <FilterSection
+                    title="Тип вина"
+                    section="color"
+                    categories={colorCategories}
+                    filterType="color"
+                  />
+
+                  <div className="filter-section">
+                    <div
+                      className="flex justify-between items-center mb-2 cursor-pointer filter-header"
+                      onClick={() => toggleSection("price")}
                     >
-                      <option value="За замовчуванням">За замовчуванням</option>
-                      <option value="За популярністю">За популярністю</option>
-                      <option value="За збільшенням ціни">За збільшенням ціни</option>
-                      <option value="За зменшенням ціни">За зменшенням ціни</option>
-                    </select>
-                  </div>
-                </div>
-               {/* Сітка продуктів */}
-               <div className="products-grid-container">
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredWines.length > 0 ? (
-                    getCurrentPageWines().map((wine) => (
-                      <div key={wine.id} className="wine-card">
-                        <div 
-                          className="wine-card-content cursor-pointer" 
-                          onClick={() => navigate(`/product/${wine.id}`)}
-                        >
-                          {wine.onSale && <div className="sale-badge">Знижка</div>}
-                          <div className="wine-image">
-                            <img src={wine.image} alt={wine.name} />
-                          </div>
-                          <div className="wine-details">
-                            <h3 className="wine-name">{wine.name}</h3>
-                            <p className="wine-type">{wine.type}</p>
-                            <div className="wine-price">
-                              <span className="font-bold">
-                                {formatPrice(wine.price)} ₴
-                              </span>
+                      <h4 className="filter-title">Ціна</h4>
+                      <button className="category-collapse-button">
+                        {renderArrow("price")}
+                      </button>
+                    </div>
+                    {!collapsedSections.price && (
+                      <div className="filter-options">
+                        <div className="price-filter-range">
+                          <div className="price-slider-container">
+                            <div className="price-slider" ref={sliderRef}>
+                              <div 
+                                className="price-slider-track"
+                                style={{
+                                  left: `${((filters.priceRange.min - 300) / (maxPriceValue - 300)) * 100}%`,
+                                  width: `${((filters.priceRange.max - filters.priceRange.min) / (maxPriceValue - 300)) * 100}%`
+                                }}
+                              ></div>
+                              <div 
+                                className="price-slider-handle left"
+                                onMouseDown={(e) => handleSliderMouseDown(e, 'left')}
+                                style={{
+                                  left: `${((filters.priceRange.min - 300) / (maxPriceValue - 300)) * 100}%`
+                                }}
+                              ></div>
+                              <div 
+                                className="price-slider-handle right"
+                                onMouseDown={(e) => handleSliderMouseDown(e, 'right')}
+                                style={{
+                                  left: `${((filters.priceRange.max - 300) / (maxPriceValue - 300)) * 100}%`
+                                }}
+                              ></div>
                             </div>
                           </div>
+                          <div className="price-inputs-container">
+                            <div className="price-input-group">
+                              <label className="price-label">ВІД</label>
+                              <input
+                                type="number"
+                                className="price-input"
+                                value={filters.priceRange.min}
+                                onChange={(e) => handlePriceChange("min", e.target.value)}
+                                min="0"
+                              />
+                              <span className="currency">₴</span>
+                            </div>
+                            <div className="price-input-group">
+                              <label className="price-label">ДО</label>
+                              <input
+                                type="number"
+                                className="price-input"
+                                value={filters.priceRange.max}
+                                onChange={(e) => handlePriceChange("max", e.target.value)}
+                                max={maxPriceValue}
+                              />
+                              <span className="currency">₴</span>
+                            </div>
+                          </div>
+                          <label className="filter-option">
+                            <input
+                              type="checkbox"
+                              className="filter-checkbox"
+                              checked={filters.showDiscounts}
+                              onChange={() => handleFilterChange("showDiscounts", !filters.showDiscounts)}
+                            />
+                            <span>Показати тільки знижки</span>
+                          </label>
                         </div>
-                        <button 
-                          className="add-to-cart"
-                          onClick={function cartButtonHandler(e) {
-                            e.stopPropagation(); 
-                            e.preventDefault();
-                            // Use direct function to prevent potential double execution
-                            handleAddToCarts(wine, 1, e);
-                          }}
-                        >
-                          До кошика
-                        </button>
                       </div>
-                    ))
-                  ) : (
-                    <div className="no-products-message">
-                      <p>За вашим запитом товарів не знайдено.</p>
-                      <p>Спробуйте змінити параметри фільтра.</p>
+                    )}
+                  </div>
+
+                  <FilterSection
+                    title="Вміст алкоголю"
+                    section="alcohol"
+                    categories={alcoholCategories}
+                    filterType="alcohol"
+                  />
+
+                  <FilterSection
+                    title="Смак"
+                    section="taste"
+                    categories={tasteCategories}
+                    filterType="taste"
+                  />
+
+                  <FilterSection
+                    title="Країна"
+                    section="country"
+                    categories={getFilteredCountries()}
+                    filterType="country"
+                    hasSearch={true}
+                    searchValue={searchCountry}
+                    onSearchChange={(e) => setSearchCountry(e.target.value)}
+                    renderItem={(category) => (
+                      <>
+                        <img
+                          src={category.flagSrc}
+                          alt={`Прапор ${category.name}`}
+                          className="inline-block mr-2 w-5 h-3"
+                        />
+                        {category.name}
+                      </>
+                    )}
+                  />
+
+                  <FilterSection
+                    title="Виробник"
+                    section="producer"
+                    categories={getFilteredProducers()}
+                    filterType="producer"
+                    hasSearch={true}
+                    searchValue={searchProducer}
+                    onSearchChange={(e) => setSearchProducer(e.target.value)}
+                  />
+
+                  <FilterSection
+                    title="Характер"
+                    section="character"
+                    categories={characterCategories}
+                    filterType="character"
+                  />
+
+                  <FilterSection
+                    title="Об'єм"
+                    section="volume"
+                    categories={volumeCategories}
+                    filterType="volume"
+                  />
+
+                  <FilterSection
+                    title="Поєднання з їжею"
+                    section="food"
+                    categories={foodCategories}
+                    filterType="food"
+                  />
+
+                  {/* Кнопки керування фільтрами */}
+                  <div className="filter-actions mt-6">
+                    <button
+                      className="filter-button filter-reset w-full"
+                      onClick={resetAllFilters}
+                    >
+                      Скинути фільтри
+                    </button>
+                  </div>
+                </div>
+
+                {/* Права колонка з товарами */}
+                <div className="w-full lg:w-3/4 products-column">
+                  <div className="sort-container">
+                    <div className="sort-wrapper">
+                      <label className="sort-label">Сортувати:</label>
+                      <select
+                        value={sortOption}
+                        onChange={handleSortChange}
+                        className="sort-select"
+                      >
+                        <option value="За замовчуванням">За замовчуванням</option>
+                        <option value="За популярністю">За популярністю</option>
+                        <option value="За збільшенням ціни">За збільшенням ціни</option>
+                        <option value="За зменшенням ціни">За зменшенням ціни</option>
+                      </select>
+                    </div>
+                  </div>
+                 {/* Сітка продуктів */}
+                 <div className="products-grid-container">
+                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredWines.length > 0 ? (
+                      getCurrentPageWines().map((wine) => (
+                        <div key={wine.id} className="wine-card">
+                          <div 
+                            className="wine-card-content cursor-pointer" 
+                            onClick={() => navigate(`/product/${wine.id}`)}
+                          >
+                            {wine.onSale && <div className="sale-badge">Знижка</div>}
+                            <div className="wine-image">
+                              <img src={wine.image} alt={wine.name} />
+                            </div>
+                            <div className="wine-details">
+                              <h3 className="wine-name">{wine.name}</h3>
+                              <p className="wine-type">{wine.type}</p>
+                              <div className="wine-price">
+                                <span className="font-bold">
+                                  {formatPrice(wine.price)} ₴
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <button 
+                            className="add-to-cart"
+                            onClick={function cartButtonHandler(e) {
+                              e.stopPropagation(); 
+                              e.preventDefault();
+                              // Use direct function to prevent potential double execution
+                              handleAddToCarts(wine, 1, e);
+                            }}
+                          >
+                            До кошика
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="no-products-message">
+                        <p>За вашим запитом товарів не знайдено.</p>
+                        <p>Спробуйте змінити параметри фільтра.</p>
+                      </div>
+                    )}
+                  </div>
+                 </div>
+
+                  {/* Пагінація */}
+                  {filteredWines.length > 0 && (
+                    <div className="pagination">
+                      <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="pagination-arrow"
+                      >
+                        ПОПЕРЕДНЯ
+                      </button>
+                      <div className="pagination-center">
+                        <span>Сторінка:</span>
+                        <div className="pagination-select-wrapper">
+                          <select
+                            value={currentPage}
+                            onChange={(e) => {
+                              const value = parseInt(e.target.value);
+                              if (value >= 1 && value <= totalPages) {
+                                handlePageChange(value);
+                              }
+                            }}
+                            className="pagination-select"
+                          >
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                              <option key={page} value={page}>{page}</option>
+                            ))}
+                          </select>
+                          <div className="pagination-select-arrow"></div>
+                        </div>
+                        <span>з {totalPages}</span>
+                      </div>
+                      <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="pagination-arrow"
+                      >
+                        НАСТУПНА
+                      </button>
                     </div>
                   )}
                 </div>
-               </div>
-
-                {/* Пагінація */}
-                {filteredWines.length > 0 && (
-                  <div className="pagination">
-                    <button
-                      onClick={() => handlePageChange(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      className="pagination-arrow"
-                    >
-                      ПОПЕРЕДНЯ
-                    </button>
-                    <div className="pagination-center">
-                      <span>Сторінка:</span>
-                      <div className="pagination-select-wrapper">
-                        <select
-                          value={currentPage}
-                          onChange={(e) => {
-                            const value = parseInt(e.target.value);
-                            if (value >= 1 && value <= totalPages) {
-                              handlePageChange(value);
-                            }
-                          }}
-                          className="pagination-select"
-                        >
-                          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                            <option key={page} value={page}>{page}</option>
-                          ))}
-                        </select>
-                        <div className="pagination-select-arrow"></div>
-                      </div>
-                      <span>з {totalPages}</span>
-                    </div>
-                    <button
-                      onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={currentPage === totalPages}
-                      className="pagination-arrow"
-                    >
-                      НАСТУПНА
-                    </button>
-                  </div>
-                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

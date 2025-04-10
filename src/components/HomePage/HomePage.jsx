@@ -14,6 +14,7 @@ import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import BlogSection from './BlogSection/BlogSection';
 import WineCategories from './BuyCategory/WineCategories';
 import ExclusiveOffers from './ExclusiveOffers/ExclusiveOffers';
+import Footer from '../Footer/Footer';
 
 
 const HomePage = () => {
@@ -132,21 +133,21 @@ const HomePage = () => {
   <div className="container">
     <div className="catalog-grid">
       <div className="catalog-card">
-        <div className="catalog-content">
+        <div className="catalog-content-home-page">
           <h2 className="catalog-title">НОВИНКИ</h2>
           <a href="/new" className="catalog-btn">КУПУЙ ПЕРШИМ</a>
         </div>
       </div>
       
       <div className="catalog-card">
-        <div className="catalog-content">
+        <div className="catalog-content-home-page">
           <h2 className="catalog-title">ЛІДЕРИ ПРОДАЖІВ</h2>
           <a href="/bestsellers" className="catalog-btn">КУПУЙ УЛЮБЛЕНЕ</a>
         </div>
       </div>
       
       <div className="catalog-card">
-        <div className="catalog-content">
+        <div className="catalog-content-home-page">
           <h2 className="catalog-title">КРАЩЕ ДЛЯ ВЕЧІРКИ</h2>
           <a href="/party" className="catalog-btn">КУПУЙ ПЕРЕВІРЕНЕ</a>
         </div>
@@ -205,6 +206,10 @@ const HomePage = () => {
       
       <div className="divider"></div>
     </section>
+      
+      {/* Підключаємо футер */}
+      <Footer />
+      
       {/* Кнопка "вгору" */}
       <button 
         className={`back-to-top ${isScrolled ? 'visible' : ''}`}
@@ -213,7 +218,7 @@ const HomePage = () => {
         <svg viewBox="0 0 24 24">
           <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
         </svg>
-      </button>
+      </button> 
     </div>
   );
 };

@@ -55,14 +55,30 @@
     height: 12px;
   }
   
+  .delivery-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
   .delivery-option {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .delivery-option-header {
+    margin-bottom: 5px;
+  }
+  
+  .delivery-option-content {
+    padding-left: 15px;
   }
   
   .option-title {
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #23272C;
   }
   
@@ -71,6 +87,7 @@
     line-height: 1.6;
     color: #333;
     max-width: 80%;
+    margin-top: 0;
   }
   
   .verification-notice {
@@ -122,14 +139,24 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 15px;
+    gap: 10px;
+  }
+  
+  .payment-option-header {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .payment-option-content {
+    text-align: center;
   }
   
   .payment-option-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   .payment-option-icon img {

@@ -80,7 +80,6 @@
   .continue-button, .profile-button {
     padding: 15px 25px;
     border: none;
-    border-radius: 2px;
     font-weight: bold;
     font-size: 1rem;
     text-transform: uppercase;

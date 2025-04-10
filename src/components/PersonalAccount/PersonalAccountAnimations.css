@@ -211,10 +211,7 @@
     opacity: 0.7;
   }
   
-  .ua-wishlist-item:hover .ua-remove-wishlist {
-    opacity: 1;
-    background-color: rgba(159, 0, 0, 0.8);
-  }
+
   
   .ua-remove-wishlist:hover {
     transform: rotate(90deg);
@@ -311,11 +308,7 @@
     padding-left: 0;
   }
   
-  .ua-info-row:hover {
-    border-left: 3px solid #9f0000;
-    padding-left: 5px;
-    background-color: #fff9f9;
-  }
+
   
   /* Адаптивність для мобільних пристроїв */
   @media (max-width: 768px) {

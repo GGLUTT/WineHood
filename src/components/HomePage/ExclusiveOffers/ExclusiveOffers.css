@@ -43,12 +43,12 @@
   text-transform: uppercase;
   border: 1px solid #23272C;
   transition: all 0.3s ease;
+  background-color: white;
 }
 
 .details-link:hover {
-  background-color: #a30000;
-  border-color: #a30000;
-  color: #fff;
+  background-color: #23272C;
+  color: white;
 }
 
 .offers-grid {

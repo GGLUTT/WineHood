@@ -4,6 +4,10 @@ import "./PersonalAccount.css";
 import "./PersonalAccountAnimations.css";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+// import Navbar from "../Navbar/Navbar";
+import penfolds1 from "../../img/penfolds1.png";
+import penfolds2 from "../../img/penfolds2.png";
+import penfolds3 from "../../img/penfolds3.png";
 
 const PersonalAccount = () => {
   const navigate = useNavigate();
@@ -272,8 +276,9 @@ const PersonalAccount = () => {
             },
           ],
           wishlist: [
-            { id: 1, name: "Сукня літня", price: "950 грн" },
-            { id: 2, name: "Блуза біла", price: "750 грн" },
+            { id: 1, name: "Penfolds Bin 60A", price: "19 850₴", image: penfolds1, type: "Червоне вино" },
+            { id: 2, name: "Penfolds Bin 60A", price: "18 950₴", image: penfolds2, type: "Червоне вино" },
+            { id: 3, name: "Penfolds Bin 60A", price: "17 750₴", image: penfolds3, type: "Червоне вино" },
           ],
         };
 
@@ -557,6 +562,39 @@ const PersonalAccount = () => {
     }
   };
 
+  // Add Nova Poshta address
+  const addNovaPoshtaAddress = () => {
+    if (formData.addresses.novaPoshta.length < 3) {
+      const newNovaPoshtaAddress = {
+        id: Date.now(), // Simple unique ID
+        city: "",
+        office: "",
+      };
+
+      const updatedNovaPoshta = [
+        ...formData.addresses.novaPoshta,
+        newNovaPoshtaAddress,
+      ];
+
+      setFormData({
+        ...formData,
+        addresses: {
+          ...formData.addresses,
+          novaPoshta: updatedNovaPoshta,
+        },
+      });
+
+      // Save changes immediately
+      setUserData({
+        ...userData,
+        addresses: {
+          ...userData.addresses,
+          novaPoshta: updatedNovaPoshta,
+        },
+      });
+    }
+  };
+
   // Remove wishlist item
   const removeWishlistItem = (id) => {
     const updatedWishlist = userData.wishlist.filter((item) => item.id !== id);
@@ -816,30 +854,90 @@ const PersonalAccount = () => {
   // Render contact info form
   const renderContactInfoContent = () => (
     <div className="ua-contact-info-form">
-      <div className="ua-form-group">
-        <label>Телефон</label>
-        <div className="ua-edit-field">
-          <span>{userData.phone || "Не вказано"}</span>
-          <button
-            className="ua-edit-button"
-            onClick={togglePhonePopup}
-          >
-            ЗМІНИТИ
-          </button>
+      {editMode.phone || editMode.email ? (
+        <>
+          {editMode.phone && (
+            <div className="ua-form-group">
+              <label>Телефон</label>
+              <input
+                type="text"
+                value={formData.phone}
+                onChange={(e) => handleInputChange(e, "phone", "phone")}
+              />
+              <div className="ua-form-actions">
+                <button
+                  className="ua-button ua-button-primary"
+                  onClick={() => saveChanges("phone")}
+                >
+                  ЗБЕРЕГТИ
+                </button>
+                <button
+                  className="ua-button ua-button-secondary"
+                  onClick={() => cancelChanges("phone")}
+                >
+                  СКАСУВАТИ
+                </button>
+              </div>
+            </div>
+          )}
+          {editMode.email && (
+            <div className="ua-form-group">
+              <label>Електронна пошта</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange(e, "email", "email")}
+              />
+              <div className="ua-form-actions">
+                <button
+                  className="ua-button ua-button-primary"
+                  onClick={() => saveChanges("email")}
+                >
+                  ЗБЕРЕГТИ
+                </button>
+                <button
+                  className="ua-button ua-button-secondary"
+                  onClick={() => cancelChanges("email")}
+                >
+                  СКАСУВАТИ
+                </button>
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="ua-contact-info-section">
+          <div className="ua-contact-row">
+            <div className="ua-contact-info">
+              <div className="ua-contact-label">Телефон</div>
+              <div className="ua-contact-value">
+                {userData.phone || "+380 66 745 22 35"}
+              </div>
+            </div>
+            <button
+              className="ua-edit-button"
+              onClick={() => toggleEditMode("phone")}
+            >
+              РЕДАГУВАТИ
+            </button>
+          </div>
+          
+          <div className="ua-contact-row">
+            <div className="ua-contact-info">
+              <div className="ua-contact-label">Адреса електронної пошти (email)</div>
+              <div className="ua-contact-value">
+                {userData.email || "krupkamari12@gmail.com"}
+              </div>
+            </div>
+            <button
+              className="ua-edit-button"
+              onClick={() => toggleEditMode("email")}
+            >
+              РЕДАГУВАТИ
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="ua-form-group">
-        <label>Адреса електронної пошти (email)</label>
-        <div className="ua-edit-field">
-          <span>{userData.email}</span>
-          <button
-            className="ua-edit-button"
-            onClick={toggleEmailPopup}
-          >
-            ЗМІНИТИ
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 
@@ -852,55 +950,120 @@ const PersonalAccount = () => {
         </h5>
         <div className="ua-nova-poshta-section">
           {formData.addresses.novaPoshta.map((address, index) => (
-            <div key={`np-${address.id}`} className="ua-address-row">
-              <div className="ua-address-field">
-                <label>Місто</label>
-                <select
-                  value={address.city}
-                  onChange={(e) =>
-                    handleInputChange(e, `novaPoshta-${index}`, "city")
-                  }
-                  className={!address.city ? "ua-select-placeholder" : ""}
-                >
-                  <option value="" disabled>
-                    Введіть назву міста
-                  </option>
-                  <option value="Київ">Київ</option>
-                  <option value="Львів">Львів</option>
-                  <option value="Одеса">Одеса</option>
-                  <option value="Харків">Харків</option>
-                  <option value="Дніпро">Дніпро</option>
-                </select>
+            address.city || address.office ? (
+              <div key={`np-${address.id}`} className="ua-delivery-block">
+                <div className="ua-address-row">
+                  <div className="ua-address-field">
+                    <label>Місто</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.city}
+                        onChange={(e) =>
+                          handleInputChange(e, `novaPoshta-${index}`, "city")
+                        }
+                        className={!address.city ? "ua-select-placeholder" : ""}
+                      >
+                        <option value="" disabled>
+                          Введіть назву міста
+                        </option>
+                        <option value="Київ">Київ</option>
+                        <option value="Львів">Львів</option>
+                        <option value="Одеса">Одеса</option>
+                        <option value="Харків">Харків</option>
+                        <option value="Дніпро">Дніпро</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="ua-address-field">
+                    <label>Відділення</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.office}
+                        onChange={(e) =>
+                          handleInputChange(e, `novaPoshta-${index}`, "office")
+                        }
+                        disabled={!address.city}
+                        className={!address.office ? "ua-select-placeholder" : ""}
+                      >
+                        <option value="" disabled>
+                          Введіть відділення
+                        </option>
+                        <option value="Відділення №1">Відділення №1</option>
+                        <option value="Відділення №2">Відділення №2</option>
+                        <option value="Відділення №3">Відділення №3</option>
+                        <option value="Відділення №4">Відділення №4</option>
+                        <option value="Відділення №5">Відділення №5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    className="ua-delete-button"
+                    onClick={() => removeNovaPoshtaAddress(index)}
+                  >
+                    <span className="ua-delete-icon">🗑</span>
+                  </button>
+                </div>
               </div>
-              <div className="ua-address-field">
-                <label>Відділення</label>
-                <select
-                  value={address.office}
-                  onChange={(e) =>
-                    handleInputChange(e, `novaPoshta-${index}`, "office")
-                  }
-                  disabled={!address.city}
-                  className={!address.office ? "ua-select-placeholder" : ""}
-                >
-                  <option value="" disabled>
-                    Введіть відділення
-                  </option>
-                  <option value="Відділення №1">Відділення №1</option>
-                  <option value="Відділення №2">Відділення №2</option>
-                  <option value="Відділення №3">Відділення №3</option>
-                  <option value="Відділення №4">Відділення №4</option>
-                  <option value="Відділення №5">Відділення №5</option>
-                </select>
+            ) : index === 0 && (
+              <div key={`np-${address.id}`} className="ua-delivery-block">
+                <div className="ua-address-row">
+                  <div className="ua-address-field">
+                    <label>Місто</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.city}
+                        onChange={(e) =>
+                          handleInputChange(e, `novaPoshta-${index}`, "city")
+                        }
+                        className="ua-select-placeholder"
+                      >
+                        <option value="" disabled>
+                          Введіть назву міста
+                        </option>
+                        <option value="Київ">Київ</option>
+                        <option value="Львів">Львів</option>
+                        <option value="Одеса">Одеса</option>
+                        <option value="Харків">Харків</option>
+                        <option value="Дніпро">Дніпро</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="ua-address-field">
+                    <label>Відділення</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.office}
+                        onChange={(e) =>
+                          handleInputChange(e, `novaPoshta-${index}`, "office")
+                        }
+                        disabled={!address.city}
+                        className="ua-select-placeholder"
+                      >
+                        <option value="" disabled>
+                          Введіть відділення
+                        </option>
+                        <option value="Відділення №1">Відділення №1</option>
+                        <option value="Відділення №2">Відділення №2</option>
+                        <option value="Відділення №3">Відділення №3</option>
+                        <option value="Відділення №4">Відділення №4</option>
+                        <option value="Відділення №5">Відділення №5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    className="ua-delete-button"
+                    onClick={() => removeNovaPoshtaAddress(index)}
+                    disabled={true}
+                  >
+                    <span className="ua-delete-icon">🗑</span>
+                  </button>
+                </div>
               </div>
-              <button
-                className="ua-delete-button"
-                onClick={() => removeNovaPoshtaAddress(index)}
-                disabled={!address.city && !address.office}
-              >
-                <span className="ua-delete-icon">🗑</span>
-              </button>
-            </div>
+            )
           ))}
+          <button className="ua-add-button" onClick={addNovaPoshtaAddress}>
+            ДОДАТИ ВІДДІЛЕННЯ
+          </button>
         </div>
       </div>
 
@@ -910,89 +1073,176 @@ const PersonalAccount = () => {
         </h5>
         <div className="ua-delivery-address-section">
           {formData.addresses.delivery.map((address, index) => (
-            <div key={`delivery-${address.id}`} className="ua-delivery-block">
-              <div className="ua-address-row">
-                <div className="ua-address-field">
-                  <label>Місто</label>
-                  <select
-                    value={address.city}
-                    onChange={(e) =>
-                      handleInputChange(e, `delivery-${index}`, "city")
-                    }
-                    className={!address.city ? "ua-select-placeholder" : ""}
+            address.city || address.street || address.building || address.apartment ? (
+              <div key={`delivery-${address.id}`} className="ua-delivery-block">
+                <div className="ua-address-row">
+                  <div className="ua-address-field">
+                    <label>Місто</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.city}
+                        onChange={(e) =>
+                          handleInputChange(e, `delivery-${index}`, "city")
+                        }
+                        className={!address.city ? "ua-select-placeholder" : ""}
+                      >
+                        <option value="" disabled>
+                          Введіть назву міста
+                        </option>
+                        <option value="Київ">Київ</option>
+                        <option value="Львів">Львів</option>
+                        <option value="Одеса">Одеса</option>
+                        <option value="Харків">Харків</option>
+                        <option value="Дніпро">Дніпро</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="ua-address-field">
+                    <label>Вулиця</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.street}
+                        onChange={(e) =>
+                          handleInputChange(e, `delivery-${index}`, "street")
+                        }
+                        disabled={!address.city}
+                        className={!address.street ? "ua-select-placeholder" : ""}
+                      >
+                        <option value="" disabled>
+                          Введіть назву вулиці
+                        </option>
+                        <option value="Хрещатик">Хрещатик</option>
+                        <option value="Богдана Хмельницького">
+                          Богдана Хмельницького
+                        </option>
+                        <option value="Володимирська">Володимирська</option>
+                        <option value="Шевченка">Шевченка</option>
+                        <option value="Лесі Українки">Лесі Українки</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    className="ua-delete-button"
+                    onClick={() => removeDeliveryAddress(index)}
                   >
-                    <option value="" disabled>
-                      Введіть назву міста
-                    </option>
-                    <option value="Київ">Київ</option>
-                    <option value="Львів">Львів</option>
-                    <option value="Одеса">Одеса</option>
-                    <option value="Харків">Харків</option>
-                    <option value="Дніпро">Дніпро</option>
-                  </select>
+                    <span className="ua-delete-icon">🗑</span>
+                  </button>
                 </div>
-                <div className="ua-address-field">
-                  <label>Вулиця</label>
-                  <select
-                    value={address.street}
-                    onChange={(e) =>
-                      handleInputChange(e, `delivery-${index}`, "street")
-                    }
-                    disabled={!address.city}
-                    className={!address.street ? "ua-select-placeholder" : ""}
-                  >
-                    <option value="" disabled>
-                      Введіть назву вулиці
-                    </option>
-                    <option value="Хрещатик">Хрещатик</option>
-                    <option value="Богдана Хмельницького">
-                      Богдана Хмельницького
-                    </option>
-                    <option value="Володимирська">Володимирська</option>
-                    <option value="Шевченка">Шевченка</option>
-                    <option value="Лесі Українки">Лесі Українки</option>
-                  </select>
+                <div className="ua-address-row">
+                  <div className="ua-address-field small">
+                    <label>Будинок</label>
+                    <input
+                      type="text"
+                      placeholder="Введіть номер"
+                      value={address.building || ""}
+                      onChange={(e) =>
+                        handleInputChange(e, `delivery-${index}`, "building")
+                      }
+                      disabled={!address.street}
+                    />
+                  </div>
+                  <div className="ua-address-field small">
+                    <label>Квартира</label>
+                    <input
+                      type="text"
+                      placeholder="Введіть номер"
+                      value={address.apartment || ""}
+                      onChange={(e) =>
+                        handleInputChange(e, `delivery-${index}`, "apartment")
+                      }
+                      disabled={!address.building}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="ua-address-row">
-                <div className="ua-address-field small">
-                  <label>Будинок</label>
-                  <input
-                    type="text"
-                    placeholder="Введіть номер"
-                    value={address.building || ""}
-                    onChange={(e) =>
-                      handleInputChange(e, `delivery-${index}`, "building")
-                    }
-                    disabled={!address.street}
-                  />
+            ) : index === 0 && (
+              <div key={`delivery-${address.id}`} className="ua-delivery-block">
+                <div className="ua-address-row">
+                  <div className="ua-address-field">
+                    <label>Місто</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.city}
+                        onChange={(e) =>
+                          handleInputChange(e, `delivery-${index}`, "city")
+                        }
+                        className="ua-select-placeholder"
+                      >
+                        <option value="" disabled>
+                          Введіть назву міста
+                        </option>
+                        <option value="Київ">Київ</option>
+                        <option value="Львів">Львів</option>
+                        <option value="Одеса">Одеса</option>
+                        <option value="Харків">Харків</option>
+                        <option value="Дніпро">Дніпро</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="ua-address-field">
+                    <label>Вулиця</label>
+                    <div className="ua-select-wrapper">
+                      <select
+                        value={address.street}
+                        onChange={(e) =>
+                          handleInputChange(e, `delivery-${index}`, "street")
+                        }
+                        disabled={!address.city}
+                        className="ua-select-placeholder"
+                      >
+                        <option value="" disabled>
+                          Введіть назву вулиці
+                        </option>
+                        <option value="Хрещатик">Хрещатик</option>
+                        <option value="Богдана Хмельницького">
+                          Богдана Хмельницького
+                        </option>
+                        <option value="Володимирська">Володимирська</option>
+                        <option value="Шевченка">Шевченка</option>
+                        <option value="Лесі Українки">Лесі Українки</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    className="ua-delete-button"
+                    onClick={() => removeDeliveryAddress(index)}
+                    disabled={true}
+                  >
+                    <span className="ua-delete-icon">🗑</span>
+                  </button>
                 </div>
-                <div className="ua-address-field small">
-                  <label>Квартира</label>
-                  <input
-                    type="text"
-                    placeholder="Введіть номер"
-                    value={address.apartment || ""}
-                    onChange={(e) =>
-                      handleInputChange(e, `delivery-${index}`, "apartment")
-                    }
-                    disabled={!address.building}
-                  />
+                <div className="ua-address-row">
+                  <div className="ua-address-field small">
+                    <label>Будинок</label>
+                    <input
+                      type="text"
+                      placeholder="Введіть номер"
+                      value={address.building || ""}
+                      onChange={(e) =>
+                        handleInputChange(e, `delivery-${index}`, "building")
+                      }
+                      disabled={!address.street}
+                    />
+                  </div>
+                  <div className="ua-address-field small">
+                    <label>Квартира</label>
+                    <input
+                      type="text"
+                      placeholder="Введіть номер"
+                      value={address.apartment || ""}
+                      onChange={(e) =>
+                        handleInputChange(e, `delivery-${index}`, "apartment")
+                      }
+                      disabled={!address.building}
+                    />
+                  </div>
                 </div>
-                <button
-                  className="ua-delete-button"
-                  onClick={() => removeDeliveryAddress(index)}
-                >
-                  <span className="ua-delete-icon">🗑</span>
-                </button>
               </div>
-            </div>
+            )
           ))}
-          {formData.addresses.delivery.length < 3 && (
-            <button className="ua-add-button" onClick={addDeliveryAddress}>
-              ДОДАТИ АДРЕСУ
-            </button>
-          )}
+          <button className="ua-add-button" onClick={addDeliveryAddress}>
+            ДОДАТИ АДРЕСУ
+          </button>
         </div>
       </div>
     </div>
@@ -1030,10 +1280,11 @@ const PersonalAccount = () => {
         userData.wishlist.map((item) => (
           <div key={item.id} className="ua-wishlist-item">
             <div className="ua-wishlist-image">
-              <div className="ua-placeholder-image"></div>
+              <img src={item.image} alt={item.name} />
             </div>
             <div className="ua-wishlist-details">
               <div className="ua-wishlist-name">{item.name}</div>
+              <div className="ua-wine-type">{item.type}</div>
               <div className="ua-wishlist-price">{item.price}</div>
             </div>
             <button className="ua-add-to-cart">В КОШИК</button>

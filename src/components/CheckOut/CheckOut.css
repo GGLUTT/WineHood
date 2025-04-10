@@ -23,24 +23,9 @@ text-align: left;
 text-transform: uppercase;
 }
 
-.checkout-title:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 3px;
-  bottom: -5px;
-  left: 0;
-  background-color: #d35050;
-  transition: width 0.4s ease;
-}
-
-.checkout-title:hover:after {
-  width: 100%;
-}
-
 section {
   margin-bottom: 40px;
-  padding: 15px;
+  padding: 15px 15px 15px 0;
   border-radius: 2px;
 }
 
@@ -53,6 +38,7 @@ section h2 {
   letter-spacing: 0%;
   text-align: left;
   position: relative;
+  padding-left: 15px;
 }
 
 /* Контактна інформація */
@@ -118,100 +104,91 @@ section h2 {
   letter-spacing: 0%;
   text-align: left;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  text-indent: 0;
+  padding-left: 15px;
+  vertical-align: middle;
+  position: relative;
 }
 
 .form-group input:focus {
-  border-color: #ffffff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  border-color: #8B0029;
+  box-shadow: 0 0 8px rgba(139, 0, 41, 0.2);
   outline: none;
 }
 
 /* Спосіб доставки */
-.delivery-options,
-.payment-options {
+.delivery-method {
+  padding: 0;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.delivery-method h2 {
+  margin-bottom: 20px;
+  font-family: Oswald;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  padding-left: 15px;
+  text-align: left;
+}
+
+.delivery-options {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding-left: 15px;
+  margin-top: 30px;
 }
 
-.delivery-option,
-.payment-option {
+.delivery-option {
   display: flex;
   align-items: center;
-  padding: 15px;
-  border: 1px solid transparent;
-  border-radius: 0;
+  justify-content: space-between; /* Розташовуємо ціну справа */
+  padding: 8px 0;
+  border: none;
+  background: transparent;
   cursor: pointer;
   position: relative;
+  width: 100%;
+}
+
+/* Змінюємо стиль для активного елемента */
+.delivery-option.active {
   background-color: transparent;
+  border-left: none;
 }
 
-.delivery-option:hover {
-  background-color: rgba(211, 80, 80, 0.05);
-  border-color: rgba(211, 80, 80, 0.2);
-}
-
-/* Видаляємо всі ховер-ефекти для payment-option */
-.payment-option input[type="radio"]:checked + .radio-custom {
-  border-color: #8B0029;
-}
-
-.payment-option input[type="radio"]:checked + .radio-custom:before {
-  background-color: #8B0029;
-}
-
-.option-text {
-  color: rgb(76, 76, 75);
-  font-family: Manrope;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0%;
-  text-align: left;
-  flex: 1;
-  margin-left: 10px;
-}
-
-.option-price {
-  color: rgb(115, 115, 115);
-  font-family: Manrope;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0%;
-  text-align: left;
-}
-
-/* Стилізація радіо-кнопок */
-.radio-custom {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  position: relative;
-  transition: border-color 0.3s ease;
-}
-
-.delivery-option:hover .radio-custom,
-.payment-option:hover .radio-custom {
-  border-color: #d35050;
-}
-
-input[type="radio"]:checked + .radio-custom {
-  border-color: #d35050;
-}
-
-input[type="radio"]:checked + .radio-custom:before {
-  content: '';
+.delivery-option input[type="radio"] {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 10px;
-  height: 10px;
-  background-color: #d35050;
-  border-radius: 50%;
-  animation: fadeIn 0.3s;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.delivery-option .radio-custom {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.delivery-option .option-text {
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  color: #262626;
+  margin-left: 10px;
+  flex: 1;
+  text-align: left;
+}
+
+.delivery-option .option-price {
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  color: #737373;
+  text-align: right;
+  margin-left: auto;
+  padding-right: 15px;
 }
 
 @keyframes fadeIn {
@@ -223,6 +200,129 @@ input[type="radio"]:checked + .radio-custom:before {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* Загальні стилі для всіх radio-custom */
+.radio-custom {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  position: relative;
+  transition: border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+input[type="radio"]:checked + .radio-custom {
+  border-color: #8B0029;
+}
+
+input[type="radio"]:checked + .radio-custom:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: #8B0029;
+  border-radius: 50%;
+  animation: fadeIn 0.3s;
+}
+
+/* Нові стилі для розділу оплати */
+.payment-section {
+  padding: 0;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.payment-section h2 {
+  margin-bottom: 20px;
+  font-family: Oswald;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.payment-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin: 0;
+  padding-left: 15px;
+}
+
+.payment-option-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.payment-option-item input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.payment-option-item input[type="radio"]:checked + .custom-radio {
+  border-color: #8B0029;
+}
+
+.payment-option-item input[type="radio"]:checked + .custom-radio:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: #8B0029;
+  border-radius: 50%;
+}
+
+/* Виправлений стиль для тексту опцій в секції оплати */
+.payment-option-item .option-text {
+  margin-left: 10px;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  color: #262626;
+  text-align: left;
+}
+
+/* Стиль для медіазапитів */
+@media (max-width: 768px) {
+  .payment-options-list {
+    width: 100%;
+  }
+}
+
+/* Збережіть існуючі стилі для option-price */
+.option-price {
+  color: rgb(115, 115, 115);
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
 }
 
 /* Розділ коментаря */
@@ -299,9 +399,17 @@ text-transform: uppercase;
     width: 100%;
   }
   
-  .delivery-option,
-  .payment-option {
+  .delivery-option {
     width: 100%;
+  }
+  
+  .checkout-payment-options {
+    width: 100%; /* Повна ширина на мобільних */
+    max-width: none;
+  }
+  
+  .payment-option {
+    padding: 8px 0; /* Менший відступ на мобільних */
   }
 }
 
@@ -360,10 +468,10 @@ text-transform: uppercase;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 0;
-  padding: 15px 0;
-  border-top: 1px solid #eee;
-  font-size: 20px;
+  margin: 30px 0 20px;
+  padding: 20px 0;
+  border-top: 2px solid #f0f0f0;
+  font-size: 22px;
 }
 
 .total-label {
@@ -378,31 +486,44 @@ text-transform: uppercase;
   padding: 5px 15px;
 }
 
-.submit-order {
+/* Кнопка оформлення замовлення */
+.order-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
   width: 100%;
-  padding: 15px;
-  background-color: #d35050;
+}
+
+.submit-order {
+  width: auto;
+  min-width: 240px;
+  margin: 0;
+  display: block;
+  padding: 12px 30px;
+  background-color: #8B0029;
   color: white;
   border: none;
-  border-radius: 0;
+  border-radius: 4px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: Oswald;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
 }
 
 .submit-order:hover {
-  background-color: #c04040;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(211, 80, 80, 0.4);
+  background-color: #7a0023;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 0, 41, 0.2);
 }
 
 .submit-order:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 5px rgba(211, 80, 80, 0.5);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(139, 0, 41, 0.3);
 }
 
 .navigation-buttons {
@@ -492,14 +613,437 @@ input, textarea {
 
 /* Контейнер із підсумком замовлення */
 .order-summary {
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  margin-top: 20px;
 }
 
-/* Стилізація секції оплати */
-.payment-option {
-  margin-bottom: 5px;
+/* Заголовок замовлення */
+.order-items h3 {
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-family: Oswald;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #333;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.order-items h3:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #8B0029;
+}
+
+/* Покращений вигляд елементів замовлення */
+.order-item {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+/* Зображення товару */
+.item-image {
+  width: 90px;
+  height: 120px;
+  margin-right: 25px;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: #f9f9f9;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Інформація про товар */
+.item-info {
+  flex: 1;
+}
+
+.item-info h4 {
+  margin: 0 0 8px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+}
+
+.item-info p {
+  margin: 0 0 5px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Ціна товару */
+.item-price {
+  font-weight: 700;
+  font-size: 20px;
+  color: #8B0029;
+  margin-left: 15px;
+}
+
+/* Підсумок замовлення */
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+  padding: 20px 0;
+  border-top: 2px solid #f0f0f0;
+  font-size: 22px;
+}
+
+.total-label {
+  font-weight: 600;
+  color: #333;
+  font-family: Oswald;
+  text-transform: uppercase;
+}
+
+.total-amount {
+  font-weight: 700;
+  color: #8B0029;
+  font-size: 26px;
+  background-color: #fcf1f2;
+  padding: 8px 20px;
+  border-radius: 2px;
+}
+
+/* Кнопка оформлення замовлення */
+.submit-order {
+  width: auto;
+  min-width: 240px;
+  /* margin: 0 auto; */
+  display: block;
+  padding: 12px 30px;
+  background-color: #8B0029;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Oswald;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-order:hover {
+  background-color: #7a0023;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 0, 41, 0.2);
+}
+
+.submit-order:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(139, 0, 41, 0.3);
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.back-button {
+  padding: 15px 35px;
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #eee;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Адаптивні стилі */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .checkout-title {
+    font-size: 24px;
+  }
+  
+  section h2 {
+    font-size: 20px;
+  }
+  
+  .customer-type {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .item-image {
+    margin-bottom: 15px;
+  }
+  
+  .item-price {
+    margin-top: 10px;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .send-button, .back-button {
+    width: 100%;
+  }
+}
+
+/* Стилізація для фокусу
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #d35050;
+  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
+} */
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Покращена видимість полів */
+input, textarea {
+  background-color: transparent !important;
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  color: #2D2D2D;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+background: rgb(141, 3, 20);
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  /* Button */
+color: rgb(255, 255, 255);
+font-family: Oswald;
+font-size: 16px;
+font-weight: 400;
+line-height: 120%;
+letter-spacing: 0%;
+text-align: center;
+text-transform: uppercase;
+}
+
+.dividers {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.dividers::before,
+.dividers::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: #E0E0E0;
+}
+
+.dividers::before {
+  left: 0;
+}
+
+.dividers::after {
+  right: 0;
+}
+
+.dividers span {
+  background-color: white;
+  padding: 0 10px;
+  color: #757575;
+  font-size: 14px;
+}
+
+.google-login {
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #2D2D2D;
+  cursor: pointer;
+}
+
+.google-login img {
+  width: 20px;
+  height: 20px;
+}
+
+.option-text {
+  color: rgb(76, 76, 75);
+  font-family: Manrope;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: left;
+  flex: 1;
+  margin-left: 10px;
+}
+
+/* Оновлюю спільні стилі для обох секцій */
+section.delivery-method, 
+section.payment-section {
+  padding: 0 !important;
+  margin-bottom: 40px;
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 30px !important;
+}
+
+/* Загальні стилі для заголовків обох секцій */
+.delivery-method h2,
+.payment-section h2 {
+  font-family: Oswald;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  padding-left: 15px;
+  text-align: left;
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Стилі для списків опцій у обох секціях */
+.delivery-options,
+.payment-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-left: 15px;
+  margin-top: 25px;
+}
+
+/* Спільні стилі для елементів вибору */
+.delivery-option,
+.payment-option-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+}
+
+/* Стилі для тексту опцій в обох секціях */
+.delivery-option .option-text,
+.payment-option-item .option-text {
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  color: #262626;
+  margin-left: 10px;
+  flex: 1;
+  text-align: left;
+}
+
+/* Стиль для ціни в доставці */
+.delivery-option .option-price {
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+  color: #737373;
+  text-align: right;
+  margin-left: auto;
+  padding-right: 15px;
+}
+
+/* Видаляю неактуальні стилі, які більше не використовуються */
+.delivery-option:hover,
+.payment-option-item:hover {
+  background-color: transparent;
+}
+
+/* Для розділу з рожевим фоном */
+section.payment-section {
+  padding: 20px 0 !important;
+  border-bottom: none;
+}
+
+/* Встановлюю правильний вигляд радіо-кнопок */
+.radio-custom,
+.custom-radio {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+/* Активне стан радіо-кнопки */
+input[type="radio"]:checked + .radio-custom,
+input[type="radio"]:checked + .custom-radio {
+  border-color: #8B0029;
+}
+
+input[type="radio"]:checked + .radio-custom:before,
+input[type="radio"]:checked + .custom-radio:before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: #8B0029;
+  border-radius: 50%;
 }
 
 /* Анімації для появи */
@@ -587,6 +1131,7 @@ input[type="checkbox"]:checked + label:after {
   background: #c04040;
 }
 
+/* Стилі для форми логіну */
 .login-form {
   max-width: 400px;
 }
@@ -636,84 +1181,116 @@ input[type="checkbox"]:checked + label:after {
   color: #757575;
 }
 
-.forgot-password {
-  display: block;
-  text-align: right;
-  color: #2D2D2D;
-  text-decoration: none;
-  font-size: 14px;
-  margin-top: 8px;
+/* Виправлення для placeholder підказок */
+.form-group input::placeholder {
+  color: #999;
+  opacity: 0.5;
 }
 
-.login-button {
-  width: 100%;
-  padding: 14px;
-background: rgb(141, 3, 20);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 20px;
-  /* Button */
-color: rgb(255, 255, 255);
-font-family: Oswald;
-font-size: 16px;
-font-weight: 400;
-line-height: 120%;
-letter-spacing: 0%;
-text-align: center;
-text-transform: uppercase;
+.form-group input::-webkit-input-placeholder {
+  color: #999;
+  opacity: 0.5;
 }
 
-.dividers {
-  text-align: center;
-  margin: 20px 0;
+.form-group input:-moz-placeholder {
+  color: #999;
+  opacity: 0.5;
+}
+
+.form-group input::-moz-placeholder {
+  color: #999;
+  opacity: 0.5;
+}
+
+.form-group input:-ms-input-placeholder {
+  color: #999;
+  opacity: 0.5;
+}
+
+.contact-info {
+  margin-bottom: 30px;
+}
+
+.contact-info .form-group {
   position: relative;
 }
 
-.dividers::before,
-.dividers::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 45%;
-  height: 1px;
-  background-color: #E0E0E0;
+.contact-info .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: rgb(115, 115, 115);
+  font-weight: 500;
 }
 
-.dividers::before {
-  left: 0;
-}
-
-.dividers::after {
-  right: 0;
-}
-
-.dividers span {
-  background-color: white;
-  padding: 0 10px;
-  color: #757575;
-  font-size: 14px;
-}
-
-.google-login {
+.contact-info .form-group input {
   width: 100%;
-  padding: 12px;
-  background-color: white;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 14px;
-  color: #2D2D2D;
-  cursor: pointer;
+  padding: 15px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  line-height: normal;
+  color: #333;
+  background-color: white !important;
+  transition: border-color 0.3s;
 }
 
-.google-login img {
-  width: 20px;
-  height: 20px;
+.contact-info .form-group input:focus {
+  border-color: #8B0029;
+  box-shadow: none; /* Прибираємо тінь при фокусі */
+  outline: none;
+}
+
+/* Стилі для placeholder-підказок у полях введення */
+.contact-info .form-group input::placeholder {
+  color: #999;
+  opacity: 0.7;
+  font-size: 16px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    padding: 5px 0;
+  }
+  
+  .submit-order {
+    width: 80%;
+    min-width: unset;
+  }
+}
+
+.order-icon {
+  margin-right: 10px;
+  font-size: 16px;
+  display: inline-block;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    padding: 10px 15px;
+  }
+  
+  .button-container::before {
+    left: 5%;
+    right: 5%;
+  }
+  
+  .submit-order {
+    width: 90%;
+    min-width: unset;
+    font-size: 15px;
+    padding: 12px 25px;
+  }
+  
+  .order-icon {
+    margin-right: 8px;
+    transform: scale(1.1);
+  }
 }

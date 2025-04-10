@@ -3,11 +3,8 @@
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background-color: white;
-    border-radius: 8px;
+    background-color: rgb(239, 237, 238);
     padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid transparent;
   }
   
   .wine-card:hover {
@@ -19,7 +16,7 @@
   /* Контейнер зображення з ефектом оверлею */
   .wine-image {
     position: relative;
-    height: 250px;
+    height: 352px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +37,7 @@
   }
   
   /* Оверлей при наведенні */
-  .wine-image::after {
+  /* .wine-image::after {
     content: '';
     position: absolute;
     top: 0;
@@ -51,7 +48,7 @@
     opacity: 0;
     transition: opacity 0.4s ease;
     border-radius: 4px;
-  }
+  } */
   
   .wine-card:hover .wine-image::after {
     opacity: 1;
@@ -135,21 +132,22 @@
     position: absolute;
     top: 12px;
     left: 12px;
-    color: white;
-    padding: 0.35rem 0.75rem;
-    font-weight: 600;
+    padding: 6px 25px 6px 25px;
     z-index: 10;
-    color: red;
-    border-radius: 4px;
     border: 1px solid rgba(141, 3, 20, 0.4);
-    transform: rotate(-2deg);
     transition: all 0.3s ease;
-    font-family: 'Manrope', sans-serif;
+    color: rgb(141, 3, 20);
+font-family: Manrope;
+font-size: 12px;
+font-weight: 500;
+line-height: 14px;
+letter-spacing: 0%;
+text-align: center;
   }
   
   .wine-card:hover .sale-badge {
     transform: rotate(0deg) scale(1.05);
-    background-color: #48000053;
+    background-color: #ffaaaa53;
   }
   
   /* Покращені стилі деталей товару */

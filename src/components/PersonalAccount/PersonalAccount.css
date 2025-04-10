@@ -18,10 +18,12 @@ background: rgb(35, 39, 44);
   font-weight: 300;
   letter-spacing: 2px;
   font-family: Oswald;
+  margin-left: 40px;
 }
 .ua-user-info {
   display: flex;
   align-items: center;
+  margin-left: 40px;
 }
 .ua-avatar {
   position: relative;
@@ -77,6 +79,7 @@ text-align: left;
   transform: translateY(-50%);
 }
 .ua-account-content {
+  padding: 0 60px;
   display: flex;
   background-color: #ffffff;
   min-height: calc(100vh - 125px);
@@ -108,25 +111,24 @@ text-align: left;
   transition: background-color 0.3s;
 }
 
-.ua-nav-button.ua-active {
-  background-color: #f9f0f0;
+/* .ua-nav-button.ua-active {
+  background-color: #f0f0f0;
   font-weight: 600;
   color: #9f0000;
   position: relative;
-}
+  border-left: 4px solid #9f0000;
+  padding-left: 16px;
+} */
 
 .ua-nav-button.ua-active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 4px;
-  background-color: #9f0000;
+  display: none;
 }
 
 .ua-nav-button:hover:not(.ua-active) {
-  background-color: #f9d9d9;
+  background-color: #f0f0f0;
+  color: #9f0000;
+  padding-left: 16px;
+  transition: all 0.3s ease;
 }
 
 .ua-logout {
@@ -141,11 +143,9 @@ text-align: left;
 
 /* Profile tab styles */
 .ua-category {
-  margin-bottom: 30px;
-  border-radius: 5px;
-  overflow: hidden;
-  /* Secondary */
-background: rgb(35, 39, 44);
+  margin-bottom: 20px;
+  border: none;
+  background: none;
 }
 
 .ua-category-header {
@@ -179,8 +179,8 @@ background: rgb(35, 39, 44);
 
 .ua-category-content {
   background-color: white;
-  color: #1e1e1e;
   padding: 20px;
+  border: 1px solid #F0F0F0;
 }
 
 /* Form styles */
@@ -257,13 +257,12 @@ line-height: 120%;
 letter-spacing: 0%;
 text-align: center;
 text-transform: uppercase;
-  background-color: #9f0000;
-  color: white;
+  background-color: transparent;
+  color: #8D0314;
+  border: 1px solid #8D0314;
 }
 
-.ua-button-primary:hover {
-  background-color: #8a0000;
-}
+
 
 .ua-button-secondary {
   background-color: #f1f1f1;
@@ -271,7 +270,9 @@ text-transform: uppercase;
 }
 
 .ua-button-secondary:hover {
-  background-color: #e5e5e5;
+  background-color: #333;
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .ua-edit-btn {
@@ -298,34 +299,46 @@ text-transform: uppercase;
   padding: 0;
 }
 
-.ua-info-display {
-  margin-bottom: 20px;
-}
 
 .ua-info-row {
   display: flex;
-  margin-bottom: 12px;
+  flex-direction: column;
+  margin-bottom: 30px;
+  align-items: flex-start;
+}
+
+.ua-info-row:last-child {
+  margin-bottom: 0;
 }
 
 .ua-info-label {
-  flex: 0 0 150px;
-  color: #777;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .ua-info-value {
-  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #1D1D1D;
 }
 
 /* Delivery addresses styles */
+
+
 .ua-form-section {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .ua-form-section h5 {
   font-size: 15px;
   margin: 0 0 15px 0;
   font-weight: 500;
+  color: #333;
 }
 
 .ua-form-section h5 span {
@@ -345,10 +358,61 @@ text-transform: uppercase;
   display: flex;
   gap: 15px;
   align-items: flex-end;
+  position: relative;
+  margin-bottom: 15px;
 }
 
 .ua-address-field {
   flex: 1;
+}
+
+.ua-address-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.ua-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.ua-select-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #9e9e9e;
+  pointer-events: none;
+}
+
+.ua-address-field select {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  appearance: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.ua-address-field input {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background-color: #FFE1E1;
+  font-size: 14px;
+  color: #333;
+}
+
+.ua-address-field input::placeholder,
+.ua-select-placeholder {
+  color: #999;
 }
 
 .ua-address-field.small {
@@ -358,15 +422,19 @@ text-transform: uppercase;
 .ua-delete-button {
   background: none;
   border: none;
-  color: #9f0000;
+  color: #8D0314;
   cursor: pointer;
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   width: 30px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .ua-delete-button:disabled {
@@ -382,25 +450,31 @@ text-transform: uppercase;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 15px;
-  border: 1px solid #eee;
-  border-radius: 5px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  position: relative;
 }
 
 .ua-add-button {
-  background: none;
-  border: 1px dashed #9f0000;
-  color: #9f0000;
-  padding: 15px;
-  width: 100%;
-  border-radius: 5px;
+  background-color: transparent;
+  border: none;
+  color: #8D0314;
+      padding: 8px 25px;
+  margin: 0;
+  width: 220px;
+  border-radius: 0;
+  border: 1px solid #8D0314;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
 }
 
-.ua-select-placeholder {
-  color: #999;
+.ua-add-button:hover {
+  background-color: #a80418;
 }
 
 /* Orders tab styles */
@@ -571,17 +645,39 @@ text-transform: uppercase;
 }
 
 .ua-wishlist-item {
-  background-color: white;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: rgb(239, 237, 238);
+  padding: 1.5rem;
+}
+
+.ua-wishlist-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 25px rgba(139, 0, 0, 0.15);
+  border-color: rgba(243, 213, 213, 0.5);
 }
 
 .ua-wishlist-image {
-  width: 100%;
-  padding-top: 100%;
   position: relative;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border-radius: 4px;
+}
+
+.ua-wishlist-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.ua-wishlist-item:hover .ua-wishlist-image img {
+  transform: scale(1.05);
 }
 
 .ua-placeholder-image {
@@ -594,47 +690,109 @@ text-transform: uppercase;
 }
 
 .ua-wishlist-details {
-  padding: 15px;
+  margin-bottom: 3rem;
 }
 
 .ua-wishlist-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
   font-weight: 500;
-  margin-bottom: 8px;
+  color: #262626;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.ua-wishlist-item:hover .ua-wishlist-name {
+  color: #8B0000;
+}
+
+.ua-wine-type {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
 
 .ua-wishlist-price {
-  color: #9f0000;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
   font-weight: 500;
+  color: #8B0000;
+  transition: all 0.3s ease;
+}
+
+.ua-wishlist-item:hover .ua-wishlist-price {
+  transform: scale(1.05);
 }
 
 .ua-add-to-cart {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  background-color: #9f0000;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  background: linear-gradient(to right, #8B0000, #a10000);
   color: white;
+  border: none;
+  padding: 0.85rem 0;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
   cursor: pointer;
-  font-weight: 500;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.95rem;
+}
+
+.ua-wishlist-item:hover .ua-add-to-cart {
+  bottom: 16px;
+  opacity: 1;
+  animation: fadeInUp 0.4s forwards;
 }
 
 .ua-add-to-cart:hover {
-  background-color: #8a0000;
+  background: linear-gradient(to right, #a10000, #c50000);
+  box-shadow: 0 6px 12px rgba(139, 0, 0, 0.4);
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .ua-remove-wishlist {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  top: 12px;
+  right: 12px;
+  background: none;
   border: none;
+  color: #262626;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  z-index: 10;
+}
+
+.ua-remove-wishlist:hover {
+  color: #8B0000;
+  transform: none;
+}
+
+/* Add fadeInUp animation if not already defined */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 .ua-empty-state {
@@ -660,6 +818,8 @@ text-transform: uppercase;
   .ua-nav-button {
     padding: 12px 15px;
   }
+  
+
   
   .ua-nav-button.ua-active::before {
     width: 100%;
@@ -827,7 +987,10 @@ text-transform: uppercase;
 }
 
 .ua-popup .ua-button-primary:hover {
-  background: #C33;
+  background: transparent;
+  color: white;
+  box-shadow: inset 0 0 0 2px white;
+  transition: all 0.3s ease;
 }
 
 /* Animation for popup */
@@ -847,4 +1010,116 @@ text-transform: uppercase;
 
 .ua-popup {
   animation: slideIn 0.3s ease-out;
+}
+
+/* New grid layout */
+.ua-profile-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.ua-sidebar {
+  background-color: #FFF2F2;
+  padding: 20px;
+}
+
+.ua-history-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.ua-sidebar-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ua-option {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #4C4C4B;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ua-option.active {
+  color: #9f0000;
+  padding-left: 10px;
+  border-left: 3px solid #9f0000;
+  font-weight: 500;
+}
+
+.ua-option:hover:not(.active) {
+  color: #9f0000;
+  padding-left: 10px;
+  border-left: 3px solid #9f0000;
+  transition: all 0.3s ease;
+}
+
+.ua-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+
+.ua-contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ua-contact-row:last-child {
+  margin-bottom: 0;
+}
+
+.ua-contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ua-contact-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.ua-contact-value {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1D1D1D;
+}
+
+.ua-edit-button {
+  border: 1px solid #B42D2D;
+  background: transparent;
+  padding: 8px 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #B42D2D;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ua-edit-button:hover {
+  color: white;
 }

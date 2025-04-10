@@ -3,6 +3,7 @@ import './ShoppingCart.css';
 import { useCart } from '../Context/CartContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import recomend from '../../img/card/new_botlle.png'
+import trashIcon from '../../img/ico/trash.svg'
 
 const ShoppingCart = () => {
   const navigate = useNavigate();
@@ -44,28 +45,31 @@ const ShoppingCart = () => {
                   <img src={item.image} alt={item.name} />
                 </div>
                 <div className="item-details">
-                  <div className="item-name">{item.name}</div>
-                  <div className="item-type">Червоне сухе вино</div>
-                  <div className="item-price">{item.price} ₴</div>
-                  <div className="quantity-control">
+                  <div className="item-header">
+                    <div>
+                      <div className="item-name">{item.name}</div>
+                      <div className="item-type">Червоне сухе вино</div>
+                    </div>
                     <button 
-                      onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                    >−</button>
-                    <span>{item.quantity}</span>
-                    <button 
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    >+</button>
+                      className="remove-item"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      <img src={trashIcon} alt="Видалити" />
+                    </button>
+                  </div>
+                  <div className="price-quantity-row">
+                    <div className="item-price">{item.price} ₴</div>
+                    <div className="quantity-control">
+                      <button 
+                        onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                      >−</button>
+                      <span>{item.quantity}</span>
+                      <button 
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      >+</button>
+                    </div>
                   </div>
                 </div>
-                <button 
-                  className="remove-item"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 4H14V14C14 15.1 13.1 16 12 16H4C2.9 16 2 15.1 2 14V4Z" fill="#DDDDDD"/>
-                    <path d="M12 2V0H4V2H0V4H16V2H12Z" fill="#DDDDDD"/>
-                  </svg>
-                </button>
               </div>
             ))}
           </div>

@@ -298,40 +298,40 @@ const Checkout = () => {
               </div>
             </section>
             
-            <section className="payment-method">
+            <section className="payment-section">
               <h2>Спосіб оплати</h2>
               
-              <div className="payment-options">
-                <label className="payment-option">
+              <div className="payment-options-list">
+                <label className="payment-option-item">
                   <input 
                     type="radio" 
                     name="paymentMethod" 
                     checked={formData.paymentMethod === 'cash'} 
                     onChange={() => handleRadioChange('paymentMethod', 'cash')} 
                   />
-                  <span className="radio-custom"></span>
+                  <span className="custom-radio"></span>
                   <span className="option-text">Готівкою</span>
                 </label>
                 
-                <label className="payment-option">
+                <label className="payment-option-item">
                   <input 
                     type="radio" 
                     name="paymentMethod" 
                     checked={formData.paymentMethod === 'card'} 
                     onChange={() => handleRadioChange('paymentMethod', 'card')} 
                   />
-                  <span className="radio-custom"></span>
+                  <span className="custom-radio"></span>
                   <span className="option-text">Карткою онлайн</span>
                 </label>
                 
-                <label className="payment-option">
+                <label className="payment-option-item">
                   <input 
                     type="radio" 
                     name="paymentMethod" 
                     checked={formData.paymentMethod === 'business'} 
                     onChange={() => handleRadioChange('paymentMethod', 'business')} 
                   />
-                  <span className="radio-custom"></span>
+                  <span className="custom-radio"></span>
                   <span className="option-text">Безготівкова для юридичних осіб</span>
                 </label>
               </div>
@@ -372,7 +372,11 @@ const Checkout = () => {
                 <div className="total-amount">{getTotalAmount()} ₴</div>
               </div>
               
-              <button type="submit" className="submit-order">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+              <div className="order-button-container">
+                <button type="submit" className="submit-order">
+                  ОФОРМИТИ ЗАМОВЛЕННЯ
+                </button>
+              </div>
             </section>
           </>
         )}

@@ -30,30 +30,44 @@ const PaymentDelivery = () => {
           </div>
         </div>
         
-        <div className="delivery-option">
-          <h3 className="option-title">Самовивіз</h3>
-          <p className="option-description">
-            WINEHOOD, пр.Бажана 28е, (м) Осокорки. Товар буде зібрано протягом години 
-            після підтвердження оператором. Забрати замовлення можна протягом 3-х 
-            днів. Замовлення зроблені у неділю будуть оброблені на наступний робочий 
-            день.
-          </p>
-        </div>
-        
-        <div className="delivery-option">
-          <h3 className="option-title">Кур'єрська доставка</h3>
-          <p className="option-description">
-            По {selectedCity} до дверей від 1000 гривень безкоштовно.
-          </p>
-        </div>
-        
-        <div className="delivery-option">
-          <h3 className="option-title">Новою поштою</h3>
-          <p className="option-description">
-            По Україні згідно тарифів «Нової Пошти», від 1000 гривень безкоштовно.
-            При виборі способу оплати «Готівкою при отриманні» отримувач сплачує за
-            послугу «Післяплата» за тарифами НП (20 грн + 2% від суми замовлення)
-          </p>
+        <div className="delivery-options-container">
+          <div className="delivery-option">
+            <div className="delivery-option-header">
+              <h3 className="option-title">Самовивіз</h3>
+            </div>
+            <div className="delivery-option-content">
+              <p className="option-description">
+                WINEHOOD, пр.Бажана 28е, (м) Осокорки. Товар буде зібрано протягом години 
+                після підтвердження оператором. Забрати замовлення можна протягом 3-х 
+                днів. Замовлення зроблені у неділю будуть оброблені на наступний робочий 
+                день.
+              </p>
+            </div>
+          </div>
+          
+          <div className="delivery-option">
+            <div className="delivery-option-header">
+              <h3 className="option-title">Кур'єрська доставка</h3>
+            </div>
+            <div className="delivery-option-content">
+              <p className="option-description">
+                По {selectedCity} до дверей від 1000 гривень безкоштовно.
+              </p>
+            </div>
+          </div>
+          
+          <div className="delivery-option">
+            <div className="delivery-option-header">
+              <h3 className="option-title">Новою поштою</h3>
+            </div>
+            <div className="delivery-option-content">
+              <p className="option-description">
+                По Україні згідно тарифів «Нової Пошти», від 1000 гривень безкоштовно.
+                При виборі способу оплати «Готівкою при отриманні» отримувач сплачує за
+                послугу «Післяплата» за тарифами НП (20 грн + 2% від суми замовлення)
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -68,32 +82,49 @@ const PaymentDelivery = () => {
       
       <div className="payment-sections">
         <h2 className="section-title">ОПЛАТА</h2>
+        
         <div className="payment-option">
-          <span className="payment-option-icon">
-            <img src={card} alt="Visa/MasterCard" />
-          </span>
-          <h3 className="option-title">Visa/MasterCard (онлайн)</h3>
+          <div className="payment-option-header">
+            <span className="payment-option-icon">
+              <img src={card} alt="Visa/MasterCard" />
+            </span>
+          </div>
+          <div className="payment-option-content">
+            <h3 className="option-title">Visa/MasterCard (онлайн)</h3>
+          </div>
         </div>
         
         <div className="payment-option">
-          <span className="payment-option-icon">
-            <img src={card2} alt="Безготівковий розрахунок" />
-          </span>
-          <h3 className="option-title">Безготівковий розрахунок, рахунок-фактура</h3>
+          <div className="payment-option-header">
+            <span className="payment-option-icon">
+              <img src={card2} alt="Безготівковий розрахунок" />
+            </span>
+          </div>
+          <div className="payment-option-content">
+            <h3 className="option-title">Безготівковий розрахунок, рахунок-фактура</h3>
+          </div>
         </div>
         
         <div className="payment-option">
-          <span className="payment-option-icon">
-            <img src={card} alt="Готівкою при отриманні" />
-          </span>
-          <h3 className="option-title">Готівкою при отриманні</h3>
+          <div className="payment-option-header">
+            <span className="payment-option-icon">
+              <img src={card} alt="Готівкою при отриманні" />
+            </span>
+          </div>
+          <div className="payment-option-content">
+            <h3 className="option-title">Готівкою при отриманні</h3>
+          </div>
         </div>
         
         <div className="payment-option">
-          <span className="payment-option-icon">
-            <img src={license} alt="Подарункові сертифікати" />
-          </span>
-          <h3 className="option-title">Подарунковими сертифікатами WINEHOOD</h3>
+          <div className="payment-option-header">
+            <span className="payment-option-icon">
+              <img src={license} alt="Подарункові сертифікати" />
+            </span>
+          </div>
+          <div className="payment-option-content">
+            <h3 className="option-title">Подарунковими сертифікатами WINEHOOD</h3>
+          </div>
         </div>
       </div>
 
