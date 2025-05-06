@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import { CartProvider } from './components/Context/CartContext.jsx';
 import ForgotPasswordPage from './components/Header/ForgotPassword/ForgotPasswordPage';
@@ -50,7 +50,7 @@ function AppContent() {
 function App() {
   return (
     <CartProvider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <AppContent />
       </Router>
     </CartProvider>
