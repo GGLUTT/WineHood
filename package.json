@@ -2,7 +2,7 @@
   "name": "wine-hood-store",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://fe-feb24-team147.github.io/wine-hood-store",
+  "homepage": "https://gglutt.github.io/WineHood",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
