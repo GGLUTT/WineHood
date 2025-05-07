@@ -50,7 +50,7 @@ function AppContent() {
 function App() {
   return (
     <CartProvider>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <AppContent />
       </Router>
     </CartProvider>
