@@ -6,7 +6,7 @@ A responsive web application for browsing and exploring fine wines. This project
 
 ## Live Preview
 
-You can view the wine catalog here: [DEMO LINK](https://github.com/GGLUTT/WineHood)
+You can view the wine catalog here: [DEMO LINK](https://gglutt.github.io/WineHood/)
 
 ## Design Reference
 
