@@ -5,6 +5,8 @@ import logo from "../../img/Logo.svg";
 import exslusive from "../../img/wine.png";
 import avatar from "../../img/avatar.png";
 import merlot from "../../img/merlot.png";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // import WineText from "../../img/WineText.png"; 
 // import HoodText from "../../img/HoodText.png";
@@ -21,8 +23,13 @@ const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  
-
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out-cubic',
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

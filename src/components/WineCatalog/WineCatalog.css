@@ -958,7 +958,7 @@ padding: 0;
   }
   
   .products-column,
-  .w-full.lg:w-3/4 {
+  .w-full.lg\:w-3\/4 {
     flex: 0 0 100%;
     width: 100%;
     max-width: 100%;

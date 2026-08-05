@@ -1067,15 +1067,6 @@ background: rgb(38, 38, 38);
   }
   
   @media (max-width: 768px) {
-    .header-container {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .nav-links {
-      gap: 1.5rem;
-    }
-    
     .hero-title {
       font-size: 3.5rem;
     }
@@ -1122,5 +1113,101 @@ background: rgb(38, 38, 38);
       border-radius: 4px;
     }
   }
+
+/* --- Custom Premium Entrance Animations --- */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUpCustom {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Apply entrance animations to Hero elements */
+.wine-text {
+  animation: slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hood-text {
+  animation: slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-subtitle {
+  animation: fadeInUpCustom 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-description {
+  animation: fadeInUpCustom 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.cta-container {
+  animation: fadeInUpCustom 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+
+/* --- Mobile Responsiveness Adjustments --- */
+@media (max-width: 768px) {
+  /* Headings scaling */
+  .section-title_aboutUs,
+  .section-title_people,
+  .wine-categories-title,
+  .section-title {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
+  }
+
+  .about-text {
+    max-width: 100% !important;
+    text-align: center !important;
+    font-size: 15px !important;
+  }
+
+  /* Catalog grid stacking */
+  .catalog-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .catalog-card {
+    height: 180px !important;
+  }
+
+  .catalog-content-home-page {
+    padding: 20px !important;
+  }
+
+  /* About us layout buttons positioning */
+  .about-button {
+    position: static !important;
+    margin: 20px auto 0 !important;
+    display: flex !important;
+  }
+}
 
   /* UPDATE 04.03 blog category  */

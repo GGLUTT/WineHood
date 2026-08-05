@@ -229,4 +229,13 @@
   .right-card-bottom {
     height: 250px;
   }
+
+  .right-card-top {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
+  .right-card-bottom {
+    width: 100% !important;
+  }
 }
