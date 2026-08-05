@@ -15,6 +15,7 @@ const Header = () => {
   const [cartBump, setCartBump] = useState(false);
   const [prevCartItems, setPrevCartItems] = useState(0);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   // Handle scroll effect
   useEffect(() => {
@@ -41,12 +42,34 @@ const Header = () => {
     setPrevCartItems(currentItems);
   }, [getTotalItems, prevCartItems]);
 
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
+  // Close burger menu if profile menu is opened
+  useEffect(() => {
+    if (isProfileMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [isProfileMenuOpen]);
+
   // Кнопка профілю для передачі в ProfileMenu
   const profileButton = (
     <button 
       className="icon-button" 
       aria-label="Профіль" 
-      onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+      onClick={() => {
+        setIsMenuOpen(false);
+        setIsProfileMenuOpen(!isProfileMenuOpen);
+      }}
     >
       <img src={userIcon} alt="Профіль" />
     </button>
@@ -55,24 +78,35 @@ const Header = () => {
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
-        <nav className="nav-menu">
+        {/* Hamburger Menu Button */}
+        <button 
+          className={`burger-button ${isMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Меню"
+        >
+          <span className="burger-line"></span>
+          <span className="burger-line"></span>
+          <span className="burger-line"></span>
+        </button>
+
+        <nav className={`nav-menu ${isMenuOpen ? 'open' : ''}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/catalog">Каталог</Link>
+              <Link to="/catalog" onClick={() => setIsMenuOpen(false)}>Каталог</Link>
             </li>
             <li className="nav-item">
-              <Link to="/promotions">Акції</Link>
+              <Link to="/promotions" onClick={() => setIsMenuOpen(false)}>Акції</Link>
             </li>
             <li className="nav-item">
-              <Link to="/blog">Блог</Link>
+              <Link to="/blog" onClick={() => setIsMenuOpen(false)}>Блог</Link>
             </li>
             <li className="nav-item">
-              <Link to="/about">Про нас</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)}>Про нас</Link>
             </li>
           </ul>
         </nav>
         
-        <Link to="/" className="logo-link">
+        <Link to="/" className="logo-link" onClick={() => setIsMenuOpen(false)}>
           <img className="logo-img" src={logo} alt="Logo" />
         </Link>
         
@@ -82,7 +116,10 @@ const Header = () => {
           </button>
           <button 
             className={`icon-button cart-button ${cartBump ? 'bump' : ''}`}
-            onClick={toggleCart}
+            onClick={() => {
+              setIsMenuOpen(false);
+              toggleCart();
+            }}
             aria-label="Кошик"
             style={cartBump ? { animation: 'bump 0.3s ease' } : {}}
           >

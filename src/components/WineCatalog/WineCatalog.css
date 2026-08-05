@@ -349,7 +349,7 @@ padding: 0;
 }
 
 .filter-option {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   margin-bottom: 4px;
   position: relative;
@@ -358,6 +358,7 @@ padding: 0;
   font-size: 14px;
   color: #262626;
   padding: 2px 0;
+  width: fit-content;
 }
 
 .filter-option:hover .filter-checkbox {
@@ -431,8 +432,8 @@ padding: 0;
 }
 
 .filter-option span {
-  flex-grow: 1;
-  display: flex;
+  flex-grow: 0;
+  display: inline-flex;
   align-items: center;
   user-select: none;
 }
@@ -904,21 +905,60 @@ padding: 0;
   color: #4A2511;
 }
 
+.filter-apply-mobile {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .catalog-content {
     flex-wrap: wrap;
   }
   
+  .mobile-filters-button {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
   .filter-column {
+    display: none;
     flex: 0 0 100%;
     width: 100%;
     max-width: 100%;
     position: static;
-    padding-right: 0;
+    padding: 1.5rem;
+    background-color: #FFF8F8;
+    border: 1px solid #F3D5D5;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .filter-column.mobile-open {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  .filter-apply-mobile {
+    display: block !important;
+    background-color: #8D0314;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .filter-apply-mobile:hover {
+    background-color: #a50317;
   }
   
   .products-column,
-  .w-full.lg\:w-3\/4 {
+  .w-full.lg:w-3/4 {
     flex: 0 0 100%;
     width: 100%;
     max-width: 100%;

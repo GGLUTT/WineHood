@@ -36,6 +36,7 @@ const WineCatalog = () => {
   const totalPages = 103;
   const itemsPerPage = 12;
   const { addToCart } = useCart();
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
   const [filters, setFilters] = useState({
     color: [],
@@ -635,9 +636,16 @@ const WineCatalog = () => {
                 <p className="product-count">{totalItems} Товарів</p>
               </div>
 
+              <button 
+                className="mobile-filters-button"
+                onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
+              >
+                {isMobileFiltersOpen ? "Сховати фільтри" : "Показати фільтри"}
+              </button>
+
               <div className="catalog-content">
                 {/* Ліва колонка з фільтрами */}
-                <div className="filter-column">
+                <div className={`filter-column ${isMobileFiltersOpen ? 'mobile-open' : ''}`}>
                   <h3 className="text-filter-title">Фільтри</h3>
 
                   <FilterSection
@@ -795,6 +803,12 @@ const WineCatalog = () => {
                       onClick={resetAllFilters}
                     >
                       Скинути фільтри
+                    </button>
+                    <button
+                      className="filter-button filter-apply-mobile w-full mt-2"
+                      onClick={() => setIsMobileFiltersOpen(false)}
+                    >
+                      Показати товари
                     </button>
                   </div>
                 </div>
