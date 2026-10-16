@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/WineHood/static/css/main.8c83b24f.css",
-    "main.js": "/WineHood/static/js/main.63514d42.js",
+    "main.css": "/WineHood/static/css/main.fa90174d.css",
+    "main.js": "/WineHood/static/js/main.1cf5060e.js",
     "static/js/453.2405243b.chunk.js": "/WineHood/static/js/453.2405243b.chunk.js",
     "static/media/aboutus.mp4": "/WineHood/static/media/aboutus.374d3aa48e86a496a048.mp4",
     "static/media/poidanie.mp4": "/WineHood/static/media/poidanie.80947fb428171f5f67fd.mp4",
@@ -65,12 +65,12 @@
     "static/media/arrow-down.svg": "/WineHood/static/media/arrow-down.1edfab86f389055c97b80ec14e52f85c.svg",
     "static/media/arrow.svg": "/WineHood/static/media/arrow.2e2de878a7b4373d7d84c9e1367cd04d.svg",
     "static/media/eye-off.svg": "/WineHood/static/media/eye-off.bb2f7e13049a55edfebd8e3908050386.svg",
-    "main.8c83b24f.css.map": "/WineHood/static/css/main.8c83b24f.css.map",
-    "main.63514d42.js.map": "/WineHood/static/js/main.63514d42.js.map",
+    "main.fa90174d.css.map": "/WineHood/static/css/main.fa90174d.css.map",
+    "main.1cf5060e.js.map": "/WineHood/static/js/main.1cf5060e.js.map",
     "453.2405243b.chunk.js.map": "/WineHood/static/js/453.2405243b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8c83b24f.css",
-    "static/js/main.63514d42.js"
+    "static/css/main.fa90174d.css",
+    "static/js/main.1cf5060e.js"
   ]
 }
