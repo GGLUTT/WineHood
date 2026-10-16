@@ -1670,3 +1670,31 @@ text-align: left;
   width: 100%;
   min-height: 400px;
 }
+/* Чіп активного пошукового запиту */
+.catalog-search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 8px 8px 8px 16px;
+  border: 1px solid rgba(141, 3, 20, 0.3);
+  background: #fff8f8;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #23272c;
+}
+
+.catalog-search-chip button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #8d0314;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.catalog-search-chip button:hover {
+  background: rgba(141, 3, 20, 0.08);
+}

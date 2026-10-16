@@ -1,0 +1,267 @@
+.search-backdrop {
+  position: fixed;
+  inset: var(--wh-header-h, 89px) 0 0 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+.search-backdrop.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - var(--wh-header-h, 89px));
+  max-height: calc(100dvh - var(--wh-header-h, 89px));
+  overflow-y: auto;
+  background: #fff;
+  border-bottom: 1px solid rgb(182, 182, 182);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.search-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.search-panel-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 28px var(--wh-gutter, 16px) 32px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 8px 0 16px;
+  border: 1px solid #23272c;
+  background: #fff;
+}
+
+.search-form:focus-within {
+  border-color: var(--wh-red, #8d0314);
+  box-shadow: 0 0 0 3px rgba(141, 3, 20, 0.12);
+}
+
+.search-form-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #6b6b6b;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #1c1c1c;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+}
+
+.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-clear {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b6b6b;
+  cursor: pointer;
+}
+
+.search-clear:hover {
+  background: #f2f2f2;
+}
+
+.search-submit {
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  background: var(--wh-red, #8d0314);
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-submit:hover {
+  background: var(--wh-red-dark, #6b0210);
+}
+
+.search-label {
+  display: block;
+  margin: 24px 0 12px;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-chip {
+  padding: 8px 14px;
+  border: 1px solid #d6d6d6;
+  border-radius: 20px;
+  background: #fff;
+  color: #23272c;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.search-chip:hover {
+  border-color: var(--wh-red, #8d0314);
+  color: var(--wh-red, #8d0314);
+}
+
+.search-empty {
+  margin: 24px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.search-results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-result {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 8px;
+  border: none;
+  border-bottom: 1px solid #efefef;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.search-result:hover,
+.search-result:focus-visible {
+  background: #f7f5f5;
+}
+
+.search-result-image {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #efedee;
+}
+
+.search-result-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.search-result-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.search-result-name {
+  font-family: "Oswald", sans-serif;
+  font-size: 17px;
+  color: #1c1c1c;
+  text-transform: uppercase;
+}
+
+.search-result-meta {
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.search-result-price {
+  font-family: "Oswald", sans-serif;
+  font-size: 17px;
+  color: #a30000;
+  white-space: nowrap;
+}
+
+.search-all {
+  margin-top: 16px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--wh-red, #8d0314);
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.search-all:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .search-panel-inner {
+    padding: 16px var(--wh-gutter, 16px) 24px;
+  }
+
+  .search-form {
+    height: 52px;
+    padding-left: 12px;
+  }
+
+  .search-submit {
+    display: none;
+  }
+
+  .search-result {
+    gap: 12px;
+    padding: 10px 0;
+  }
+
+  .search-result-name {
+    font-size: 15px;
+  }
+}

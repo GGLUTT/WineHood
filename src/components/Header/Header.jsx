@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 import searchIcon from '../../img/ico/search.svg';
@@ -7,6 +7,7 @@ import userIcon from '../../img/ico/user.svg';
 import logo from "../../img/Logo.svg";
 import ShoppingCart from '../Cart/ShoppingCart';
 import ProfileMenu from '../ProfileMenu/ProfileMenu.jsx';
+import SearchPanel from './SearchPanel/SearchPanel';
 import { useCart } from '../Context/CartContext';
 
 const navItems = [
@@ -23,6 +24,8 @@ const Header = () => {
   const [cartBump, setCartBump] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const closeSearch = useCallback(() => setIsSearchOpen(false), []);
   const totalItems = getTotalItems();
   const prevItemsRef = useRef(totalItems);
 
@@ -56,7 +59,8 @@ const Header = () => {
   // Закриваємо мобільне меню при переході на іншу сторінку
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [location.pathname]);
+    setIsSearchOpen(false);
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     if (!isMenuOpen) return undefined;
@@ -89,7 +93,10 @@ const Header = () => {
           className={`burger-button ${isMenuOpen ? 'active' : ''}`}
           aria-label={isMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
           aria-expanded={isMenuOpen}
-          onClick={() => setIsMenuOpen((open) => !open)}
+          onClick={() => {
+            setIsSearchOpen(false);
+            setIsMenuOpen((open) => !open);
+          }}
         >
           <span />
           <span />
@@ -111,7 +118,15 @@ const Header = () => {
         </Link>
 
         <div className="header-controls">
-          <button className="icon-button search-button" aria-label="Пошук">
+          <button
+            className={`icon-button search-button ${isSearchOpen ? 'active' : ''}`}
+            aria-label={isSearchOpen ? 'Закрити пошук' : 'Пошук'}
+            aria-expanded={isSearchOpen}
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsSearchOpen((open) => !open);
+            }}
+          >
             <img src={searchIcon} alt="" />
           </button>
           <button
@@ -149,6 +164,8 @@ const Header = () => {
           <Link to="/register" tabIndex={isMenuOpen ? 0 : -1}>Зареєструватися</Link>
         </div>
       </nav>
+
+      <SearchPanel isOpen={isSearchOpen} onClose={closeSearch} />
 
       {isCartOpen && (
         <div className="shopping-cart-wrapper">

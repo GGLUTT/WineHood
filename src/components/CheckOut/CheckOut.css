@@ -1,1296 +1,565 @@
-.checkout-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  color: #333;
-  animation: slideInFromBottom 0.5s ease-out;
+/* ===== Сторінка оформлення замовлення ===== */
+.checkout-page {
+  min-height: calc(100vh - var(--wh-header-h, 89px));
+  padding: clamp(28px, 5vw, 56px) 0 clamp(56px, 8vw, 96px);
+  background: var(--wh-light, #f5f5f5);
+  color: var(--wh-ink, #1c1c1c);
+  font-family: "Manrope", sans-serif;
 }
 
-.checkout-title {
-  margin-bottom: 40px;
-  color: #333;
-  position: relative;
-  display: inline-block;
-  animation: fadeInTitle 0.7s ease;
-  /* H2 */
-color: rgb(35, 39, 44);
-font-family: Oswald;
-font-size: 60px;
-font-weight: 300;
-line-height: 110%;
-letter-spacing: 0%;
-text-align: left;
-text-transform: uppercase;
-}
-
-.checkout-container section {
-  margin-bottom: 40px;
-  padding: 15px 15px 15px 0;
-  border-radius: 2px;
-}
-
-.checkout-container section h2 {
-  margin-bottom: 20px;
-  font-family: Oswald;
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 120%;
-  letter-spacing: 0%;
-  text-align: left;
-  position: relative;
-  padding-left: 15px;
-}
-
-/* Контактна інформація */
-.customer-type {
-  display: flex;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
-}
-
-.customer-option {
-  margin-right: 30px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-
-.customer-option:hover {
-  color: #d35050;
-}
-
-.customer-option.active {
-  font-weight: 600;
-  color: #d35050;
-}
-
-.form-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  flex: 1;
-  position: relative;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: rgb(115, 115, 115);
-  font-family: Manrope;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0%;
-  text-align: left;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 12px 15px;
-  box-sizing: border-box;
-  border: 1px solid rgb(182, 182, 182);
-  border-radius: 0;
-  color: rgb(76, 76, 75);
-  font-family: Manrope;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0%;
-  text-align: left;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  text-indent: 0;
-  padding-left: 15px;
-  vertical-align: middle;
-  position: relative;
-}
-
-.form-group input:focus {
-  border-color: #8B0029;
-  box-shadow: 0 0 8px rgba(139, 0, 41, 0.2);
-  outline: none;
-}
-
-/* Спосіб доставки */
-.delivery-method {
-  padding: 0;
-  margin-bottom: 40px;
-  width: 100%;
-}
-
-.delivery-method h2 {
-  margin-bottom: 20px;
-  font-family: Oswald;
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 120%;
-  padding-left: 15px;
-  text-align: left;
-}
-
-.delivery-options {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding-left: 15px;
-  margin-top: 30px;
-}
-
-.delivery-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Розташовуємо ціну справа */
-  padding: 8px 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  position: relative;
-  width: 100%;
-}
-
-/* Змінюємо стиль для активного елемента */
-.delivery-option.active {
-  background-color: transparent;
-  border-left: none;
-}
-
-.delivery-option input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.delivery-option .radio-custom {
-  margin-right: 10px;
-  flex-shrink: 0;
-}
-
-.delivery-option .option-text {
-  font-family: Manrope;
-  font-size: 16px;
-  font-weight: 400;
-  color: #262626;
-  margin-left: 10px;
-  flex: 1;
-  text-align: left;
-}
-
-.delivery-option .option-price {
-  font-family: Manrope;
-  font-size: 16px;
-  font-weight: 400;
-  color: #737373;
-  text-align: right;
-  margin-left: auto;
-  padding-right: 15px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Загальні стилі для всіх radio-custom */
-.radio-custom {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #666;
-  border-radius: 50%;
-  position: relative;
-  transition: border-color 0.3s ease;
-  flex-shrink: 0;
-}
-
-input[type="radio"]:checked + .radio-custom {
-  border-color: #8B0029;
-}
-
-input[type="radio"]:checked + .radio-custom:before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 6px;
-  height: 6px;
-  background-color: #8B0029;
-  border-radius: 50%;
-  animation: fadeIn 0.3s;
-}
-
-/* Нові стилі для розділу оплати */
-.payment-section {
-  padding: 0;
-  margin-bottom: 40px;
-  width: 100%;
-}
-
-.payment-section h2 {
-  margin-bottom: 20px;
-  font-family: Oswald;
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 120%;
-  text-align: left;
-  padding-left: 15px;
-}
-
-.payment-options-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  margin: 0;
-  padding-left: 15px;
-}
-
-.payment-option-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: relative;
-}
-
-.payment-option-item input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.custom-radio {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #666;
-  border-radius: 50%;
-  position: relative;
-  margin-right: 10px;
-  flex-shrink: 0;
-}
-
-.payment-option-item input[type="radio"]:checked + .custom-radio {
-  border-color: #8B0029;
-}
-
-.payment-option-item input[type="radio"]:checked + .custom-radio:before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 6px;
-  height: 6px;
-  background-color: #8B0029;
-  border-radius: 50%;
-}
-
-/* Виправлений стиль для тексту опцій в секції оплати */
-.payment-option-item .option-text {
-  margin-left: 10px;
-  font-family: Manrope;
-  font-size: 16px;
-  font-weight: 400;
-  color: #262626;
-  text-align: left;
-}
-
-/* Стиль для медіазапитів */
-@media (max-width: 768px) {
-  .payment-options-list {
-    width: 100%;
-  }
-}
-
-/* Збережіть існуючі стилі для option-price */
-.option-price {
-  color: rgb(115, 115, 115);
-  font-family: Manrope;
-  font-size: 18px;
-  font-weight: 400;
-  text-align: left;
-}
-
-/* Розділ коментаря */
-.comment-section {
-  margin-bottom: 40px;
-}
-
-.comment-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.comment-section textarea {
-  width: 100%;
-  height: 120px;
-  padding: 15px;
-  border: 1px solid #E0E0E0;
-  border-radius: 0;
-  resize: vertical;
-  font-family: inherit;
-  font-size: 16px;
-  color: #2D2D2D;
-  background-color: transparent;
-}
-
-.comment-section textarea::placeholder {
-  color: #BDBDBD;
-}
-
-.comment-section textarea:focus {
-  border-color: #8B0029;
-  outline: none;
-}
-
-.send-comment-button {
-  padding: 10px 30px;
-  background-color: transparent;
-  box-sizing: border-box;
-/* Secondary */
-border: 1px solid rgb(35, 39, 44);
-  color: #8B0029;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.co-title {
+  margin: 0 0 clamp(24px, 4vw, 40px);
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
   text-transform: uppercase;
-  width: fit-content;
-  /* Button */
-color: rgb(35, 39, 44);
-font-family: Oswald;
-font-size: 16px;
-font-weight: 400;
-line-height: 120%;
-letter-spacing: 0%;
-text-align: center;
-text-transform: uppercase;
+  color: var(--wh-ink, #1c1c1c);
 }
 
-.send-comment-button:hover {
-  background-color: #363636;
-  color: white;
+.co-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: start;
+  gap: 24px;
 }
 
-/* Адаптивність для мобільних пристроїв */
-@media (max-width: 768px) {
-  .comment-container {
-    align-items: stretch;
-  }
-  
-  .send-comment-button {
-    width: 100%;
-  }
-  
-  .delivery-option {
-    width: 100%;
-  }
-  
-  .checkout-payment-options {
-    width: 100%; /* Повна ширина на мобільних */
-    max-width: none;
-  }
-  
-  .payment-option {
-    padding: 8px 0; /* Менший відступ на мобільних */
-  }
+.co-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* Підсумок замовлення */
-.order-items {
-  margin-bottom: 30px;
+/* Картки кроків */
+.co-card {
+  padding: clamp(20px, 3vw, 32px);
+  background: #fff;
+  border: 1px solid #e6e4e5;
 }
 
-.order-items h3 {
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.order-item {
+.co-card-title {
   display: flex;
   align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.item-image {
-  width: 80px;
-  height: 80px;
-  margin-right: 20px;
-  overflow: hidden;
-}
-
-.item-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.item-info {
-  flex: 1;
-}
-
-.item-info h4 {
-  margin: 0 0 5px;
-  font-weight: 500;
-}
-
-.item-info p {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
-}
-
-.item-price {
-  font-weight: 600;
-  font-size: 18px;
-  color: #d35050;
-}
-
-.order-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 30px 0 20px;
-  padding: 20px 0;
-  border-top: 2px solid #f0f0f0;
-  font-size: 22px;
-}
-
-.total-label {
-  font-weight: 600;
-}
-
-.total-amount {
-  font-weight: 700;
-  color: #d35050;
-  font-size: 24px;
-  background-color: rgba(255, 240, 240, 0.7);
-  padding: 5px 15px;
-}
-
-/* Кнопка оформлення замовлення */
-.order-button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.submit-order {
-  width: auto;
-  min-width: 240px;
-  margin: 0;
-  display: block;
-  padding: 12px 30px;
-  background-color: #8B0029;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Oswald;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  gap: 12px;
+  margin: 0 0 20px;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 400;
   text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
+  color: var(--wh-ink, #1c1c1c);
 }
 
-.submit-order:hover {
-  background-color: #7a0023;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(139, 0, 41, 0.2);
-}
-
-.submit-order:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(139, 0, 41, 0.3);
-}
-
-.navigation-buttons {
-  display: flex;
+.co-card-title span {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  gap: 20px;
-}
-
-.back-button {
-  padding: 15px 35px;
-  background-color: transparent;
-  color: #666;
-  border: 1px solid #eee;
-  border-radius: 0;
+  border-radius: 50%;
+  background: var(--wh-red, #8d0314);
+  color: #fff;
   font-size: 16px;
-  font-weight: 500;
+}
+
+/* Перемикач "новий / постійний" */
+.co-segmented {
+  display: inline-flex;
+  margin-bottom: 24px;
+  padding: 4px;
+  background: #f1efef;
+}
+
+.co-segmented button {
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: #6b6b6b;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.back-button:hover {
-  background-color: #f5f5f5;
+.co-segmented button.active {
+  background: #fff;
+  color: var(--wh-red, #8d0314);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-/* Адаптивні стилі */
-@media (max-width: 768px) {
-  .form-row {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .checkout-title {
-    font-size: 24px;
-  }
-  
-  .checkout-container section h2 {
-    font-size: 20px;
-  }
-  
-  .customer-type {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .order-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .item-image {
-    margin-bottom: 15px;
-  }
-  
-  .item-price {
-    margin-top: 10px;
-  }
-  
-  .navigation-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .send-button, .back-button {
-    width: 100%;
-  }
+/* Поля */
+.co-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
 }
 
-/* Стилізація для фокусу
-.checkout-container input:focus, .checkout-container textarea:focus {
-  outline: none;
-  border-color: #d35050;
-  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
-} */
-
-.checkout-container input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Покращена видимість полів */
-.checkout-container input, .checkout-container textarea {
-  background-color: transparent !important;
-}
-
-/* Контейнер із підсумком замовлення */
-.order-summary {
-  padding: 30px;
-  background-color: white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border-radius: 4px;
+.co-grid--spaced {
   margin-top: 20px;
 }
 
-/* Заголовок замовлення */
-.order-items h3 {
-  margin-bottom: 25px;
-  font-weight: 600;
-  font-family: Oswald;
-  font-size: 22px;
-  text-transform: uppercase;
-  color: #333;
-  position: relative;
-  padding-bottom: 10px;
+.co-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.order-items h3:after {
+.co-field > span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+.co-field input,
+.co-field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d4d2d3;
+  border-radius: 0;
+  background: #fff;
+  color: var(--wh-ink, #1c1c1c);
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.co-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.co-field input::placeholder,
+.co-field textarea::placeholder {
+  color: #9b9b9b;
+}
+
+.co-field input:focus,
+.co-field textarea:focus {
+  border-color: var(--wh-red, #8d0314);
+  box-shadow: 0 0 0 3px rgba(141, 3, 20, 0.1);
+}
+
+.co-field input:user-invalid {
+  border-color: #c62828;
+}
+
+.co-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Варіанти доставки й оплати */
+.co-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.co-options--three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.co-option {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #d4d2d3;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.co-option:hover {
+  border-color: #a5a3a4;
+}
+
+.co-option.active {
+  border-color: var(--wh-red, #8d0314);
+  background: #fff8f8;
+}
+
+.co-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.co-radio {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border: 2px solid #a5a3a4;
+  border-radius: 50%;
+  transition: border-color 0.2s ease;
+}
+
+.co-option.active .co-radio {
+  border-color: var(--wh-red, #8d0314);
+}
+
+.co-option.active .co-radio::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background-color: #8B0029;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--wh-red, #8d0314);
 }
 
-/* Покращений вигляд елементів замовлення */
-.order-item {
+.co-option input:focus-visible + .co-radio {
+  box-shadow: 0 0 0 3px rgba(141, 3, 20, 0.2);
+}
+
+.co-option-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.co-option-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--wh-ink, #1c1c1c);
+}
+
+.co-option-text small {
+  font-size: 13px;
+  color: #7a7a7a;
+}
+
+.co-option-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wh-red, #8d0314);
+  text-align: right;
+  max-width: 110px;
+}
+
+/* Підказка для постійного клієнта */
+.co-login-hint p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4a4a4a;
+}
+
+.co-login-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Кнопки */
+.co-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 28px;
+  border: 1px solid transparent;
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.co-btn--primary {
+  background: var(--wh-red, #8d0314);
+  color: #fff;
+}
+
+.co-btn--primary:hover {
+  background: var(--wh-red-dark, #6b0210);
+}
+
+.co-btn--primary:disabled {
+  background: #c9c7c8;
+  cursor: not-allowed;
+}
+
+.co-btn--ghost {
+  border-color: var(--wh-graphite, #23272c);
+  background: transparent;
+  color: var(--wh-graphite, #23272c);
+}
+
+.co-btn--ghost:hover {
+  background: var(--wh-graphite, #23272c);
+  color: #fff;
+}
+
+/* Підсумок */
+.co-summary {
+  position: sticky;
+  top: calc(var(--wh-header-h, 89px) + 16px);
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e6e4e5;
+}
+
+.co-summary-title {
+  margin: 0 0 16px;
+  font-family: "Oswald", sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.co-items {
+  max-height: 360px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.co-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #efefef;
+}
+
+.co-item:first-child {
+  padding-top: 0;
+}
+
+.co-item-image {
+  width: 64px;
+  height: 80px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #f0f0f0;
+  justify-content: center;
+  background: var(--wh-card, #efedee);
 }
 
-.order-item:last-child {
-  border-bottom: none;
-}
-
-/* Зображення товару */
-.item-image {
-  width: 90px;
-  height: 120px;
-  margin-right: 25px;
-  overflow: hidden;
-  border-radius: 2px;
-  background-color: #f9f9f9;
-}
-
-.item-image img {
-  width: 100%;
-  height: 100%;
+.co-item-image img {
+  max-width: 90%;
+  max-height: 90%;
   object-fit: contain;
 }
 
-/* Інформація про товар */
-.item-info {
+.co-item-info {
   flex: 1;
-}
-
-.item-info h4 {
-  margin: 0 0 8px;
-  font-weight: 600;
-  font-size: 18px;
-  color: #333;
-}
-
-.item-info p {
-  margin: 0 0 5px;
-  color: #666;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-/* Ціна товару */
-.item-price {
-  font-weight: 700;
-  font-size: 20px;
-  color: #8B0029;
-  margin-left: 15px;
-}
-
-/* Підсумок замовлення */
-.order-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 30px 0;
-  padding: 20px 0;
-  border-top: 2px solid #f0f0f0;
-  font-size: 22px;
-}
-
-.total-label {
-  font-weight: 600;
-  color: #333;
-  font-family: Oswald;
-  text-transform: uppercase;
-}
-
-.total-amount {
-  font-weight: 700;
-  color: #8B0029;
-  font-size: 26px;
-  background-color: #fcf1f2;
-  padding: 8px 20px;
-  border-radius: 2px;
-}
-
-/* Кнопка оформлення замовлення */
-.submit-order {
-  width: auto;
-  min-width: 240px;
-  /* margin: 0 auto; */
-  display: block;
-  padding: 12px 30px;
-  background-color: #8B0029;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Oswald;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-}
-
-.submit-order:hover {
-  background-color: #7a0023;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(139, 0, 41, 0.2);
-}
-
-.submit-order:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(139, 0, 41, 0.3);
-}
-
-.navigation-buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 20px;
-}
-
-.back-button {
-  padding: 15px 35px;
-  background-color: transparent;
-  color: #666;
-  border: 1px solid #eee;
-  border-radius: 0;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.back-button:hover {
-  background-color: #f5f5f5;
-}
-
-/* Адаптивні стилі */
-@media (max-width: 768px) {
-  .form-row {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .checkout-title {
-    font-size: 24px;
-  }
-  
-  .checkout-container section h2 {
-    font-size: 20px;
-  }
-  
-  .customer-type {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .order-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .item-image {
-    margin-bottom: 15px;
-  }
-  
-  .item-price {
-    margin-top: 10px;
-  }
-  
-  .navigation-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .send-button, .back-button {
-    width: 100%;
-  }
-}
-
-/* Стилізація для фокусу
-.checkout-container input:focus, .checkout-container textarea:focus {
-  outline: none;
-  border-color: #d35050;
-  box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
-} */
-
-.checkout-container input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Покращена видимість полів */
-.checkout-container input, .checkout-container textarea {
-  background-color: transparent !important;
-}
-
-.forgot-password {
-  display: block;
-  text-align: right;
-  color: #2D2D2D;
-  text-decoration: none;
-  font-size: 14px;
-  margin-top: 8px;
-}
-
-.login-button {
-  width: 100%;
-  padding: 14px;
-background: rgb(141, 3, 20);
-  color: white;
-  border: none;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 20px;
-  /* Button */
-color: rgb(255, 255, 255);
-font-family: Oswald;
-font-size: 16px;
-font-weight: 400;
-line-height: 120%;
-letter-spacing: 0%;
-text-align: center;
-text-transform: uppercase;
-}
-
-.dividers {
-  text-align: center;
-  margin: 20px 0;
-  position: relative;
-}
-
-.dividers::before,
-.dividers::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 45%;
-  height: 1px;
-  background-color: #E0E0E0;
-}
-
-.dividers::before {
-  left: 0;
-}
-
-.dividers::after {
-  right: 0;
-}
-
-.dividers span {
-  background-color: white;
-  padding: 0 10px;
-  color: #757575;
-  font-size: 14px;
-}
-
-.google-login {
-  width: 100%;
-  padding: 12px;
-  background-color: white;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 14px;
-  color: #2D2D2D;
-  cursor: pointer;
-}
-
-.google-login img {
-  width: 20px;
-  height: 20px;
-}
-
-.option-text {
-  color: rgb(76, 76, 75);
-  font-family: Manrope;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0%;
-  text-align: left;
-  flex: 1;
-  margin-left: 10px;
-}
-
-/* Оновлюю спільні стилі для обох секцій */
-.checkout-container section.delivery-method, 
-.checkout-container section.payment-section {
-  padding: 0 !important;
-  margin-bottom: 40px;
-  width: 100%;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 30px !important;
-}
-
-/* Загальні стилі для заголовків обох секцій */
-.delivery-method h2,
-.payment-section h2 {
-  font-family: Oswald;
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 120%;
-  padding-left: 15px;
-  text-align: left;
-  text-transform: uppercase;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Стилі для списків опцій у обох секціях */
-.delivery-options,
-.payment-options-list {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding-left: 15px;
-  margin-top: 25px;
+  gap: 2px;
 }
 
-/* Спільні стилі для елементів вибору */
-.delivery-option,
-.payment-option-item {
-  display: flex;
+.co-item-name {
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.co-item-type {
+  font-size: 12px;
+  color: #7a7a7a;
+}
+
+.co-qty {
+  display: inline-flex;
   align-items: center;
-  padding: 8px 0;
+  width: fit-content;
+  margin-top: 8px;
+  border: 1px solid #d4d2d3;
+}
+
+.co-qty button {
+  width: 30px;
+  height: 30px;
   border: none;
   background: transparent;
-  cursor: pointer;
-  position: relative;
-  width: 100%;
-}
-
-/* Стилі для тексту опцій в обох секціях */
-.delivery-option .option-text,
-.payment-option-item .option-text {
-  font-family: Manrope;
+  color: var(--wh-ink, #1c1c1c);
   font-size: 16px;
-  font-weight: 400;
-  color: #262626;
-  margin-left: 10px;
-  flex: 1;
-  text-align: left;
-}
-
-/* Стиль для ціни в доставці */
-.delivery-option .option-price {
-  font-family: Manrope;
-  font-size: 16px;
-  font-weight: 400;
-  color: #737373;
-  text-align: right;
-  margin-left: auto;
-  padding-right: 15px;
-}
-
-/* Видаляю неактуальні стилі, які більше не використовуються */
-.delivery-option:hover,
-.payment-option-item:hover {
-  background-color: transparent;
-}
-
-/* Для розділу з рожевим фоном */
-.checkout-container section.payment-section {
-  padding: 20px 0 !important;
-  border-bottom: none;
-}
-
-/* Встановлюю правильний вигляд радіо-кнопок */
-.radio-custom,
-.custom-radio {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #666;
-  border-radius: 50%;
-  margin-right: 10px;
-  flex-shrink: 0;
-}
-
-/* Активне стан радіо-кнопки */
-input[type="radio"]:checked + .radio-custom,
-input[type="radio"]:checked + .custom-radio {
-  border-color: #8B0029;
-}
-
-input[type="radio"]:checked + .radio-custom:before,
-input[type="radio"]:checked + .custom-radio:before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 6px;
-  height: 6px;
-  background-color: #8B0029;
-  border-radius: 50%;
-}
-
-/* Анімації для появи */
-@keyframes slideInFromBottom {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInTitle {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Стилізація для активних елементів */
-.delivery-option.active, .payment-option.active {
-  background-color: rgba(211, 80, 80, 0.1);
-  border-left: 3px solid #d35050;
-}
-
-/* Базові стилі для чекбоксів */
-input[type="checkbox"] + label {
-  position: relative;
-  padding-left: 28px;
   cursor: pointer;
-  display: inline-block;
-  line-height: 20px;
 }
 
-input[type="checkbox"] + label:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #ccc;
-  background: #fff;
-  transition: all 0.3s ease;
+.co-qty button:hover {
+  background: #f3f1f2;
 }
 
-input[type="checkbox"]:checked + label:before {
-  background: #d35050;
-  border-color: #d35050;
-}
-
-input[type="checkbox"]:checked + label:after {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  width: 6px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-/* Прокрутка для текстового поля */
-.comment-section textarea::-webkit-scrollbar {
-  width: 6px;
-}
-
-.comment-section textarea::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.comment-section textarea::-webkit-scrollbar-thumb {
-  background: #d35050;
-  border-radius: 3px;
-}
-
-.comment-section textarea::-webkit-scrollbar-thumb:hover {
-  background: #c04040;
-}
-
-/* Стилі для форми логіну */
-.login-form {
-  max-width: 400px;
-}
-
-.login-form .form-group {
-  margin-bottom: 20px;
-}
-
-.login-form label {
-  display: block;
-  margin-bottom: 8px;
-  color: #2D2D2D;
+.co-qty span {
+  min-width: 28px;
   font-size: 14px;
+  font-weight: 600;
+  text-align: center;
 }
 
-.login-form input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #2D2D2D;
-}
-
-.login-form input::placeholder {
-  color: #BDBDBD;
-}
-
-.password-group {
-  position: relative;
-}
-
-.password-input {
-  position: relative;
-}
-
-.toggle-password {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-size: 20px;
-  color: #757575;
-}
-
-/* Виправлення для placeholder підказок */
-.form-group input::placeholder {
-  color: #999;
-  opacity: 0.5;
-}
-
-.form-group input::-webkit-input-placeholder {
-  color: #999;
-  opacity: 0.5;
-}
-
-.form-group input:-moz-placeholder {
-  color: #999;
-  opacity: 0.5;
-}
-
-.form-group input::-moz-placeholder {
-  color: #999;
-  opacity: 0.5;
-}
-
-.form-group input:-ms-input-placeholder {
-  color: #999;
-  opacity: 0.5;
-}
-
-.contact-info {
-  margin-bottom: 30px;
-}
-
-.contact-info .form-group {
-  position: relative;
-}
-
-.contact-info .form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: rgb(115, 115, 115);
-  font-weight: 500;
-}
-
-.contact-info .form-group input {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  line-height: normal;
-  color: #333;
-  background-color: white !important;
-  transition: border-color 0.3s;
-}
-
-.contact-info .form-group input:focus {
-  border-color: #8B0029;
-  box-shadow: none; /* Прибираємо тінь при фокусі */
-  outline: none;
-}
-
-/* Стилі для placeholder-підказок у полях введення */
-.contact-info .form-group input::placeholder {
-  color: #999;
-  opacity: 0.7;
-  font-size: 16px;
-}
-
-.button-container {
+.co-item-side {
   display: flex;
-  justify-content: center;
-  margin-top: 25px;
-  padding: 10px 0;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
-@media (max-width: 768px) {
-  .button-container {
-    padding: 5px 0;
-  }
-  
-  .submit-order {
-    width: 80%;
-    min-width: unset;
-  }
-}
-
-.order-icon {
-  margin-right: 10px;
+.co-item-price {
+  font-family: "Oswald", sans-serif;
   font-size: 16px;
-  display: inline-block;
-  transform: scale(1.2);
+  color: #a30000;
+  white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-  .button-container {
-    padding: 10px 15px;
+.co-item-remove {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #8a8a8a;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.co-item-remove:hover {
+  color: var(--wh-red, #8d0314);
+}
+
+.co-totals {
+  margin: 16px 0 20px;
+}
+
+.co-totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.co-totals dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--wh-ink, #1c1c1c);
+}
+
+.co-totals .co-totals-grand {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #e6e4e5;
+  font-family: "Oswald", sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--wh-ink, #1c1c1c);
+}
+
+.co-totals .co-totals-grand dd {
+  font-weight: 500;
+  color: #a30000;
+}
+
+.co-submit {
+  width: 100%;
+}
+
+.co-legal {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: #8a8a8a;
+}
+
+/* Порожній кошик */
+.co-empty {
+  max-width: 460px;
+  margin: clamp(24px, 8vw, 80px) auto;
+  padding: 40px 24px;
+  background: #fff;
+  border: 1px solid #e6e4e5;
+  text-align: center;
+}
+
+.co-empty svg {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  fill: none;
+  stroke: var(--wh-red, #8d0314);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.co-empty h1 {
+  margin: 0 0 8px;
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.co-empty p {
+  margin: 0 0 24px;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 1024px) {
+  .co-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
   }
-  
-  .button-container::before {
-    left: 5%;
-    right: 5%;
+
+  .co-options--three {
+    grid-template-columns: 1fr;
   }
-  
-  .submit-order {
-    width: 90%;
-    min-width: unset;
-    font-size: 15px;
-    padding: 12px 25px;
+}
+
+@media (max-width: 860px) {
+  .co-layout {
+    grid-template-columns: 1fr;
   }
-  
-  .order-icon {
-    margin-right: 8px;
-    transform: scale(1.1);
+
+  .co-summary {
+    position: static;
+  }
+
+  .co-items {
+    max-height: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .co-grid,
+  .co-options {
+    grid-template-columns: 1fr;
+  }
+
+  .co-segmented {
+    display: flex;
+  }
+
+  .co-segmented button {
+    flex: 1;
+    padding: 10px 8px;
+  }
+
+  .co-option {
+    padding: 14px;
+  }
+
+  .co-option-price {
+    max-width: 90px;
+  }
+
+  .co-login-actions .co-btn {
+    flex: 1;
   }
 }

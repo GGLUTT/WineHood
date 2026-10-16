@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import "./WineCatalog.css";
 import "./Product.css";
 import "./SortProduct.css";
@@ -13,10 +13,12 @@ import GeorgiaFlag from "../../img/ico/flags/icon_georgia.svg";
 import IzrailFlag from "../../img/ico/flags/icon_izrail.svg";
 import SpainFlag from "../../img/ico/flags/icon_spain.svg";
 import { useCart } from '../Context/CartContext.jsx';
-import penfolds from "../../img/wine_Category/penfolds.png";
+import { allWines, searchWines } from "../../data/wines";
 import Footer from "../Footer/Footer.jsx";
 
 const WineCatalog = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('q') || '';
   const [collapsedSections, setCollapsedSections] = useState({
     color: false,
     price: false,
@@ -129,152 +131,6 @@ const WineCatalog = () => {
     });
   };
 
-  const allWines = [
-    {
-      id: 1,
-      name: "Penfolds Bin 60A",
-      type: "Червоне вино",
-      color: "Червоне",
-      price: 19850,
-      onSale: false,
-      alcohol: "14%+",
-      taste: "Сухе",
-      country: "Австралія",
-      producer: "Penfolds",
-      character: "Глибоке",
-      volume: "0.75 л",
-      foodPairing: ["Дичина", "Баранина"],
-      image: penfolds,
-    },
-    {
-      id: 2,
-      name: "Penfolds Bin 60A",
-      type: "Червоне вино",
-      color: "Червоне",
-      price: 21500,
-      onSale: true,
-      alcohol: "14%+",
-      taste: "Сухе",
-      country: "Австралія",
-      producer: "Penfolds",
-      character: "Глибоке",
-      volume: "0.75 л",
-      foodPairing: ["Дичина", "Баранина"],
-      image: penfolds,
-    },
-    {
-      id: 3,
-      name: "Penfolds Bin 60A",
-      type: "Червоне вино",
-      color: "Червоне",
-      price: 18750,
-      onSale: false,
-      alcohol: "14%+",
-      taste: "Сухе",
-      country: "Австралія",
-      producer: "Penfolds",
-      character: "Глибоке",
-      volume: "0.75 л",
-      foodPairing: ["Дичина"],
-      image: penfolds,
-    },
-    {
-      id: 4,
-      name: "Cloudy Bay",
-      type: "Біле вино",
-      color: "Біле",
-      price: 2850,
-      onSale: false,
-      alcohol: "11-13%",
-      taste: "Сухе",
-      country: "Австралія",
-      producer: "Cloudy Bay",
-      character: "Квіткове",
-      volume: "0.75 л",
-      foodPairing: ["Біла риба (лосось, тунець тощо)"],
-      image: penfolds,
-    },
-    {
-      id: 5,
-      name: "Lou Rosé",
-      type: "Біле вино",
-      color: "Біле",
-      price: 1950,
-      onSale: true,
-      alcohol: "11-13%",
-      taste: "Напівсухе",
-      country: "Іспанія",
-      producer: "Lou",
-      character: "Легке",
-      volume: "0.75 л",
-      foodPairing: ["Аперитив"],
-      image: penfolds,
-    },
-    {
-      id: 6,
-      name: "Penfolds Bin 60A",
-      type: "Біле вино",
-      color: "Біле",
-      price: 3250,
-      onSale: false,
-      alcohol: "11-13%",
-      taste: "Сухе",
-      country: "Австралія",
-      producer: "Penfolds",
-      character: "Елегантне",
-      volume: "0.75 л",
-      foodPairing: ["Біла риба (лосось, тунець тощо)"],
-      image: penfolds,
-    },
-    {
-      id: 7,
-      name: "Villa Maria",
-      type: "Біле вино",
-      color: "Біле",
-      price: 1650,
-      onSale: false,
-      alcohol: "11-13%",
-      taste: "Сухе",
-      country: "Аргентина",
-      producer: "Villa Maria",
-      character: "Легке",
-      volume: "0.75 л",
-      foodPairing: ["Вегетаріанські"],
-      image: penfolds,
-    },
-    {
-      id: 8,
-      name: "Domaine Desvignes",
-      type: "Біле вино",
-      color: "Біле",
-      price: 2950,
-      onSale: true,
-      alcohol: "11-13%",
-      taste: "Сухе",
-      country: "Франція",
-      producer: "Domaine Desvignes",
-      character: "Квіткове",
-      volume: "0.75 л",
-      foodPairing: ["Аперитив"],
-      image: penfolds,
-    },
-    {
-      id: 9,
-      name: "Whispering Angel",
-      type: "Рожеве вино",
-      color: "Рожеве",
-      price: 2450,
-      onSale: false,
-      alcohol: "11-13%",
-      taste: "Сухе",
-      country: "Франція",
-      producer: "Whispering Angel",
-      character: "Легке",
-      volume: "0.75 л",
-      foodPairing: ["Аперитив"],
-      image: penfolds,
-    },
-  ];
 
   const colorCategories = [
     "Червоне",
@@ -399,7 +255,7 @@ const WineCatalog = () => {
   };
 
   const applyFilters = () => {
-    let result = [...allWines];
+    let result = searchQuery ? searchWines(searchQuery) : [...allWines];
 
     if (filters.color.length > 0) {
       result = result.filter((wine) => filters.color.includes(wine.color));
@@ -491,7 +347,7 @@ const WineCatalog = () => {
   // Додаємо новий useEffect для автоматичного застосування фільтрів
   useEffect(() => {
     applyFilters();
-  }, [filters]);
+  }, [filters, searchQuery]);
 
   const getCurrentPageWines = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -635,6 +491,13 @@ const WineCatalog = () => {
                 <h2 className="tittle-catalog">КАТАЛОГ</h2>
                 <p className="product-count">{totalItems} Товарів</p>
               </div>
+
+              {searchQuery && (
+                <div className="catalog-search-chip">
+                  <span>Результати пошуку: «{searchQuery}»</span>
+                  <button type="button" onClick={() => setSearchParams({})} aria-label="Скинути пошук">✕</button>
+                </div>
+              )}
 
               <button 
                 className="mobile-filters-button"
