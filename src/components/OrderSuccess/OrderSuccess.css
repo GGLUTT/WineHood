@@ -1,9 +1,5 @@
 /* Reset and full-screen layout */
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+.order-success-container {
   overflow-x: hidden;
 }
 
@@ -86,7 +82,7 @@ body, html {
 }
 
 /* Section titles */
-.section-title {
+.order-success-container .section-title {
   font-size: 20px;
   color: #fff;
   margin-bottom: 20px;

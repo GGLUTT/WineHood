@@ -1,73 +1,46 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './WineCategories.css';
 
-// Import images
-import redWineImage from '../../../img/red_wine.png';
-import whiteWineImage from '../../../img/white_wine.png';
-import pinkWineImage from '../../../img/pink_wine.png';
-import sparklingWineImage from '../../../img/igristoe_wine.png';
+import redWineImage from '../../../img/red_wine.webp';
+import whiteWineImage from '../../../img/white_wine.webp';
+import pinkWineImage from '../../../img/pink_wine.webp';
+import sparklingWineImage from '../../../img/igristoe_wine.webp';
 
-const WineCategories = () => {
-  const categories = [
-    {
-      title: 'ЧЕРВОНЕ ВИНО',
-      image: redWineImage,
-      alt: 'Red Wine',
-      customClass: 'red-wine-category',
-      width: 690
-    },
-    {
-      title: 'БІЛЕ ВИНО',
-      image: whiteWineImage,
-      alt: 'White Wine',
-      customClass: 'white-wine-category',
-      width: 486
-    },
-    {
-      title: 'РОЖЕВЕ ВИНО',
-      image: pinkWineImage,
-      alt: 'Rose Wine',
-      customClass: 'rose-wine-category',
-      width: 486
-    },
-    {
-      title: 'ІГРИСТЕ ВИНО',
-      image: sparklingWineImage,
-      alt: 'Sparkling Wine',
-      customClass: 'sparkling-wine-category',
-      width: 690,
-      left: 200
-    }
-  ];
+const categories = [
+  { title: 'ЧЕРВОНЕ ВИНО', image: redWineImage, alt: 'Червоне вино', modifier: 'red' },
+  { title: 'БІЛЕ ВИНО', image: whiteWineImage, alt: 'Біле вино', modifier: 'white' },
+  { title: 'РОЖЕВЕ ВИНО', image: pinkWineImage, alt: 'Рожеве вино', modifier: 'rose' },
+  { title: 'ІГРИСТЕ ВИНО', image: sparklingWineImage, alt: 'Ігристе вино', modifier: 'sparkling' },
+];
 
-  return (
-    <div className="wine-categories-container">
-      <div className="wine-categories-title-container">
-        <h2 className="wine-categories-title">КУПУЙТЕ ЗА КАТЕГОРІЯМИ</h2>
-      </div>
+const WineCategories = () => (
+  <section className="wine-categories" id="categories">
+    <div className="wh-container">
+      <h2 className="wh-section-title wine-categories-title" data-reveal>КУПУЙТЕ ЗА КАТЕГОРІЯМИ</h2>
       <div className="wine-categories-grid">
         {categories.map((category, index) => (
-          <div
-            key={index}
-            className={`wine-category-item ${category.customClass}`}
-            style={{ 
-              width: `${category.width}px`,
-              ...(category.left !== undefined && { left: `-${category.left}px` })
-            }}
+          <Link
+            to="/catalog"
+            key={category.modifier}
+            className={`wine-category-item wine-category-item--${category.modifier}`}
+            data-reveal
+            style={{ '--reveal-delay': `${index * 70}ms` }}
           >
             <img
               src={category.image}
               alt={category.alt}
               className="wine-category-image"
+              loading="lazy"
+              decoding="async"
             />
-            <div className="wine-category-overlay">
-              <span className="wine-category-label">{category.title}</span>
-            </div>
-          </div>
+            <span className="wine-category-label">{category.title}</span>
+            <span className="wine-category-arrow" aria-hidden="true">→</span>
+          </Link>
         ))}
       </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default WineCategories;

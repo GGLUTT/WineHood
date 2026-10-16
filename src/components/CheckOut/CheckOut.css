@@ -23,13 +23,13 @@ text-align: left;
 text-transform: uppercase;
 }
 
-section {
+.checkout-container section {
   margin-bottom: 40px;
   padding: 15px 15px 15px 0;
   border-radius: 2px;
 }
 
-section h2 {
+.checkout-container section h2 {
   margin-bottom: 20px;
   font-family: Oswald;
   font-size: 28px;
@@ -560,7 +560,7 @@ text-transform: uppercase;
     font-size: 24px;
   }
   
-  section h2 {
+  .checkout-container section h2 {
     font-size: 20px;
   }
   
@@ -593,13 +593,13 @@ text-transform: uppercase;
 }
 
 /* Стилізація для фокусу
-input:focus, textarea:focus {
+.checkout-container input:focus, .checkout-container textarea:focus {
   outline: none;
   border-color: #d35050;
   box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
 } */
 
-input[type="radio"] {
+.checkout-container input[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -607,7 +607,7 @@ input[type="radio"] {
 }
 
 /* Покращена видимість полів */
-input, textarea {
+.checkout-container input, .checkout-container textarea {
   background-color: transparent !important;
 }
 
@@ -791,7 +791,7 @@ input, textarea {
     font-size: 24px;
   }
   
-  section h2 {
+  .checkout-container section h2 {
     font-size: 20px;
   }
   
@@ -824,13 +824,13 @@ input, textarea {
 }
 
 /* Стилізація для фокусу
-input:focus, textarea:focus {
+.checkout-container input:focus, .checkout-container textarea:focus {
   outline: none;
   border-color: #d35050;
   box-shadow: 0 0 8px rgba(211, 80, 80, 0.3);
 } */
 
-input[type="radio"] {
+.checkout-container input[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -838,7 +838,7 @@ input[type="radio"] {
 }
 
 /* Покращена видимість полів */
-input, textarea {
+.checkout-container input, .checkout-container textarea {
   background-color: transparent !important;
 }
 
@@ -936,8 +936,8 @@ text-transform: uppercase;
 }
 
 /* Оновлюю спільні стилі для обох секцій */
-section.delivery-method, 
-section.payment-section {
+.checkout-container section.delivery-method, 
+.checkout-container section.payment-section {
   padding: 0 !important;
   margin-bottom: 40px;
   width: 100%;
@@ -1012,7 +1012,7 @@ section.payment-section {
 }
 
 /* Для розділу з рожевим фоном */
-section.payment-section {
+.checkout-container section.payment-section {
   padding: 20px 0 !important;
   border-bottom: none;
 }

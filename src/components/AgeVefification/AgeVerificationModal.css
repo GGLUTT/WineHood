@@ -12,11 +12,6 @@
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(5px);
-  transition: backdrop-filter 0.5s ease;
-}
-
-.age-verification-overlay:hover {
-  backdrop-filter: blur(8px);
 }
 
 /* Основний контейнер */
@@ -27,7 +22,7 @@
   border-radius: 12px;
   text-align: center;
   position: relative;
-  background: url('../../img/18+.jpg') center/cover no-repeat, rgb(35, 39, 44);
+  background: url('../../img/18+.webp') center/cover no-repeat, rgb(35, 39, 44);
   background-blend-mode: overlay;
   animation: fadeIn 0.4s ease-in-out;
   transition: box-shadow 0.4s ease, transform 0.3s ease;
@@ -37,7 +32,7 @@
   transform: scale(1.02);
 }
 
-p {
+.age-verification-modal p {
   font-family: Manrope;
   font-size: 18px;
   font-weight: 400;

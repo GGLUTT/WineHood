@@ -1,142 +1,131 @@
-.wine-categories-container {
-    width: 100%;
-    padding: 40px 20px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .wine-categories-title-container {
-    width: 100%;
-    max-width: 1200px; 
-    margin: 0 auto; 
-    margin-bottom: 20px;
-    padding: 0 20px; 
-  }
-  
-  .wine-categories-title {
-    font-family: Oswald;
-    font-size: 60px;
-    font-weight: 300;
-    color: #333;
-    margin: 0;
-    text-transform: uppercase;
-    text-align: left; 
-  }
+.wine-categories {
+  padding: var(--wh-section-y) 0;
+  background-color: #fff;
+}
 
-/* Головна сітка для розташування блоків */
+.wine-categories-title {
+  margin-bottom: 32px;
+}
+
 .wine-categories-grid {
-    display: grid;
-    grid-template-columns: 690px 486px;
-    grid-template-rows: repeat(2, 200px);
-    gap: 10px;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: clamp(200px, 22vw, 260px);
+  gap: 16px;
+}
+
+.wine-category-item--red,
+.wine-category-item--sparkling {
+  grid-column: span 7;
+}
+
+.wine-category-item--white,
+.wine-category-item--rose {
+  grid-column: span 5;
 }
 
 .wine-category-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
 }
 
-.wine-category-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+.wine-category-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.1) 55%, rgba(0, 0, 0, 0.35) 100%);
+  transition: background-color 0.3s ease;
 }
 
-.wine-category-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    transition: background 0.3s ease;
-  }
+.wine-category-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--wh-ease);
+}
+
+.wine-category-item:hover .wine-category-image {
+  transform: scale(1.06);
+}
+
+.wine-category-item:hover::after {
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
 .wine-category-label {
-    color: white;
-    font-family: Oswald;
-font-size: 40px;
-font-weight: 400;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    text-align: left;
-    text-transform: uppercase;
-    opacity: 1;
-    margin: 0;
-    z-index: 10;
-  }
-.wine-category-item:hover img {
-    transform: scale(1.05);
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  z-index: 1;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
-.wine-category-item:hover .wine-category-overlay {
-    background: rgba(0, 0, 0, 0.6);
+.wine-category-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  font-size: 20px;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.3s var(--wh-ease);
 }
 
-/* Визначення розташування блоків */
-.large-left-wine-category {
-    width: 690px;
-    height: 200px;
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.small-right-wine-category {
-    width: 486px;
-    height: 200px;
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.small-right-wine-category-pink {
-    width: 486px;
-    height: 200px;
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.large-bottom-wine-category {
-    width: 690px;
-    height: 200px;
-    grid-column: 1;
-    grid-row: 2;
-}
-
-/* Адаптивність */
-@media (max-width: 1200px) {
-    .wine-categories-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .large-left-wine-category,
-    .small-right-wine-category,
-    .small-right-wine-category-pink,
-    .large-bottom-wine-category {
-        width: 100%;
-    }
+.wine-category-item:hover .wine-category-arrow {
+  background: #fff;
+  color: var(--wh-ink);
+  transform: translateX(4px);
 }
 
 @media (max-width: 768px) {
-    .wine-categories-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-    }
+  .wine-categories-title {
+    margin-bottom: 24px;
+  }
 
-    .large-left-wine-category,
-    .small-right-wine-category,
-    .small-right-wine-category-pink,
-    .large-bottom-wine-category {
-        grid-column: auto;
-        grid-row: auto;
-        height: 200px;
-    }
+  .wine-categories-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    gap: 10px;
+  }
+
+  .wine-category-item--red,
+  .wine-category-item--sparkling,
+  .wine-category-item--white,
+  .wine-category-item--rose {
+    grid-column: span 1;
+    aspect-ratio: 1 / 1.1;
+  }
+
+  .wine-category-label {
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    font-size: clamp(18px, 5.4vw, 24px);
+  }
+
+  .wine-category-arrow {
+    right: 12px;
+    bottom: 12px;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
 }

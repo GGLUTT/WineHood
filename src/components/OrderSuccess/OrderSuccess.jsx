@@ -4,7 +4,7 @@ import Header from '../Header/Header.jsx';
 import Footer from '../Footer/Footer.jsx';
 import './OrderSuccess.css';
 
-import wineGlassesImage from '../../img/Accept.png';
+import wineGlassesImage from '../../img/Accept.webp';
 
 const OrderSuccess = () => {
   const location = useLocation();

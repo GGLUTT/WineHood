@@ -223,7 +223,7 @@ const { addToCart } = useCart();
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="product-page bg-white min-h-screen">
     
 
       {/* Банер заголовка продукту */}

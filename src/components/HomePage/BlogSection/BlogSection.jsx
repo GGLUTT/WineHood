@@ -1,101 +1,96 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import degustationVideo from "../../../video/degustation.mp4";
+import degustationPoster from "../../../video/degustation_poster.jpg";
 import traditionsVideo from "../../../video/tradition.mp4";
+import traditionsPoster from "../../../video/tradition_poster.jpg";
 import pairingsVideo from "../../../video/poidanie.mp4";
+import pairingsPoster from "../../../video/poidanie_poster.jpg";
+import useInViewVideo from "../useInViewVideo";
 import "./BlogSection.css";
 
-const BlogSection = () => {
-  return (
-    <section className="blog-section">
-      <div className="blog-container">
-        <div className="blog-header">
-          <h2 className="blog-heading">БЛОГ</h2>
-          <a href="/blog" className="read-more">ЧИТАТИ БІЛЬШЕ</a>
-        </div>
-        
-        <p className="blog-description">
-          Ласкаво просимо до нашого блогу – простір для натхнення, знань та нових смакових відкриттів. Незалежно від того, знавець ви чи тільки починаєте свій шлях у світ вина, тут ви знайдете щось цікаве для себе.
-        </p>
-        
-        <div className="blog-grid">
-          <div className="left-section">
-            <BlogCard
-              className="left-card"
-              videoSrc={degustationVideo}
-              title="СЕКРЕТИ ДЕГУСТАЦІЇ"
-              link="/secrets"
-            />
-          </div>
-          
-          <div className="right-section">
-            <div className="top-right">
-              <BlogCard
-                className="right-card-top"
-                videoSrc={traditionsVideo}
-                title="ВИННІ ТРАДИЦІЇ"
-                link="/traditions"
-              />
-            </div>
-            
-            <div className="bottom-right">
-              <BlogCard
-                className="right-card-bottom"
-                videoSrc={pairingsVideo}
-                title="ПОЄДНАННЯ ЗІ СТРАВАМИ"
-                link="/pairings"
-              />
-              
-              <div className="stats-section">
-                <div className="blog-stats">
-                  <span>1 000+</span>
-                  <p>Експертних Статей</p>
-                </div>
-              </div>
-            </div>
-          </div>
+// На пристроях з мишкою відео грає при наведенні, на тач-пристроях — коли картка в екрані.
+const canHover = typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches;
+
+const BlogSection = () => (
+  <section className="blog-section">
+    <div className="wh-container">
+      <div className="blog-header" data-reveal>
+        <h2 className="wh-section-title wh-section-title--light">БЛОГ</h2>
+        <Link to="/blog" className="wh-btn wh-btn--outline-light">ЧИТАТИ БІЛЬШЕ</Link>
+      </div>
+
+      <p className="blog-description" data-reveal>
+        Ласкаво просимо до нашого блогу – простір для натхнення, знань та нових смакових відкриттів.
+        Незалежно від того, знавець ви чи тільки починаєте свій шлях у світ вина, тут ви знайдете щось цікаве для себе.
+      </p>
+
+      <div className="blog-grid">
+        <BlogCard
+          className="blog-card--main"
+          videoSrc={degustationVideo}
+          poster={degustationPoster}
+          title="СЕКРЕТИ ДЕГУСТАЦІЇ"
+          to="/blog"
+        />
+        <BlogCard
+          className="blog-card--top"
+          videoSrc={traditionsVideo}
+          poster={traditionsPoster}
+          title="ВИННІ ТРАДИЦІЇ"
+          to="/blog"
+        />
+        <BlogCard
+          className="blog-card--bottom"
+          videoSrc={pairingsVideo}
+          poster={pairingsPoster}
+          title="ПОЄДНАННЯ ЗІ СТРАВАМИ"
+          to="/blog"
+        />
+        <div className="blog-stats" data-reveal>
+          <span>1 000+</span>
+          <p>Експертних статей</p>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
-const BlogCard = ({ className, videoSrc, title, link }) => {
+const BlogCard = ({ className, videoSrc, poster, title, to }) => {
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  useInViewVideo(videoRef, { enabled: !canHover, threshold: 0.6 });
 
-  const toggleVideo = () => {
-    const videoElement = videoRef.current;
-    if (videoElement) {
-      if (isPlaying) {
-        videoElement.pause();
-        videoElement.currentTime = 0;
-      } else {
-        videoElement.play().catch(error => {
-          console.error("Помилка відтворення відео:", error);
-        });
-      }
-      setIsPlaying(!isPlaying);
-    }
+  const play = () => {
+    if (canHover) videoRef.current?.play().catch(() => {});
+  };
+
+  const pause = () => {
+    if (canHover) videoRef.current?.pause();
   };
 
   return (
-    <div 
-      className={`blog-card ${className} ${isPlaying ? 'video-active' : ''}`}
-      onClick={toggleVideo}
+    <Link
+      to={to}
+      className={`blog-card ${className}`}
+      onMouseEnter={play}
+      onMouseLeave={pause}
+      data-reveal
     >
       <video
         ref={videoRef}
         className="blog-video"
         src={videoSrc}
-        preload="metadata"
+        poster={poster}
+        preload="none"
+        loop
         muted
         playsInline
       />
       <div className="blog-content">
         <h3 className="blog-title">{title}</h3>
-        <a href={link} className="blog-btn">ЧИТАТИ</a>
+        <span className="blog-btn">ЧИТАТИ</span>
       </div>
-    </div>
+    </Link>
   );
 };
 

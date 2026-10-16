@@ -866,7 +866,7 @@ text-transform: uppercase;
 }
 
 .ua-popup {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../img/welcomeAlert.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../img/welcomeAlert.webp') center/cover no-repeat;
   padding: 24px;
   width: 480px;
   height: 396px;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import { CartProvider } from './components/Context/CartContext.jsx';
@@ -19,6 +19,10 @@ import Header from './components/Header/Header';
 
 function AppContent() {
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   const noBreadcrumbsPaths = ['/register', '/login', '/forgot-password', '/catalog'];
   const isNotFoundPage = location.pathname !== '/' && !location.pathname.startsWith('/catalog') && 
                          !location.pathname.startsWith('/product') && location.pathname !== '/checkout' && 
@@ -50,7 +54,7 @@ function AppContent() {
 function App() {
   return (
     <CartProvider>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <AppContent />
       </Router>
     </CartProvider>

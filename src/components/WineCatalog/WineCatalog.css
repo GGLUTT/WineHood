@@ -14,7 +14,7 @@
 }
 
 .custom-bg {
-  background-image: url('../../../src/img/catalog_banner.png');
+  background-image: url('../../../src/img/catalog_banner.webp');
   background-size: cover;
   background-position: center;
   height: 400px;
@@ -1532,128 +1532,6 @@ text-align: left;
 .cart-notification.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
-}
-
-/* Футер сторінки з анімацією */
-.footer {
-  color: white;
-  padding: 3rem 0;
-  margin-top: 4rem;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-.footer-logo {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-  position: relative;
-}
-
-.footer-logo::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #8B0000;
-  transition: width 0.4s ease;
-}
-
-.footer-logo:hover::after {
-  width: 100%;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-}
-
-.footer-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: white;
-  transition: width 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: #FFC0CB;
-}
-
-.footer-links a:hover::after {
-  width: 100%;
-}
-
-.footer-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-}
-
-.footer-social {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  background-color: #8B0000;
-  transform: translateY(-5px);
-}
-
-.copyright {
-  text-align: center;
-  padding-top: 2rem;
-  margin-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.875rem;
-}
-
-/* Адаптивність для футера */
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Специфічні стилі для Breadcrumbs на сторінці каталогу */

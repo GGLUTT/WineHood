@@ -1,7 +1,4 @@
 /* src/App.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:wght@400;500;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 :root {
   --primary-color: #C10000;
   --background-dark: #1E1E1E;
@@ -43,4 +40,33 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+/* ===== Дизайн-токени Wine Hood ===== */
+:root {
+  --wh-red: #8D0314;
+  --wh-red-dark: #6B0210;
+  --wh-ink: #1C1C1C;
+  --wh-graphite: #23272C;
+  --wh-cream: #FFE4E1;
+  --wh-light: #F5F5F5;
+  --wh-card: #EFEDEE;
+  --wh-muted: #6B6B6B;
+  --wh-gutter: clamp(16px, 4vw, 32px);
+  --wh-section-y: clamp(56px, 8vw, 104px);
+  --wh-header-h: 89px;
+  --wh-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.wh-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--wh-gutter);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --wh-header-h: 61px;
+  }
 }
