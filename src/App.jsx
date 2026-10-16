@@ -16,6 +16,9 @@ import OrderSuccess from './components/OrderSuccess/OrderSuccess.jsx';
 import PersonalAccount from './components/PersonalAccount/PersonalAccount.jsx';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Header from './components/Header/Header';
+import AboutPage from './components/About/AboutPage';
+import BlogPage from './components/Blog/BlogPage';
+import PromotionsPage from './components/Promotions/PromotionsPage';
 
 function AppContent() {
   const location = useLocation();
@@ -26,7 +29,9 @@ function AppContent() {
   const noBreadcrumbsPaths = ['/register', '/login', '/forgot-password', '/catalog'];
   const isNotFoundPage = location.pathname !== '/' && !location.pathname.startsWith('/catalog') && 
                          !location.pathname.startsWith('/product') && location.pathname !== '/checkout' && 
-                         location.pathname !== '/order-success' && location.pathname !== '/account';
+                         location.pathname !== '/order-success' && location.pathname !== '/account' &&
+                         location.pathname !== '/about' && location.pathname !== '/blog' && 
+                         location.pathname !== '/promotions';
   const shouldShowBreadcrumbs = !noBreadcrumbsPaths.includes(location.pathname) && !isNotFoundPage;
 
   return (
@@ -45,6 +50,9 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/account" element={<PersonalAccount />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/promotions" element={<PromotionsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
