@@ -38,7 +38,11 @@ function AppContent() {
     <>
       <AgeVerificationModal />
       <Header />
-      {shouldShowBreadcrumbs && <Breadcrumbs />}
+      {shouldShowBreadcrumbs && location.pathname !== '/' && (
+        <div className="breadcrumbs-bar">
+          <Breadcrumbs />
+        </div>
+      )}
       <Routes>
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-success" element={<OrderSuccess />} />

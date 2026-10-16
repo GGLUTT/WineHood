@@ -31,3 +31,33 @@
   color: #000;
   opacity: 0.7;
 } 
+/* Світла смуга під хедером для сторінок без власного банера */
+.breadcrumbs-bar {
+  background: #fff;
+  border-bottom: 1px solid #e6e4e5;
+}
+
+.breadcrumbs-bar .breadcrumbs {
+  padding: 12px var(--wh-gutter, 16px);
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+}
+
+.breadcrumbs-bar .breadcrumb-item {
+  color: #6b6b6b;
+  opacity: 1;
+}
+
+.breadcrumbs-bar a.breadcrumb-item:hover {
+  color: var(--wh-red, #8d0314);
+}
+
+.breadcrumbs-bar .breadcrumb-item.active {
+  color: var(--wh-ink, #1c1c1c);
+  font-weight: 600;
+}
+
+.breadcrumbs-bar .breadcrumb-separator {
+  color: #b0b0b0;
+  opacity: 1;
+}

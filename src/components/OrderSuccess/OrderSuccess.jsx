@@ -1,119 +1,142 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import Header from '../Header/Header.jsx';
 import Footer from '../Footer/Footer.jsx';
 import './OrderSuccess.css';
 
 import wineGlassesImage from '../../img/Accept.webp';
 
+const deliveryLabels = {
+  pickup: 'Самовивіз з магазину Wine Hood',
+  courier: "Кур'єр Wine Hood",
+  'nova-post-branch': 'Нова пошта, відділення',
+  'nova-post-courier': "Нова пошта, кур'єр",
+};
+
+const paymentLabels = {
+  cash: 'Готівкою при отриманні',
+  card: 'Карткою онлайн',
+  business: 'Безготівковий розрахунок для юридичних осіб',
+};
+
+const formatPrice = (price) => `${Number(price).toLocaleString('uk-UA')} ₴`;
+
 const OrderSuccess = () => {
   const location = useLocation();
   const { orderData } = location.state || {};
-  const orderNumber = orderData?.orderNumber || 'N12345';
-  
-  return (
-    <div className="order-success-container">
-      {/* <Header /> */}
-      
-      <div className="order-success-main">
-        {/* Wine glasses image */}
-        <img src={wineGlassesImage} alt="Wine glasses toast" className="wine-glasses-image" />
-        
-        <div className="success-header">
-          <h1 className="success-title">ДЯКУЄМО ЗА ЗАМОВЛЕННЯ!</h1>
-          <p className="order-number">Ваше замовлення <span>№{orderNumber}</span> прийнято і незабаром буде надіслано.</p>
+
+  if (!orderData) {
+    return (
+      <div className="order-success-page">
+        <div className="wh-container">
+          <div className="os-card os-missing">
+            <h1>Замовлення не знайдено</h1>
+            <p>Схоже, ви відкрили цю сторінку напряму. Оформіть замовлення в каталозі — і тут з'явиться підтвердження.</p>
+            <Link to="/catalog" className="os-btn os-btn--primary">Перейти до каталогу</Link>
+          </div>
         </div>
-        
-        <div className="success-content">
-          {/* Left column - Customer information */}
-          <div className="success-left-content">
-            <div className="order-details-section">
-              <div className="details-block">
-                <h3>Особиста інформація</h3>
-                <p>{orderData?.customerInfo?.firstName} {orderData?.customerInfo?.lastName}</p>
-                <p>{orderData?.customerInfo?.email}</p>
-              </div>
-              
-              <div className="details-block">
-                <h3>Спосіб доставки</h3>
-                {orderData?.customerInfo?.deliveryMethod === 'nova-post-branch' && (
-                  <>
-                    <p>Нова пошта (відділення)</p>
-                    <p className="address">
-                      Дніпро, Дніпропетровська обл.,<br />
-                      Відділення №1 вул. Маршала Малиновського, 114
-                    </p>
-                  </>
-                )}
-                {orderData?.customerInfo?.deliveryMethod === 'nova-post-courier' && (
-                  <p>Нова пошта (кур'єрська доставка)</p>
-                )}
-                {orderData?.customerInfo?.deliveryMethod === 'courier' && (
-                  <p>Кур'єрська доставка</p>
-                )}
-                {orderData?.customerInfo?.deliveryMethod === 'pickup' && (
-                  <p>Самовивіз</p>
-                )}
-              </div>
-              
-              <div className="details-block">
-                <h3>Спосіб оплати</h3>
-                {orderData?.customerInfo?.paymentMethod === 'cash' && (
-                  <p>Готівкою</p>
-                )}
-                {orderData?.customerInfo?.paymentMethod === 'card' && (
-                  <p>Карткою онлайн</p>
-                )}
-                {orderData?.customerInfo?.paymentMethod === 'business' && (
-                  <p>Безготівкова для юридичних осіб</p>
-                )}
-              </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  const { customerInfo = {}, items = [] } = orderData;
+  const subtotal = items.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  const deliveryDetails = [
+    customerInfo.city,
+    customerInfo.deliveryMethod === 'nova-post-branch' && customerInfo.branch && `відділення №${customerInfo.branch}`,
+    (customerInfo.deliveryMethod === 'courier' || customerInfo.deliveryMethod === 'nova-post-courier') && customerInfo.address,
+  ].filter(Boolean).join(', ');
+
+  return (
+    <div className="order-success-page">
+      <div className="wh-container">
+        <section className="os-hero">
+          <div className="os-hero-text">
+            <span className="os-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+            </span>
+            <h1 className="os-title">Дякуємо за замовлення!</h1>
+            <p className="os-subtitle">
+              Замовлення <strong>№{orderData.orderNumber}</strong> від {orderData.date} прийнято.
+              Ми зв'яжемося з вами найближчим часом, щоб підтвердити деталі.
+            </p>
+            <div className="os-actions">
+              <Link to="/catalog" className="os-btn os-btn--primary">Продовжити покупки</Link>
+              <Link to="/" className="os-btn os-btn--ghost">На головну</Link>
             </div>
           </div>
-          
-          {/* Right column - Order summary */}
-          <div className="success-right-content">
-            <h3 className="section-title">Ваше замовлення</h3>
-            <div className="order-items-list">
-              {orderData?.items?.map(item => (
-                <div key={item.id} className="success-order-item">
-                  <div className="success-item-image">
+          <img src={wineGlassesImage} alt="" className="os-hero-image" />
+        </section>
+
+        <div className="os-layout">
+          <section className="os-card">
+            <h2 className="os-card-title">Деталі замовлення</h2>
+            <dl className="os-details">
+              <div>
+                <dt>Отримувач</dt>
+                <dd>
+                  {customerInfo.firstName} {customerInfo.lastName}
+                  {customerInfo.phone && <span>{customerInfo.phone}</span>}
+                  {customerInfo.email && <span>{customerInfo.email}</span>}
+                </dd>
+              </div>
+              <div>
+                <dt>Доставка</dt>
+                <dd>
+                  {deliveryLabels[customerInfo.deliveryMethod] || '—'}
+                  {deliveryDetails && <span>{deliveryDetails}</span>}
+                </dd>
+              </div>
+              <div>
+                <dt>Оплата</dt>
+                <dd>{paymentLabels[customerInfo.paymentMethod] || '—'}</dd>
+              </div>
+              {orderData.comment && (
+                <div>
+                  <dt>Коментар</dt>
+                  <dd>{orderData.comment}</dd>
+                </div>
+              )}
+            </dl>
+          </section>
+
+          <section className="os-card">
+            <h2 className="os-card-title">Ваше замовлення</h2>
+            <ul className="os-items">
+              {items.map((item) => (
+                <li key={item.id} className="os-item">
+                  <div className="os-item-image">
                     <img src={item.image} alt={item.name} />
                   </div>
-                  <div className="success-item-details">
-                    <h4>{item.name}</h4>
-                    <p>{item.description || 'Червоне сухе вино'}</p>
-                    <div className="price-quantity">
-                      <span className="price-label">Ціна:</span>
-                      <span className="price-value">{item.price} ₴</span>
-                      <span className="quantity-label">Кількість:</span>
-                      <span className="quantity-value">{item.quantity || 1}</span>
-                    </div>
+                  <div className="os-item-info">
+                    <span className="os-item-name">{item.name}</span>
+                    {item.type && <span className="os-item-meta">{item.type}</span>}
+                    <span className="os-item-meta">
+                      {item.quantity || 1} × {formatPrice(item.price)}
+                    </span>
                   </div>
-                </div>
+                  <span className="os-item-price">{formatPrice(item.price * (item.quantity || 1))}</span>
+                </li>
               ))}
-            </div>
-            
-            <div className="success-order-total">
-              <div className="delivery-cost">
-                <span>Вартість доставки:</span>
-                <span>{orderData?.deliveryCost || 'За тарифами перевізника'}</span>
+            </ul>
+
+            <dl className="os-totals">
+              <div>
+                <dt>Товари</dt>
+                <dd>{formatPrice(subtotal)}</dd>
               </div>
-              <div className="final-total">
-                <span>До сплати:</span>
-                <span className="total-price">{orderData?.totalAmount || '480'} ₴</span>
+              <div>
+                <dt>Доставка</dt>
+                <dd>{orderData.deliveryCost}</dd>
               </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Action buttons */}
-        <div className="success-buttons">
-          <Link to="/catalog" className="continue-shopping-btn">ПРОДОВЖИТИ ПОКУПКИ</Link>
-          <Link to="/" className="home-page-btn">НА ГОЛОВНУ</Link>
+              <div className="os-totals-grand">
+                <dt>До сплати</dt>
+                <dd>{formatPrice(orderData.totalAmount)}</dd>
+              </div>
+            </dl>
+          </section>
         </div>
       </div>
-      
       <Footer />
     </div>
   );
